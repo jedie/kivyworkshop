@@ -7,7 +7,9 @@ Desarrollar una aplicación para Android utilizando Python, aprovechando algunas
 
 ## Material
 
-[Acceso al Taller de Kivy](KivyWorkshop.ipynb)
+[Primera Parte](01_kivy_intro.ipynb)
+[Segunda Parte](02_kivy_android.ipynb)
+[Tercera Parte](03_kivy_avanzado.ipynb)
 
 <img src="images/qr.png">
 
