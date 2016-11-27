@@ -1,0 +1,779 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from kivy.org/docs/api-kivy.clock.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:19 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="twitter:site" content="@kivyframework">
+    
+    <title>Clock object &mdash; Kivy 1.9.0-dev documentation</title>
+    <link href='../../fonts.googleapis.com/css8da2.css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="_static/fresh.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.9.0-dev',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="../../cdn.mathjax.org/mathjax/latest/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/jquery-effects-core-and-slide.js"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/kivy.js"></script>
+    <link rel="top" title="Kivy 1.9.0-dev documentation" href="index-2.html" />
+    <link rel="up" title="API Reference" href="api-index.html" />
+    <link rel="next" title="Compatibility module for Python 2.7 and > 3.3" href="api-kivy.compat.html" />
+    <link rel="prev" title="Cache manager" href="api-kivy.cache.html" /> 
+  </head>
+  <body>
+
+    <div id="topbar">
+        <div id="topwrapper">
+        <div id="toplogo">
+            <a href="http://kivy.org/">
+                <img src="_static/logo-kivy.png" alt="Kivy" height="50"/>
+            </a>
+        </div>
+        <div id="topmenu">
+            <ul class="navigation">
+                <li><a class="nav-guides" href="gettingstarted/intro.html">Guides</a></li>
+                <li><a class="nav-garden" href="http://kivy-garden.github.io/">Garden</a></li>
+                <li><a class="nav-api" href="api-kivy.html">API Reference</a></li>
+                <li><a class="nav-pdf" href="pdf/Kivy-latest.pdf">PDF</a></li>
+                <li><a class="nav-wiki" href="http://wiki.kivy.org/">Wiki</a></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+<div id="contentall">
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>Quick search</h3>
+            <form class="search" action="http://kivy.org/docs/search.html" method="get">
+                &nbsp;
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+                <input type="text" class="text" name="q" />
+            </form>
+          <!--
+          <h3><a href="index.html">Clock object</a></h3>
+          <ul>
+<li><a class="reference internal" href="#">Clock object</a><ul>
+<li><a class="reference internal" href="#schedule-before-frame">Schedule before frame</a></li>
+<li><a class="reference internal" href="#triggered-events">Triggered Events</a></li>
+<li><a class="reference internal" href="#threading">Threading</a></li>
+</ul>
+</li>
+</ul>
+
+          <h3><a href="index.html">Table Of Contents</a></h3>
+          -->
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/first_app.html">A first App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/rules.html">Kv Design Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/events.html">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/framework.html">Non-widget stuff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/layouts.html">Layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/diving.html">Diving in</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current current">
+<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User&#8217;s Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="philosophy.html">Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contact.html">Contact Us</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guide-index.html">Programming Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide/basic.html">Kivy Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/environment.html">Controlling the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/config.html">Configure Kivy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/architecture.html">Architectural Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/events.html">Events and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/inputs.html">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/lang.html">Kv language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/other-frameworks.html">Integrating with other Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/bestpractices.html">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/advancedgraphics.html">Advanced Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/packaging.html">Packaging your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials-index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/pong.html">Pong Game Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/firstwidget.html">A Simple Paint App</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current current"><a class="reference internal" href="api-index.html">API Reference</a><ul class="current current">
+<li class="toctree-l2 current"><a class="reference internal" href="api-kivy.html">Kivy framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.html">Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.adapter.html">Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.args_converters.html">List Item View Argument Converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.dictadapter.html">DictAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.listadapter.html">ListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.models.html">SelectableDataItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.simplelistadapter.html">SimpleListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.animation.html">Animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.app.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.atlas.html">Atlas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.base.html">Kivy Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.cache.html">Cache manager</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Clock object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.compat.html">Compatibility module for Python 2.7 and &gt; 3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.config.html">Configuration object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.context.html">Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.html">Core Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.clipboard.html">Clipboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.gl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.spelling.html">Spelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.text.html">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.text.markup.html">Text Markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.text.text_layout.html">Text layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.html">Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.dampedscroll.html">Damped scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.kinetic.html">Kinetic effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.opacityscroll.html">Opacity scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.scroll.html">Scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.event.html">Event dispatcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.ext.html">Extension Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.factory.html">Factory object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.garden.html">Garden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.geometry.html">Geometry utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.gesture.html">Gesture recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.compiler.html">Graphics compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.context.html">Context management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.context_instructions.html">Context instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.fbo.html">Framebuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.gl_instructions.html">GL instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.instructions.html">Canvas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.opengl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.opengl_utils.html">OpenGL utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.shader.html">Shader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.stencil_instructions.html">Stencil instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.svg.html">SVG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.tesselator.html">Tesselator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.texture.html">Texture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.transformation.html">Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.html">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.factory.html">Motion Event Factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.motionevent.html">Motion Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.html">Input Postprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.dejitter.html">Dejitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.doubletap.html">Double Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.ignorelist.html">Ignore list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.retaintouch.html">Retain Touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.tripletap.html">Triple Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.provider.html">Motion Event Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.html">Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.androidjoystick.html">Android Joystick Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.hidinput.html">Native support for HID input from the linux kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.leapfinger.html">Leap Motion - finger only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.linuxwacom.html">Native support of Wacom tablet from linuxwacom driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.mactouch.html">Native support of MultitouchSupport framework for MacBook (MaxOSX platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.mouse.html">Mouse provider implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.mtdev.html">Native support for Multitouch devices on Linux, using libmtdev.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.probesysfs.html">Auto Create Input Provider Config Entry for Available MT Hardware (linux only).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.tuio.html">TUIO Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.wm_common.html">Common definitions for a Windows provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.wm_pen.html">Support for WM_PEN messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.wm_touch.html">Support for WM_TOUCH messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.recorder.html">Input recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.shape.html">Motion Event Shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.interactive.html">Interactive launcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.lang.html">Kivy Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.lib.html">External libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.lib.gstplayer.html">GstPlayer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.loader.html">Asynchronous data loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.logger.html">Logger object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.metrics.html">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.html">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.inspector.html">Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.keybinding.html">Keybinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.monitor.html">Monitor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.recorder.html">Recorder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.screen.html">Screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.touchring.html">Touchring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.webdebugger.html">Web Debugger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.multistroke.html">Multistroke gesture recognizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.network.html">Network support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.network.urlrequest.html">Url Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.parser.html">Parser utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.resources.html">Resources management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.storage.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.storage.dictstore.html">Dictionary store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.storage.jsonstore.html">JSON store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.storage.redisstore.html">Redis Store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.support.html">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.abstractview.html">Abstract View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.accordion.html">Accordion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.actionbar.html">Action Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.anchorlayout.html">Anchor Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.boxlayout.html">Box Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.bubble.html">Bubble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.button.html">Button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.carousel.html">Carousel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.checkbox.html">CheckBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.codeinput.html">Code Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.colorpicker.html">Color Picker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.dropdown.html">Drop-Down List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.effectwidget.html">EffectWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.filechooser.html">FileChooser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.floatlayout.html">Float Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.gesturesurface.html">Gesture Surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.gridlayout.html">Grid Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.label.html">Label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.layout.html">Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.listview.html">List View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.modalview.html">ModalView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.pagelayout.html">PageLayout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.popup.html">Popup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.progressbar.html">Progress Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.relativelayout.html">Relative Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.rst.html">reStructuredText renderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.sandbox.html">Sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.scatter.html">Scatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.scatterlayout.html">Scatter Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.screenmanager.html">Screen Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.scrollview.html">Scroll View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.slider.html">Slider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.spinner.html">Spinner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.splitter.html">Splitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.stacklayout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.stencilview.html">Stencil View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.switch.html">Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.tabbedpanel.html">TabbedPanel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.textinput.html">Text Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.togglebutton.html">Toggle button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.treeview.html">Tree View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.videoplayer.html">Video player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.vkeyboard.html">VKeyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.widget.html">Widget class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.vector.html">Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.weakmethod.html">Weak Method</a></li>
+</ul>
+</li>
+</ul>
+
+          <!--
+          <h3>Related Topics</h3>
+          <ul>
+              <li>Previous: <a href="api-kivy.cache.html" title="previous chapter">Cache manager</a></li>
+              <li>Next: <a href="api-kivy.compat.html" title="next chapter">Compatibility module for Python 2.7 and &gt; 3.3</a></li>
+          </ul>
+          -->
+        </div>
+      </div>
+    <div id="content">
+    <div class="wrapper">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div class="toc"><h2>Table Of Contents</h2><ul>
+<li><a class="reference internal" href="#">Clock object</a><ul>
+<li><a class="reference internal" href="#schedule-before-frame">Schedule before frame</a></li>
+<li><a class="reference internal" href="#triggered-events">Triggered Events</a></li>
+<li><a class="reference internal" href="#threading">Threading</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+  <div class="section" id="module-kivy.clock">
+<span id="clock-object"></span><h1>Clock object<a class="headerlink" href="#module-kivy.clock" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#kivy.clock.Clock" title="kivy.clock.Clock"><tt class="xref py py-class docutils literal"><span class="pre">Clock</span></tt></a> object allows you to schedule a function call in the
+future; once or repeatedly at specified intervals. You can get the time
+elapsed between the scheduling and the calling of the callback via the
+<cite>dt</cite> argument:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># dt means delta-time</span>
+<span class="k">def</span> <span class="nf">my_callback</span><span class="p">(</span><span class="n">dt</span><span class="p">):</span> 
+    <span class="k">pass</span>
+
+<span class="c"># call my_callback every 0.5 seconds</span>
+<span class="n">Clock</span><span class="o">.</span><span class="n">schedule_interval</span><span class="p">(</span><span class="n">my_callback</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c"># call my_callback in 5 seconds</span>
+<span class="n">Clock</span><span class="o">.</span><span class="n">schedule_once</span><span class="p">(</span><span class="n">my_callback</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="c"># call my_callback as soon as possible (usually next frame.)</span>
+<span class="n">Clock</span><span class="o">.</span><span class="n">schedule_once</span><span class="p">(</span><span class="n">my_callback</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the callback returns False, the schedule will be removed.</p>
+</div>
+<p>If you want to schedule a function to call with default arguments, you can use
+the <a class="reference external" href="http://docs.python.org/library/functools.html#functools.partial">functools.partial</a> python
+module:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="k">def</span> <span class="nf">my_callback</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="o">*</span><span class="n">largs</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">Clock</span><span class="o">.</span><span class="n">schedule_interval</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">my_callback</span><span class="p">,</span> <span class="s">&#39;my value&#39;</span><span class="p">,</span> <span class="s">&#39;my key&#39;</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Conversely, if you want to schedule a function that doesn&#8217;t accept the dt
+argument, you can use a <a class="reference external" href="http://docs.python.org/2/reference/expressions.html#lambda">lambda</a> expression
+to write a short function that does accept dt. For Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">no_args_func</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;I accept no arguments, so don&#39;t schedule me in the clock&quot;</span><span class="p">)</span>
+
+<span class="n">Clock</span><span class="o">.</span><span class="n">schedule_once</span><span class="p">(</span><span class="k">lambda</span> <span class="n">dt</span><span class="p">:</span> <span class="n">no_args_func</span><span class="p">(),</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You cannot unschedule an anonymous function unless you keep a
+reference to it.  It&#8217;s better to add *args to your function
+definition so that it can be called with an arbitrary number of
+parameters.</p>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>The callback is weak-referenced: you are responsible for keeping a
+reference to your original object/callback. If you don&#8217;t keep a
+reference, the ClockBase will never execute your callback. For
+example:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">Clock</span><span class="o">.</span><span class="n">schedule_interval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;In callback&#39;</span><span class="p">)</span>
+
+<span class="c"># A Foo object is created and the method start is called.</span>
+<span class="c"># Because no reference is kept to the instance returned from Foo(),</span>
+<span class="c"># the object will be collected by the Python Garbage Collector and</span>
+<span class="c"># your callback will be never called.</span>
+<span class="n">Foo</span><span class="p">()</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c"># So you should do the following and keep a reference to the instance</span>
+<span class="c"># of foo until you don&#39;t need it anymore!</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="schedule-before-frame">
+<span id="id1"></span><h2>Schedule before frame<a class="headerlink" href="#schedule-before-frame" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span>New in version 1.0.5.</span></p>
+</div>
+<p>Sometimes you need to schedule a callback BEFORE the next frame. Starting
+from 1.0.5, you can use a timeout of -1:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Clock</span><span class="o">.</span><span class="n">schedule_once</span><span class="p">(</span><span class="n">my_callback</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c"># call after the next frame</span>
+<span class="n">Clock</span><span class="o">.</span><span class="n">schedule_once</span><span class="p">(</span><span class="n">my_callback</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c"># call before the next frame</span>
+</pre></div>
+</div>
+<p>The Clock will execute all the callbacks with a timeout of -1 before the
+next frame even if you add a new callback with -1 from a running
+callback.  However, <a class="reference internal" href="#kivy.clock.Clock" title="kivy.clock.Clock"><tt class="xref py py-class docutils literal"><span class="pre">Clock</span></tt></a> has an iteration limit for these
+callbacks: it defaults to 10.</p>
+<p>If you schedule a callback that schedules a callback that schedules a .. etc
+more than 10 times, it will leave the loop and send a warning to the console,
+then continue after the next frame. This is implemented to prevent bugs from
+hanging or crashing the application.</p>
+<p>If you need to increase the limit, set the <tt class="xref py py-attr docutils literal"><span class="pre">max_iteration</span></tt> property:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.clock</span> <span class="kn">import</span> <span class="n">Clock</span>
+<span class="n">Clock</span><span class="o">.</span><span class="n">max_iteration</span> <span class="o">=</span> <span class="mi">20</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="triggered-events">
+<span id="id2"></span><h2>Triggered Events<a class="headerlink" href="#triggered-events" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span>New in version 1.0.5.</span></p>
+</div>
+<p>A triggered event is a way to defer a callback exactly like schedule_once(),
+but with some added convenience. The callback will only be scheduled once per
+frame even if you call the trigger twice (or more). This is not the case
+with <tt class="xref py py-meth docutils literal"><span class="pre">Clock.schedule_once()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># will run the callback twice before the next frame</span>
+<span class="n">Clock</span><span class="o">.</span><span class="n">schedule_once</span><span class="p">(</span><span class="n">my_callback</span><span class="p">)</span>
+<span class="n">Clock</span><span class="o">.</span><span class="n">schedule_once</span><span class="p">(</span><span class="n">my_callback</span><span class="p">)</span>
+
+<span class="c"># will run the callback once before the next frame</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Clock</span><span class="o">.</span><span class="n">create_trigger</span><span class="p">(</span><span class="n">my_callback</span><span class="p">)</span>
+<span class="n">t</span><span class="p">()</span>
+<span class="n">t</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Before triggered events, you may have used this approach in a widget:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">trigger_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">largs</span><span class="p">):</span>
+    <span class="n">Clock</span><span class="o">.</span><span class="n">unschedule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">)</span>
+    <span class="n">Clock</span><span class="o">.</span><span class="n">schedule_once</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As soon as you call <cite>trigger_callback()</cite>, it will correctly schedule the
+callback once in the next frame. It is more convenient to create and bind to
+the triggered event than using <tt class="xref py py-meth docutils literal"><span class="pre">Clock.schedule_once()</span></tt> in a function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.clock</span> <span class="kn">import</span> <span class="n">Clock</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.widget</span> <span class="kn">import</span> <span class="n">Widget</span>
+
+<span class="k">class</span> <span class="nc">Sample</span><span class="p">(</span><span class="n">Widget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trigger</span> <span class="o">=</span> <span class="n">Clock</span><span class="o">.</span><span class="n">create_trigger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cb</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sample</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_trigger</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_trigger</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">largs</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Even if x and y changes within one frame, the callback is only run once.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="#kivy.clock.ClockBase.create_trigger" title="kivy.clock.ClockBase.create_trigger"><tt class="xref py py-meth docutils literal"><span class="pre">ClockBase.create_trigger()</span></tt></a> also has a timeout parameter that
+behaves exactly like <a class="reference internal" href="#kivy.clock.ClockBase.schedule_once" title="kivy.clock.ClockBase.schedule_once"><tt class="xref py py-meth docutils literal"><span class="pre">ClockBase.schedule_once()</span></tt></a>.</p>
+</div>
+</div>
+<div class="section" id="threading">
+<h2>Threading<a class="headerlink" href="#threading" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span>New in version 1.9.0.</span></p>
+</div>
+<p>Often, other threads are used to schedule callbacks with kivy&#8217;s main thread
+using <a class="reference internal" href="#kivy.clock.ClockBase" title="kivy.clock.ClockBase"><tt class="xref py py-class docutils literal"><span class="pre">ClockBase</span></tt></a>. Therefore, it&#8217;s important to know what is thread safe
+and what isn&#8217;t.</p>
+<p>All the <a class="reference internal" href="#kivy.clock.ClockBase" title="kivy.clock.ClockBase"><tt class="xref py py-class docutils literal"><span class="pre">ClockBase</span></tt></a> and <a class="reference internal" href="#kivy.clock.ClockEvent" title="kivy.clock.ClockEvent"><tt class="xref py py-class docutils literal"><span class="pre">ClockEvent</span></tt></a> methods are safe with
+respect to kivy&#8217;s thread. That is, it&#8217;s always safe to call these methods
+from a single thread that is not the kivy thread. However, there are no
+guarantees as to the order in which these callbacks will be executed.</p>
+<p>Calling a previously created trigger from two different threads (even if one
+of them is the kivy thread), or calling the trigger and its
+<a class="reference internal" href="#kivy.clock.ClockEvent.cancel" title="kivy.clock.ClockEvent.cancel"><tt class="xref py py-meth docutils literal"><span class="pre">ClockEvent.cancel()</span></tt></a> method from two different threads at the same time is
+not safe. That is, although no exception will be raised, there no guarantees
+that calling the trigger from two different threads will not result in the
+callback being executed twice, or not executed at all. Similarly, such issues
+might arise when calling the trigger and canceling it with
+<a class="reference internal" href="#kivy.clock.ClockBase.unschedule" title="kivy.clock.ClockBase.unschedule"><tt class="xref py py-meth docutils literal"><span class="pre">ClockBase.unschedule()</span></tt></a> or <a class="reference internal" href="#kivy.clock.ClockEvent.cancel" title="kivy.clock.ClockEvent.cancel"><tt class="xref py py-meth docutils literal"><span class="pre">ClockEvent.cancel()</span></tt></a> from two threads
+simultaneously.</p>
+<p>Therefore, it is safe to call <a class="reference internal" href="#kivy.clock.ClockBase.create_trigger" title="kivy.clock.ClockBase.create_trigger"><tt class="xref py py-meth docutils literal"><span class="pre">ClockBase.create_trigger()</span></tt></a>,
+<a class="reference internal" href="#kivy.clock.ClockBase.schedule_once" title="kivy.clock.ClockBase.schedule_once"><tt class="xref py py-meth docutils literal"><span class="pre">ClockBase.schedule_once()</span></tt></a>, <a class="reference internal" href="#kivy.clock.ClockBase.schedule_interval" title="kivy.clock.ClockBase.schedule_interval"><tt class="xref py py-meth docutils literal"><span class="pre">ClockBase.schedule_interval()</span></tt></a>, or
+call or cancel a previously created trigger from an external thread.
+The following code, though, is not safe because it calls or cancels
+from two threads simultaneously without any locking mechanism:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">event</span> <span class="o">=</span> <span class="n">Clock</span><span class="o">.</span><span class="n">create_trigger</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+
+<span class="c"># in thread 1</span>
+<span class="n">event</span><span class="p">()</span>
+<span class="c"># in thread 2</span>
+<span class="n">event</span><span class="p">()</span>
+<span class="c"># now, the event may be scheduled twice or once</span>
+
+<span class="c"># the following is also unsafe</span>
+<span class="c"># in thread 1</span>
+<span class="n">event</span><span class="p">()</span>
+<span class="c"># in thread 2</span>
+<span class="n">event</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+<span class="c"># now, the event may or may not be scheduled and a subsequent call</span>
+<span class="c"># may schedule it twice</span>
+</pre></div>
+</div>
+<p>Note, in the code above, thread 1 or thread 2 could be the kivy thread, not
+just an external thread.</p>
+<dl class="data">
+<dt id="kivy.clock.Clock">
+<tt class="descclassname">kivy.clock.</tt><tt class="descname">Clock</tt><em class="property"> = None</em><a class="headerlink" href="#kivy.clock.Clock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instance of <a class="reference internal" href="#kivy.clock.ClockBase" title="kivy.clock.ClockBase"><tt class="xref py py-class docutils literal"><span class="pre">ClockBase</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.clock.ClockBase">
+<em class="property">class </em><tt class="descclassname">kivy.clock.</tt><tt class="descname">ClockBase</tt><a class="reference internal" href="_modules/kivy/clock.html#ClockBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">kivy.clock._ClockBase</span></tt></p>
+<p>A clock object with event support.</p>
+<dl class="method">
+<dt id="kivy.clock.ClockBase.create_trigger">
+<tt class="descname">create_trigger</tt><big>(</big><em>callback</em>, <em>timeout=0</em><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.create_trigger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.create_trigger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Trigger event. Check module documentation for more
+information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A <a class="reference internal" href="#kivy.clock.ClockEvent" title="kivy.clock.ClockEvent"><tt class="xref py py-class docutils literal"><span class="pre">ClockEvent</span></tt></a> instance. To schedule the callback of this
+instance, you can call it.</td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span>New in version 1.0.5.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.clock.ClockBase.frames">
+<tt class="descname">frames</tt><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.frames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.frames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of internal frames (not necesseraly drawed) from the start of
+the clock.</p>
+<div class="versionadded">
+<p><span>New in version 1.8.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.clock.ClockBase.frames_displayed">
+<tt class="descname">frames_displayed</tt><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.frames_displayed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.frames_displayed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of displayed frames from the start of the clock.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.clock.ClockBase.frametime">
+<tt class="descname">frametime</tt><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.frametime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.frametime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time spent between the last frame and the current frame
+(in seconds).</p>
+<div class="versionadded">
+<p><span>New in version 1.8.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.clock.ClockBase.get_boottime">
+<tt class="descname">get_boottime</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.get_boottime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.get_boottime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the time in seconds from the application start.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.clock.ClockBase.get_fps">
+<tt class="descname">get_fps</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.get_fps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.get_fps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current average FPS calculated by the clock.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.clock.ClockBase.get_rfps">
+<tt class="descname">get_rfps</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.get_rfps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.get_rfps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current &#8220;real&#8221; FPS calculated by the clock.
+This counter reflects the real framerate displayed on the screen.</p>
+<p>In contrast to get_fps(), this function returns a counter of the
+number of frames, not the average of frames per second.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.clock.ClockBase.get_time">
+<tt class="descname">get_time</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.get_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.get_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the last tick made by the clock.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.clock.ClockBase.max_iteration">
+<tt class="descname">max_iteration</tt><a class="headerlink" href="#kivy.clock.ClockBase.max_iteration" title="Permalink to this definition">¶</a></dt>
+<dd><div class="versionadded">
+<p><span>New in version 1.0.5: </span>When a schedule_once is used with -1, you can add a limit on
+how iteration will be allowed. That is here to prevent too much
+relayout.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.clock.ClockBase.schedule_interval">
+<tt class="descname">schedule_interval</tt><big>(</big><em>callback</em>, <em>timeout</em><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.schedule_interval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.schedule_interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Schedule an event to be called every &lt;timeout&gt; seconds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A <a class="reference internal" href="#kivy.clock.ClockEvent" title="kivy.clock.ClockEvent"><tt class="xref py py-class docutils literal"><span class="pre">ClockEvent</span></tt></a> instance. As opposed to
+<a class="reference internal" href="#kivy.clock.ClockBase.create_trigger" title="kivy.clock.ClockBase.create_trigger"><tt class="xref py py-meth docutils literal"><span class="pre">create_trigger()</span></tt></a> which only creates the trigger event, this
+method also schedules it.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.clock.ClockBase.schedule_once">
+<tt class="descname">schedule_once</tt><big>(</big><em>callback</em>, <em>timeout=0</em><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.schedule_once"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.schedule_once" title="Permalink to this definition">¶</a></dt>
+<dd><p>Schedule an event in &lt;timeout&gt; seconds. If &lt;timeout&gt; is unspecified
+or 0, the callback will be called after the next frame is rendered.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A <a class="reference internal" href="#kivy.clock.ClockEvent" title="kivy.clock.ClockEvent"><tt class="xref py py-class docutils literal"><span class="pre">ClockEvent</span></tt></a> instance. As opposed to
+<a class="reference internal" href="#kivy.clock.ClockBase.create_trigger" title="kivy.clock.ClockBase.create_trigger"><tt class="xref py py-meth docutils literal"><span class="pre">create_trigger()</span></tt></a> which only creates the trigger event, this
+method also schedules it.</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span>Changed in version 1.0.5: </span>If the timeout is -1, the callback will be called before the next
+frame (at <a class="reference internal" href="#kivy.clock.ClockBase.tick_draw" title="kivy.clock.ClockBase.tick_draw"><tt class="xref py py-meth docutils literal"><span class="pre">tick_draw()</span></tt></a>).</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.clock.ClockBase.tick">
+<tt class="descname">tick</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.tick"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.tick" title="Permalink to this definition">¶</a></dt>
+<dd><p>Advance the clock to the next step. Must be called every frame.
+The default clock has a tick() function called by the core Kivy
+framework.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.clock.ClockBase.tick_draw">
+<tt class="descname">tick_draw</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.tick_draw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.tick_draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tick the drawing counter.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.clock.ClockBase.unschedule">
+<tt class="descname">unschedule</tt><big>(</big><em>callback</em>, <em>all=True</em><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#ClockBase.unschedule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockBase.unschedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a previously scheduled event.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>callback</cite>: <a class="reference internal" href="#kivy.clock.ClockEvent" title="kivy.clock.ClockEvent"><tt class="xref py py-class docutils literal"><span class="pre">ClockEvent</span></tt></a> or a callable.</dt>
+<dd><p class="first last">If it&#8217;s a <a class="reference internal" href="#kivy.clock.ClockEvent" title="kivy.clock.ClockEvent"><tt class="xref py py-class docutils literal"><span class="pre">ClockEvent</span></tt></a> instance, then the callback
+associated with this event will be canceled if it is
+scheduled. If it&#8217;s a callable, then the callable will be
+unscheduled if it is scheduled.</p>
+</dd>
+<dt><cite>all</cite>: bool</dt>
+<dd><p class="first last">If True and if <cite>callback</cite> is a callable, all instances of this
+callable will be unscheduled (i.e. if this callable was
+scheduled multiple times). Defaults to <cite>True</cite>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span>Changed in version 1.9.0: </span>The all parameter was added. Before, it behaved as if <cite>all</cite> was
+<cite>True</cite>.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.clock.ClockEvent">
+<em class="property">class </em><tt class="descclassname">kivy.clock.</tt><tt class="descname">ClockEvent</tt><big>(</big><em>clock</em>, <em>loop</em>, <em>callback</em>, <em>timeout</em>, <em>starttime</em>, <em>cid</em>, <em>trigger=False</em><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#ClockEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A class that describes a callback scheduled with kivy&#8217;s <a class="reference internal" href="#kivy.clock.Clock" title="kivy.clock.Clock"><tt class="xref py py-attr docutils literal"><span class="pre">Clock</span></tt></a>.
+This class is never created by the user; instead, kivy creates and returns
+an instance of this class when scheduling a callback.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Most of the methods of this class are internal and can change without
+notice. The only exception are the <a class="reference internal" href="#kivy.clock.ClockEvent.cancel" title="kivy.clock.ClockEvent.cancel"><tt class="xref py py-meth docutils literal"><span class="pre">cancel()</span></tt></a> and
+<tt class="xref py py-meth docutils literal"><span class="pre">__call__()</span></tt> methods.</p>
+</div>
+<dl class="method">
+<dt id="kivy.clock.ClockEvent.cancel">
+<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#ClockEvent.cancel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.ClockEvent.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancels the callback if it was scheduled to be called.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="kivy.clock.mainthread">
+<tt class="descclassname">kivy.clock.</tt><tt class="descname">mainthread</tt><big>(</big><em>func</em><big>)</big><a class="reference internal" href="_modules/kivy/clock.html#mainthread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kivy.clock.mainthread" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that will schedule the call of the function for the next
+available frame in the mainthread. It can be useful when you use
+<a class="reference internal" href="api-kivy.network.urlrequest.html#kivy.network.urlrequest.UrlRequest" title="kivy.network.urlrequest.UrlRequest"><tt class="xref py py-class docutils literal"><span class="pre">UrlRequest</span></tt></a> or when you do Thread
+programming: you cannot do any OpenGL-related work in a thread.</p>
+<p>Please note that this method will return directly and no result can be
+returned:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@mainthread</span>
+<span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;The request succedded!&#39;</span><span class="p">,</span>
+          <span class="s">&#39;This callback is called in the main thread.&#39;</span><span class="p">)</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">req</span> <span class="o">=</span> <span class="n">UrlRequest</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s">&#39;http://...&#39;</span><span class="p">,</span> <span class="n">on_success</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span>New in version 1.8.0.</span></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+</div>
+
+
+            <div class="footerlinks">
+            <table>
+                <tr>
+                    <td class="leftlink">
+                  <a href="api-kivy.cache.html" title="previous chapter">&laquo; Cache manager</a></li>
+                  </td>
+                  <td class="rightlink">
+                  <a href="api-kivy.compat.html" title="next chapter">Compatibility module for Python 2.7 and &gt; 3.3 &raquo;</a>
+                      </td>
+                  </tr>
+              </table>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    </div>
+<!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://txzone.net/piwik/" : "http://txzone.net/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 8);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://txzone.net/piwik/piwik.php?idsite=8" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+    <!--
+    <div class="footer">
+      &copy; Copyright 2010, The Kivy Authors.
+      Last updated on Dec 11, 2014.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2b1.
+</div>
+-->
+  </body>
+
+<!-- Mirrored from kivy.org/docs/api-kivy.clock.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:19 GMT -->
+</html>

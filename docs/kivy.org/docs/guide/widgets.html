@@ -1,0 +1,991 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from kivy.org/docs/guide/widgets.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:12 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="twitter:site" content="@kivyframework">
+    
+    <title>Widgets &mdash; Kivy 1.9.0-dev documentation</title>
+    <link href='../../../fonts.googleapis.com/css8da2.css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../_static/fresh.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0-dev',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../cdn.mathjax.org/mathjax/latest/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery-effects-core-and-slide.js"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/kivy.js"></script>
+    <link rel="top" title="Kivy 1.9.0-dev documentation" href="../index-2.html" />
+    <link rel="up" title="Programming Guide" href="../guide-index.html" />
+    <link rel="next" title="Graphics" href="graphics.html" />
+    <link rel="prev" title="Input management" href="inputs.html" /> 
+  </head>
+  <body>
+
+    <div id="topbar">
+        <div id="topwrapper">
+        <div id="toplogo">
+            <a href="http://kivy.org/">
+                <img src="../_static/logo-kivy.png" alt="Kivy" height="50"/>
+            </a>
+        </div>
+        <div id="topmenu">
+            <ul class="navigation">
+                <li><a class="nav-guides" href="../gettingstarted/intro.html">Guides</a></li>
+                <li><a class="nav-garden" href="http://kivy-garden.github.io/">Garden</a></li>
+                <li><a class="nav-api" href="../api-kivy.html">API Reference</a></li>
+                <li><a class="nav-pdf" href="../pdf/Kivy-latest.pdf">PDF</a></li>
+                <li><a class="nav-wiki" href="http://wiki.kivy.org/">Wiki</a></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+<div id="contentall">
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>Quick search</h3>
+            <form class="search" action="http://kivy.org/docs/search.html" method="get">
+                &nbsp;
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+                <input type="text" class="text" name="q" />
+            </form>
+          <!--
+          <h3><a href="../index.html">Widgets</a></h3>
+          <ul>
+<li><a class="reference internal" href="#">Widgets</a><ul>
+<li><a class="reference internal" href="#introduction-to-widget">Introduction to Widget</a></li>
+<li><a class="reference internal" href="#manipulating-the-widget-tree">Manipulating the Widget tree</a></li>
+<li><a class="reference internal" href="#traversing-the-tree">Traversing the Tree</a></li>
+<li><a class="reference internal" href="#widgets-z-index">Widgets Z Index</a></li>
+<li><a class="reference internal" href="#organize-with-layouts">Organize with Layouts</a></li>
+<li><a class="reference internal" href="#adding-a-background-to-a-layout">Adding a Background to a Layout</a></li>
+<li><a class="reference internal" href="#nesting-layouts">Nesting Layouts</a></li>
+<li><a class="reference internal" href="#size-and-position-metrics">Size and position metrics</a></li>
+<li><a class="reference internal" href="#screen-separation-with-screen-manager">Screen Separation with Screen Manager</a></li>
+</ul>
+</li>
+</ul>
+
+          <h3><a href="../index.html">Table Of Contents</a></h3>
+          -->
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/first_app.html">A first App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/rules.html">Kv Design Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/events.html">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/framework.html">Non-widget stuff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/layouts.html">Layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/diving.html">Diving in</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user-guide.html">User&#8217;s Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../philosophy.html">Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contact.html">Contact Us</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guide-index.html">Programming Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basic.html">Kivy Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">Controlling the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Configure Kivy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">Architectural Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Events and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputs.html">Input management</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lang.html">Kv language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other-frameworks.html">Integrating with other Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bestpractices.html">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advancedgraphics.html">Advanced Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packaging.html">Packaging your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/pong.html">Pong Game Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/firstwidget.html">A Simple Paint App</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api-index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.html">Kivy framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.html">Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.adapter.html">Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.args_converters.html">List Item View Argument Converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.dictadapter.html">DictAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.listadapter.html">ListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.models.html">SelectableDataItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.simplelistadapter.html">SimpleListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.animation.html">Animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.app.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.atlas.html">Atlas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.base.html">Kivy Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.cache.html">Cache manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.clock.html">Clock object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.compat.html">Compatibility module for Python 2.7 and &gt; 3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.config.html">Configuration object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.context.html">Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.html">Core Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.clipboard.html">Clipboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.gl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.spelling.html">Spelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.text.html">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.text.markup.html">Text Markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.text.text_layout.html">Text layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.html">Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.dampedscroll.html">Damped scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.kinetic.html">Kinetic effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.opacityscroll.html">Opacity scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.scroll.html">Scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.event.html">Event dispatcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.ext.html">Extension Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.factory.html">Factory object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.garden.html">Garden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.geometry.html">Geometry utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.gesture.html">Gesture recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.compiler.html">Graphics compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.context.html">Context management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.context_instructions.html">Context instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.fbo.html">Framebuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.gl_instructions.html">GL instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.instructions.html">Canvas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.opengl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.opengl_utils.html">OpenGL utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.shader.html">Shader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.stencil_instructions.html">Stencil instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.svg.html">SVG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.tesselator.html">Tesselator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.texture.html">Texture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.transformation.html">Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.html">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.factory.html">Motion Event Factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.motionevent.html">Motion Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.html">Input Postprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.dejitter.html">Dejitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.doubletap.html">Double Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.ignorelist.html">Ignore list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.retaintouch.html">Retain Touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.tripletap.html">Triple Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.provider.html">Motion Event Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.html">Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.androidjoystick.html">Android Joystick Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.hidinput.html">Native support for HID input from the linux kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.leapfinger.html">Leap Motion - finger only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.linuxwacom.html">Native support of Wacom tablet from linuxwacom driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.mactouch.html">Native support of MultitouchSupport framework for MacBook (MaxOSX platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.mouse.html">Mouse provider implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.mtdev.html">Native support for Multitouch devices on Linux, using libmtdev.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.probesysfs.html">Auto Create Input Provider Config Entry for Available MT Hardware (linux only).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.tuio.html">TUIO Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.wm_common.html">Common definitions for a Windows provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.wm_pen.html">Support for WM_PEN messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.wm_touch.html">Support for WM_TOUCH messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.recorder.html">Input recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.shape.html">Motion Event Shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.interactive.html">Interactive launcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.lang.html">Kivy Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.lib.html">External libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.lib.gstplayer.html">GstPlayer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.loader.html">Asynchronous data loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.logger.html">Logger object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.metrics.html">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.html">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.inspector.html">Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.keybinding.html">Keybinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.monitor.html">Monitor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.recorder.html">Recorder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.screen.html">Screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.touchring.html">Touchring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.webdebugger.html">Web Debugger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.multistroke.html">Multistroke gesture recognizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.network.html">Network support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.network.urlrequest.html">Url Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.parser.html">Parser utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.resources.html">Resources management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.dictstore.html">Dictionary store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.jsonstore.html">JSON store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.redisstore.html">Redis Store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.support.html">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.abstractview.html">Abstract View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.accordion.html">Accordion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.actionbar.html">Action Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.anchorlayout.html">Anchor Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.boxlayout.html">Box Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.bubble.html">Bubble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.button.html">Button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.carousel.html">Carousel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.checkbox.html">CheckBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.codeinput.html">Code Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.colorpicker.html">Color Picker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.dropdown.html">Drop-Down List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.effectwidget.html">EffectWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.filechooser.html">FileChooser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.floatlayout.html">Float Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.gesturesurface.html">Gesture Surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.gridlayout.html">Grid Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.label.html">Label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.layout.html">Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.listview.html">List View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.modalview.html">ModalView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.pagelayout.html">PageLayout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.popup.html">Popup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.progressbar.html">Progress Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.relativelayout.html">Relative Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.rst.html">reStructuredText renderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.sandbox.html">Sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.scatter.html">Scatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.scatterlayout.html">Scatter Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.screenmanager.html">Screen Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.scrollview.html">Scroll View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.slider.html">Slider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.spinner.html">Spinner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.splitter.html">Splitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.stacklayout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.stencilview.html">Stencil View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.switch.html">Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.tabbedpanel.html">TabbedPanel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.textinput.html">Text Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.togglebutton.html">Toggle button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.treeview.html">Tree View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.videoplayer.html">Video player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.vkeyboard.html">VKeyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.widget.html">Widget class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.vector.html">Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.weakmethod.html">Weak Method</a></li>
+</ul>
+</li>
+</ul>
+
+          <!--
+          <h3>Related Topics</h3>
+          <ul>
+              <li>Previous: <a href="inputs.html" title="previous chapter">Input management</a></li>
+              <li>Next: <a href="graphics.html" title="next chapter">Graphics</a></li>
+          </ul>
+          -->
+        </div>
+      </div>
+    <div id="content">
+    <div class="wrapper">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div class="toc"><h2>Table Of Contents</h2><ul>
+<li><a class="reference internal" href="#">Widgets</a><ul>
+<li><a class="reference internal" href="#introduction-to-widget">Introduction to Widget</a></li>
+<li><a class="reference internal" href="#manipulating-the-widget-tree">Manipulating the Widget tree</a></li>
+<li><a class="reference internal" href="#traversing-the-tree">Traversing the Tree</a></li>
+<li><a class="reference internal" href="#widgets-z-index">Widgets Z Index</a></li>
+<li><a class="reference internal" href="#organize-with-layouts">Organize with Layouts</a></li>
+<li><a class="reference internal" href="#adding-a-background-to-a-layout">Adding a Background to a Layout</a></li>
+<li><a class="reference internal" href="#nesting-layouts">Nesting Layouts</a></li>
+<li><a class="reference internal" href="#size-and-position-metrics">Size and position metrics</a></li>
+<li><a class="reference internal" href="#screen-separation-with-screen-manager">Screen Separation with Screen Manager</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+  <div class="section" id="widgets">
+<span id="id1"></span><h1>Widgets<a class="headerlink" href="#widgets" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction-to-widget">
+<h2>Introduction to Widget<a class="headerlink" href="#introduction-to-widget" title="Permalink to this headline">¶</a></h2>
+<p>A <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget" title="kivy.uix.widget.Widget"><tt class="xref py py-class docutils literal"><span class="pre">Widget</span></tt></a> is the base building block of GUI interfaces in Kivy.
+It provides a <a class="reference internal" href="../api-kivy.graphics.html#kivy.graphics.Canvas" title="kivy.graphics.Canvas"><tt class="xref py py-class docutils literal"><span class="pre">Canvas</span></tt></a> that can be used to draw on screen. It receives events
+and reacts to them. For a in-depth explanation about the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget" title="kivy.uix.widget.Widget"><tt class="xref py py-class docutils literal"><span class="pre">Widget</span></tt></a> class,
+look at the module documentation.</p>
+</div>
+<div class="section" id="manipulating-the-widget-tree">
+<h2>Manipulating the Widget tree<a class="headerlink" href="#manipulating-the-widget-tree" title="Permalink to this headline">¶</a></h2>
+<p>Widgets in Kivy are organized in trees. Your
+application has a <cite>root widget</cite>, which usually has <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.children" title="kivy.uix.widget.Widget.children"><tt class="xref py py-attr docutils literal"><span class="pre">children</span></tt></a> that can have
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.children" title="kivy.uix.widget.Widget.children"><tt class="xref py py-attr docutils literal"><span class="pre">children</span></tt></a> of their own. Children of a widget are represented as the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.children" title="kivy.uix.widget.Widget.children"><tt class="xref py py-attr docutils literal"><span class="pre">children</span></tt></a>
+attribute, a Kivy <a class="reference internal" href="../api-kivy.properties.html#kivy.properties.ListProperty" title="kivy.properties.ListProperty"><tt class="xref py py-class docutils literal"><span class="pre">ListProperty</span></tt></a>.</p>
+<p>The widget tree can be manipulated with the following methods:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.add_widget" title="kivy.uix.widget.Widget.add_widget"><tt class="xref py py-meth docutils literal"><span class="pre">add_widget()</span></tt></a>: add a widget as a child</li>
+<li><a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.remove_widget" title="kivy.uix.widget.Widget.remove_widget"><tt class="xref py py-meth docutils literal"><span class="pre">remove_widget()</span></tt></a>: remove a widget from the
+children list</li>
+<li><a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.clear_widgets" title="kivy.uix.widget.Widget.clear_widgets"><tt class="xref py py-meth docutils literal"><span class="pre">clear_widgets()</span></tt></a>: remove all children from a
+widget</li>
+</ul>
+<p>For example, if you want to add a button inside a BoxLayout, you can do:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">layout</span> <span class="o">=</span> <span class="n">BoxLayout</span><span class="p">(</span><span class="n">padding</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&#39;My first button&#39;</span><span class="p">)</span>
+<span class="n">layout</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The button is added to layout: the button&#8217;s parent property will be set to layout;
+the layout will have the button added to its children list. To remove the button
+from the layout:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">layout</span><span class="o">.</span><span class="n">remove_widget</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With removal, the button&#8217;s parent property will be set to None, and the layout
+will have button removed from its children list.</p>
+<p>If you want to clear all the children inside a widget, use
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.clear_widgets" title="kivy.uix.widget.Widget.clear_widgets"><tt class="xref py py-meth docutils literal"><span class="pre">clear_widgets()</span></tt></a> method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">layout</span><span class="o">.</span><span class="n">clear_widgets</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Never manipulate the children list yourself, unless you really know what you
+are doing. The widget tree is associated with a graphic tree. For example, if you
+add a widget into the children list without adding its canvas to the
+graphics tree, the widget will be a child, yes, but nothing will be drawn
+on the screen. Moreover, you might have issues on further calls of
+add_widget, remove_widget and clear_widgets.</p>
+</div>
+</div>
+<div class="section" id="traversing-the-tree">
+<h2>Traversing the Tree<a class="headerlink" href="#traversing-the-tree" title="Permalink to this headline">¶</a></h2>
+<p>The Widget class instance&#8217;s <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.children" title="kivy.uix.widget.Widget.children"><tt class="xref py py-attr docutils literal"><span class="pre">children</span></tt></a> list property
+contains all the children. You can easily traverse the tree by doing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">root</span> <span class="o">=</span> <span class="n">BoxLayout</span><span class="p">()</span>
+<span class="c"># ... add widgets to root ...</span>
+<span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, this must be used carefuly. If you intend to modify the children list
+with one of the methods shown in the previous section, you must use a copy of
+the list like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">children</span><span class="p">[:]:</span>
+    <span class="c"># manipulate the tree. For example here, remove all widgets that have a</span>
+    <span class="c"># width &lt; 100</span>
+    <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">width</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">remove_widget</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Widgets don&#8217;t influence the size/pos of their children by default. The
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.pos" title="kivy.uix.widget.Widget.pos"><tt class="xref py py-attr docutils literal"><span class="pre">pos</span></tt></a> attribute is the absolute position in screen co-ordinates (unless, you
+use the <a class="reference internal" href="../api-kivy.uix.relativelayout.html#module-kivy.uix.relativelayout" title="kivy.uix.relativelayout"><tt class="xref py py-mod docutils literal"><span class="pre">relativelayout</span></tt></a>. More on that later) and <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size" title="kivy.uix.widget.Widget.size"><tt class="xref py py-attr docutils literal"><span class="pre">size</span></tt></a>, is an absolute size.</p>
+</div>
+<div class="section" id="widgets-z-index">
+<h2>Widgets Z Index<a class="headerlink" href="#widgets-z-index" title="Permalink to this headline">¶</a></h2>
+<p>The order of drawing widgets is based on position in
+the widget tree. The last widget&#8217;s canvas is drawn last (on top of everything
+else inside its parent). add_widget takes a <cite>index</cite> parameter:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">root</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>for setting the z-index.</p>
+</div>
+<div class="section" id="organize-with-layouts">
+<h2>Organize with Layouts<a class="headerlink" href="#organize-with-layouts" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../api-kivy.uix.layout.html#module-kivy.uix.layout" title="kivy.uix.layout"><tt class="xref py py-mod docutils literal"><span class="pre">layout</span></tt></a> is a special kind of widget that controls the size and position of
+its children. There are different kinds of layouts, allowing for different
+automatic organization of their children. Layouts use <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint" title="kivy.uix.widget.Widget.size_hint"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint</span></tt></a> and <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.pos_hint" title="kivy.uix.widget.Widget.pos_hint"><tt class="xref py py-attr docutils literal"><span class="pre">pos_hint</span></tt></a>
+properties to determine the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size" title="kivy.uix.widget.Widget.size"><tt class="xref py py-attr docutils literal"><span class="pre">size</span></tt></a> and <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.pos" title="kivy.uix.widget.Widget.pos"><tt class="xref py py-attr docutils literal"><span class="pre">pos</span></tt></a> of their <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.children" title="kivy.uix.widget.Widget.children"><tt class="xref py py-attr docutils literal"><span class="pre">children</span></tt></a>.</p>
+<p><strong>BoxLayout</strong>:
+Arranges widgets in an adjacent manner (either vertically or horizontally) manner,
+to fill all the space. The size_hint property of children can be used to change
+proportions allowed to each child, or set fixed size for some of them.</p>
+<img alt="../_images/boxlayout1.gif" src="../_images/boxlayout1.gif" />
+<img alt="../_images/gridlayout1.gif" src="../_images/gridlayout1.gif" />
+<img alt="../_images/stacklayout1.gif" src="../_images/stacklayout1.gif" />
+<img alt="../_images/anchorlayout1.gif" src="../_images/anchorlayout1.gif" />
+<img alt="../_images/floatlayout1.gif" src="../_images/floatlayout1.gif" />
+<p><strong>GridLayout</strong>:
+Arranges widgets in a grid. You must specify at least one dimension of the
+grid so kivy can compute the size of the elements and how to arrange them.</p>
+<p><strong>StackLayout</strong>:
+Arranges widgets adjacent to one another, but with a set size in one of the
+dimensions, without trying to make them fit within the entire space. This is
+useful to display children of the same predefined size.</p>
+<p><strong>AnchorLayout</strong>:
+A simple layout only caring about children positions. It allows putting the
+children at a position relative to a border of the layout.
+<cite>size_hint</cite> is not honored.</p>
+<p><strong>FloatLayout</strong>:
+Allows placing children with arbitrary locations and size, either absolute or
+relative to the layout size. Default size_hint (1, 1) will make every child
+the same size as the whole layout, so you probably want to change this value
+if you have more than one child. You can set size_hint to (None, None) to use
+absolute size with <cite>size</cite>. This widget honors <cite>pos_hint</cite> also, which as a dict
+setting position relative to layout position.</p>
+<p><strong>RelativeLayout</strong>:
+Behaves just like FloatLayout, except children positions are relative to layout
+position, not the screen.</p>
+<p>Examine the documentation of the individaul layouts for a more in-depth
+understanding.</p>
+<p><a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint" title="kivy.uix.widget.Widget.size_hint"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint</span></tt></a> and <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.pos_hint" title="kivy.uix.widget.Widget.pos_hint"><tt class="xref py py-attr docutils literal"><span class="pre">pos_hint</span></tt></a>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../api-kivy.uix.floatlayout.html#module-kivy.uix.floatlayout" title="kivy.uix.floatlayout"><tt class="xref py py-mod docutils literal"><span class="pre">floatlayout</span></tt></a></li>
+<li><a class="reference internal" href="../api-kivy.uix.boxlayout.html#module-kivy.uix.boxlayout" title="kivy.uix.boxlayout"><tt class="xref py py-mod docutils literal"><span class="pre">boxlayout</span></tt></a></li>
+<li><a class="reference internal" href="../api-kivy.uix.gridlayout.html#module-kivy.uix.gridlayout" title="kivy.uix.gridlayout"><tt class="xref py py-mod docutils literal"><span class="pre">gridlayout</span></tt></a></li>
+<li><a class="reference internal" href="../api-kivy.uix.stacklayout.html#module-kivy.uix.stacklayout" title="kivy.uix.stacklayout"><tt class="xref py py-mod docutils literal"><span class="pre">stacklayout</span></tt></a></li>
+<li><a class="reference internal" href="../api-kivy.uix.relativelayout.html#module-kivy.uix.relativelayout" title="kivy.uix.relativelayout"><tt class="xref py py-mod docutils literal"><span class="pre">relativelayout</span></tt></a></li>
+<li><a class="reference internal" href="../api-kivy.uix.anchorlayout.html#module-kivy.uix.anchorlayout" title="kivy.uix.anchorlayout"><tt class="xref py py-mod docutils literal"><span class="pre">anchorlayout</span></tt></a></li>
+</ul>
+<p><a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint" title="kivy.uix.widget.Widget.size_hint"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint</span></tt></a> is a <a class="reference internal" href="../api-kivy.properties.html#kivy.properties.ReferenceListProperty" title="kivy.properties.ReferenceListProperty"><tt class="xref py py-class docutils literal"><span class="pre">ReferenceListProperty</span></tt></a> of
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_x" title="kivy.uix.widget.Widget.size_hint_x"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_x</span></tt></a> and <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_y" title="kivy.uix.widget.Widget.size_hint_y"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_y</span></tt></a>. It excepts values from <cite>0</cite> to <cite>1</cite> or <cite>None</cite>
+and defaults to <cite>(1, 1)</cite>. This signifies that if the widget is in a layout,
+the layout will allocate it as much place as possible in both directions
+(relative to the layouts size).</p>
+<p>Setting <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint" title="kivy.uix.widget.Widget.size_hint"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint</span></tt></a> to (0.5, 0.8), for example, will make the widget 50% the
+width and 80% the height of available size for the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget" title="kivy.uix.widget.Widget"><tt class="xref py py-class docutils literal"><span class="pre">Widget</span></tt></a> inside a <a class="reference internal" href="../api-kivy.uix.layout.html#module-kivy.uix.layout" title="kivy.uix.layout"><tt class="xref py py-mod docutils literal"><span class="pre">layout</span></tt></a>.</p>
+<p>Consider the following example:</p>
+<div class="highlight-kv"><div class="highlight"><pre><span class="nc">BoxLayout</span><span class="p">:</span>
+    <span class="nc">Button</span><span class="p">:</span>
+        <span class="na">text</span><span class="p">:</span> <span class="s">&#39;Button 1&#39;</span>
+        <span class="c"># default size_hint is 1, 1, we don&#39;t need to specify it explicitly</span>
+        <span class="c"># however it&#39;s provided here to make things clear</span>
+        <span class="na">size_hint</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>load kivy catalog:</p>
+<div class="highlight-python"><pre>cd $KIVYDIR/examples/demo/kivycatalog
+python main.py</pre>
+</div>
+<p>Replace $KIVYDIR with the directory of your installation of Kivy. Click on the
+button labeled <cite>Box Layout</cite> from the left. Now paste the code from above into
+the editor panel on the right.</p>
+<img alt="../_images/size_hint[B].jpg" src="../_images/size_hint%5bB%5d.jpg" />
+<p>As you can see from the image above, the <cite>Button</cite> takes up 100% of the layout
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size" title="kivy.uix.widget.Widget.size"><tt class="xref py py-attr docutils literal"><span class="pre">size</span></tt></a>.</p>
+<p>Changing the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_x" title="kivy.uix.widget.Widget.size_hint_x"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_x</span></tt></a>/<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_y" title="kivy.uix.widget.Widget.size_hint_y"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_y</span></tt></a> to .5 will make the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget" title="kivy.uix.widget.Widget"><tt class="xref py py-class docutils literal"><span class="pre">Widget</span></tt></a> take 50%
+of the <a class="reference internal" href="../api-kivy.uix.layout.html#module-kivy.uix.layout" title="kivy.uix.layout"><tt class="xref py py-mod docutils literal"><span class="pre">layout</span></tt></a> <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.width" title="kivy.uix.widget.Widget.width"><tt class="xref py py-attr docutils literal"><span class="pre">width</span></tt></a>/<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.height" title="kivy.uix.widget.Widget.height"><tt class="xref py py-attr docutils literal"><span class="pre">height</span></tt></a>.</p>
+<img alt="../_images/size_hint[b_].jpg" src="../_images/size_hint%5bb_%5d.jpg" />
+<p>You can see here that, although we specify <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_x" title="kivy.uix.widget.Widget.size_hint_x"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_x</span></tt></a> and <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_y" title="kivy.uix.widget.Widget.size_hint_y"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_y</span></tt></a> both
+to be .5, only <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_x" title="kivy.uix.widget.Widget.size_hint_x"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_x</span></tt></a> seems to be honored. That is because <a class="reference internal" href="../api-kivy.uix.boxlayout.html#module-kivy.uix.boxlayout" title="kivy.uix.boxlayout"><tt class="xref py py-mod docutils literal"><span class="pre">boxlayout</span></tt></a>
+controls the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_y" title="kivy.uix.widget.Widget.size_hint_y"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_y</span></tt></a> when <a class="reference internal" href="../api-kivy.uix.boxlayout.html#kivy.uix.boxlayout.BoxLayout.orientation" title="kivy.uix.boxlayout.BoxLayout.orientation"><tt class="xref py py-attr docutils literal"><span class="pre">orientation</span></tt></a> is <cite>vertical</cite> and <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_x" title="kivy.uix.widget.Widget.size_hint_x"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_x</span></tt></a>
+when <a class="reference internal" href="../api-kivy.uix.boxlayout.html#kivy.uix.boxlayout.BoxLayout.orientation" title="kivy.uix.boxlayout.BoxLayout.orientation"><tt class="xref py py-attr docutils literal"><span class="pre">orientation</span></tt></a> is &#8216;horizontal&#8217;. The controlled dimension&#8217;s size is calculated depending
+upon the total no. of <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.children" title="kivy.uix.widget.Widget.children"><tt class="xref py py-attr docutils literal"><span class="pre">children</span></tt></a> in the <a class="reference internal" href="../api-kivy.uix.boxlayout.html#module-kivy.uix.boxlayout" title="kivy.uix.boxlayout"><tt class="xref py py-mod docutils literal"><span class="pre">boxlayout</span></tt></a>. In this example, one child has
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_y" title="kivy.uix.widget.Widget.size_hint_y"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_y</span></tt></a> controlled (.5/.5 = 1). Thus, the widget takes 100% of the parent
+layout&#8217;s height.</p>
+<p>Let&#8217;s add another <a class="reference internal" href="../api-kivy.uix.button.html#kivy.uix.button.Button" title="kivy.uix.button.Button"><tt class="xref py py-class docutils literal"><span class="pre">Button</span></tt></a> to the <a class="reference internal" href="../api-kivy.uix.layout.html#module-kivy.uix.layout" title="kivy.uix.layout"><tt class="xref py py-mod docutils literal"><span class="pre">layout</span></tt></a> and see what happens.</p>
+<img alt="../_images/size_hint[bb].jpg" src="../_images/size_hint%5bbb%5d.jpg" />
+<p><a class="reference internal" href="../api-kivy.uix.boxlayout.html#module-kivy.uix.boxlayout" title="kivy.uix.boxlayout"><tt class="xref py py-mod docutils literal"><span class="pre">boxlayout</span></tt></a> by its very nature divides the available space between its
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.children" title="kivy.uix.widget.Widget.children"><tt class="xref py py-attr docutils literal"><span class="pre">children</span></tt></a> equally. In our example, the proportion is 50-50, because we have two
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.children" title="kivy.uix.widget.Widget.children"><tt class="xref py py-attr docutils literal"><span class="pre">children</span></tt></a>. Let&#8217;s use size_hint on one of the children and see the results.</p>
+<img alt="../_images/size_hint[oB].jpg" src="../_images/size_hint%5boB%5d.jpg" />
+<p>If a child specifies <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint" title="kivy.uix.widget.Widget.size_hint"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint</span></tt></a>, this specifies how much space the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget" title="kivy.uix.widget.Widget"><tt class="xref py py-class docutils literal"><span class="pre">Widget</span></tt></a>
+will take out of the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size" title="kivy.uix.widget.Widget.size"><tt class="xref py py-attr docutils literal"><span class="pre">size</span></tt></a> given to it by the <a class="reference internal" href="../api-kivy.uix.boxlayout.html#module-kivy.uix.boxlayout" title="kivy.uix.boxlayout"><tt class="xref py py-mod docutils literal"><span class="pre">boxlayout</span></tt></a>. In our example, the
+first <a class="reference internal" href="../api-kivy.uix.button.html#kivy.uix.button.Button" title="kivy.uix.button.Button"><tt class="xref py py-class docutils literal"><span class="pre">Button</span></tt></a> specifies .5 for <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_x" title="kivy.uix.widget.Widget.size_hint_x"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_x</span></tt></a>. The space for the widget is
+calculated like so:</p>
+<div class="highlight-python"><pre>first child's size_hint devided by
+first child's size_hint + second child's size_hint + ...n(no of children)
+
+.5/(.5+1) = .333...</pre>
+</div>
+<p>The rest of the BoxLayout&#8217;s <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.width" title="kivy.uix.widget.Widget.width"><tt class="xref py py-attr docutils literal"><span class="pre">width</span></tt></a> is divided among the rest of the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.children" title="kivy.uix.widget.Widget.children"><tt class="xref py py-attr docutils literal"><span class="pre">children</span></tt></a>.
+In our example, this means the second <a class="reference internal" href="../api-kivy.uix.button.html#kivy.uix.button.Button" title="kivy.uix.button.Button"><tt class="xref py py-class docutils literal"><span class="pre">Button</span></tt></a> takes up 66.66% of the <a class="reference internal" href="../api-kivy.uix.layout.html#module-kivy.uix.layout" title="kivy.uix.layout"><tt class="xref py py-mod docutils literal"><span class="pre">layout</span></tt></a>
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.width" title="kivy.uix.widget.Widget.width"><tt class="xref py py-attr docutils literal"><span class="pre">width</span></tt></a>.</p>
+<p>Experiment with <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint" title="kivy.uix.widget.Widget.size_hint"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint</span></tt></a> to get comfortable with it.</p>
+<p>If you want to control the absolute <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size" title="kivy.uix.widget.Widget.size"><tt class="xref py py-attr docutils literal"><span class="pre">size</span></tt></a> of a <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget" title="kivy.uix.widget.Widget"><tt class="xref py py-class docutils literal"><span class="pre">Widget</span></tt></a>, you can set
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_x" title="kivy.uix.widget.Widget.size_hint_x"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_x</span></tt></a>/<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint_y" title="kivy.uix.widget.Widget.size_hint_y"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint_y</span></tt></a> or both to <cite>None</cite> so that the widget&#8217;s <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.width" title="kivy.uix.widget.Widget.width"><tt class="xref py py-attr docutils literal"><span class="pre">width</span></tt></a> and or
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.height" title="kivy.uix.widget.Widget.height"><tt class="xref py py-attr docutils literal"><span class="pre">height</span></tt></a> attributes will be honored.</p>
+<p><a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.pos_hint" title="kivy.uix.widget.Widget.pos_hint"><tt class="xref py py-attr docutils literal"><span class="pre">pos_hint</span></tt></a> is a dict, which defaults to empty. As for <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint" title="kivy.uix.widget.Widget.size_hint"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint</span></tt></a>, layouts honor
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.pos_hint" title="kivy.uix.widget.Widget.pos_hint"><tt class="xref py py-attr docutils literal"><span class="pre">pos_hint</span></tt></a> differently, but generally you can add values to any of the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.pos" title="kivy.uix.widget.Widget.pos"><tt class="xref py py-attr docutils literal"><span class="pre">pos</span></tt></a>
+attributes (<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.x" title="kivy.uix.widget.Widget.x"><tt class="xref py py-attr docutils literal"><span class="pre">x</span></tt></a>, <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.y" title="kivy.uix.widget.Widget.y"><tt class="xref py py-attr docutils literal"><span class="pre">y</span></tt></a>, <tt class="xref py py-attr docutils literal"><span class="pre">left</span></tt>, <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.top" title="kivy.uix.widget.Widget.top"><tt class="xref py py-attr docutils literal"><span class="pre">top</span></tt></a>, <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.center_x" title="kivy.uix.widget.Widget.center_x"><tt class="xref py py-attr docutils literal"><span class="pre">center_x</span></tt></a>, <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.center_y" title="kivy.uix.widget.Widget.center_y"><tt class="xref py py-attr docutils literal"><span class="pre">center_y</span></tt></a>) to have the
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget" title="kivy.uix.widget.Widget"><tt class="xref py py-class docutils literal"><span class="pre">Widget</span></tt></a> positioned relative to its <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.parent" title="kivy.uix.widget.Widget.parent"><tt class="xref py py-attr docutils literal"><span class="pre">parent</span></tt></a>.</p>
+<p>Let&#8217;s experiment with the following code in kivycatalog to understand <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.pos_hint" title="kivy.uix.widget.Widget.pos_hint"><tt class="xref py py-attr docutils literal"><span class="pre">pos_hint</span></tt></a>
+visually:</p>
+<div class="highlight-kv"><div class="highlight"><pre><span class="nc">FloatLayout</span><span class="p">:</span>
+    <span class="nc">Button</span><span class="p">:</span>
+        <span class="na">text</span><span class="p">:</span> <span class="s">&quot;We Will&quot;</span>
+        <span class="na">pos</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
+        <span class="na">size_hint</span><span class="p">:</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">4</span>
+    <span class="nc">Button</span><span class="p">:</span>
+        <span class="na">text</span><span class="p">:</span> <span class="s">&quot;Wee Wiill&quot;</span>
+        <span class="na">pos</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span>
+        <span class="na">size_hint</span><span class="p">:</span> <span class="o">.</span><span class="mi">4</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span>
+
+    <span class="nc">Button</span><span class="p">:</span>
+        <span class="na">text</span><span class="p">:</span> <span class="s">&quot;ROCK YOU!!&quot;</span>
+        <span class="na">pos_hint</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;x&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">6</span><span class="p">}</span>
+        <span class="na">size_hint</span><span class="p">:</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>This gives us:</p>
+<img alt="../_images/pos_hint.jpg" src="../_images/pos_hint.jpg" />
+<p>As with <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size_hint" title="kivy.uix.widget.Widget.size_hint"><tt class="xref py py-attr docutils literal"><span class="pre">size_hint</span></tt></a>, you should experiment with <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.pos_hint" title="kivy.uix.widget.Widget.pos_hint"><tt class="xref py py-attr docutils literal"><span class="pre">pos_hint</span></tt></a> to
+understand the effect it has on the widget positions.</p>
+</div>
+<div class="section" id="adding-a-background-to-a-layout">
+<span id="adding-widget-background"></span><h2>Adding a Background to a Layout<a class="headerlink" href="#adding-a-background-to-a-layout" title="Permalink to this headline">¶</a></h2>
+<p>One of the frequently asked questions about layouts is::</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;How to add a background image/color/video/... to a Layout&quot;</span>
+</pre></div>
+</div>
+<p>Layouts by their nature have no visual representation: they have no canvas
+instructions by default. However you can add canvas instructions to a layout
+instance easily, as with adding a colored background:</p>
+<p>In Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.graphics</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Rectangle</span>
+
+<span class="k">with</span> <span class="n">layout_instance</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">before</span><span class="p">:</span>
+    <span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c"># green; colors range from 0-1 instead of 0-255</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">layout_instance</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
+                           <span class="n">pos</span><span class="o">=</span><span class="n">layout_instance</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Unfortunately, this will only draw a rectangle at the layout&#8217;s initial position
+and size. To make sure the rect is drawn inside the layout, when the layout
+size/pos changes, we need to listen to any changes and update the rectangles
+size and pos. We can do that as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">layout_instance</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">before</span><span class="p">:</span>
+    <span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c"># green; colors range from 0-1 instead of 0-255</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">layout_instance</span><span class="o">.</span><span class="n">size</span><span class="p">,</span>
+                           <span class="n">pos</span><span class="o">=</span><span class="n">layout_instance</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">update_rect</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="n">instance</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">pos</span>
+    <span class="n">instance</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">size</span>
+
+<span class="c"># listen to size and position changes</span>
+<span class="n">layout_instance</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">update_rect</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">update_rect</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In kv:</p>
+<div class="highlight-kv"><div class="highlight"><pre><span class="nc">FloatLayout</span><span class="p">:</span>
+    <span class="nc">canvas.before</span><span class="p">:</span>
+        <span class="nc">Color</span><span class="p">:</span>
+            <span class="na">rgba</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="nc">Rectangle</span><span class="p">:</span>
+            <span class="c"># self here refers to the widget i.e BoxLayout</span>
+            <span class="na">pos</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span>
+            <span class="na">size</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+</pre></div>
+</div>
+<p>The kv declaration sets an implicit binding: the last two kv lines ensure that
+the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.pos" title="kivy.uix.widget.Widget.pos"><tt class="xref py py-attr docutils literal"><span class="pre">pos</span></tt></a> and <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.size" title="kivy.uix.widget.Widget.size"><tt class="xref py py-attr docutils literal"><span class="pre">size</span></tt></a> values of the rectangle will update when the <a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.pos" title="kivy.uix.widget.Widget.pos"><tt class="xref py py-attr docutils literal"><span class="pre">pos</span></tt></a> of the
+<a class="reference internal" href="../api-kivy.uix.floatlayout.html#module-kivy.uix.floatlayout" title="kivy.uix.floatlayout"><tt class="xref py py-mod docutils literal"><span class="pre">floatlayout</span></tt></a> changes.</p>
+<p>Now we put the snippets above into the shell of Kivy App.</p>
+<p>Pure Python way:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.graphics</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Rectangle</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.floatlayout</span> <span class="kn">import</span> <span class="n">FloatLayout</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.button</span> <span class="kn">import</span> <span class="n">Button</span>
+
+
+<span class="k">class</span> <span class="nc">RootWidget</span><span class="p">(</span><span class="n">FloatLayout</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c"># make sure we aren&#39;t overriding any important functionality</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RootWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c"># let&#39;s add a Widget to this layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span>
+            <span class="n">Button</span><span class="p">(</span>
+                <span class="n">text</span><span class="o">=</span><span class="s">&quot;Hello World&quot;</span><span class="p">,</span>
+                <span class="n">size_hint</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">),</span>
+                <span class="n">pos_hint</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;center_x&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="s">&#39;center_y&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">5</span><span class="p">}))</span>
+
+
+<span class="k">class</span> <span class="nc">MainApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span> <span class="o">=</span> <span class="n">RootWidget</span><span class="p">()</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_rect</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_rect</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">root</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">before</span><span class="p">:</span>
+            <span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c"># green; colors range from 0-1 not 0-255</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">root</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">root</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">root</span>
+
+    <span class="k">def</span> <span class="nf">_update_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">pos</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">size</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">MainApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Using the kv Language:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.lang</span> <span class="kn">import</span> <span class="n">Builder</span>
+
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">Builder</span><span class="o">.</span><span class="n">load_string</span><span class="p">(</span><span class="s">&#39;&#39;&#39;</span>
+<span class="s">FloatLayout:</span>
+<span class="s">    canvas.before:</span>
+<span class="s">        Color:</span>
+<span class="s">            rgba: 0, 1, 0, 1</span>
+<span class="s">        Rectangle:</span>
+<span class="s">            # self here refers to the widget i.e FloatLayout</span>
+<span class="s">            pos: self.pos</span>
+<span class="s">            size: self.size</span>
+<span class="s">    Button:</span>
+<span class="s">        text: &#39;Hello World!!&#39;</span>
+<span class="s">        size_hint: .5, .5</span>
+<span class="s">        pos_hint: {&#39;center_x&#39;:.5, &#39;center_y&#39;: .5}</span>
+<span class="s">&#39;&#39;&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MainApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">root</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">MainApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Both of the Apps should look something like this:</p>
+<img alt="../_images/layout_background.png" src="../_images/layout_background.png" />
+<p><strong>To add a color to the background of a **custom layouts rule/class</strong> **</p>
+<p>The way we add background to the layout&#8217;s instance can quickly become
+cumbersome if we need to use multiple layouts. To help with this, you can
+subclass the Layout and create your own layout that adds a background.</p>
+<p>Using Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.graphics</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Rectangle</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.boxlayout</span> <span class="kn">import</span> <span class="n">BoxLayout</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.floatlayout</span> <span class="kn">import</span> <span class="n">FloatLayout</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.image</span> <span class="kn">import</span> <span class="n">AsyncImage</span>
+
+
+<span class="k">class</span> <span class="nc">RootWidget</span><span class="p">(</span><span class="n">BoxLayout</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">CustomLayout</span><span class="p">(</span><span class="n">FloatLayout</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c"># make sure we aren&#39;t overriding any important functionality</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CustomLayout</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">before</span><span class="p">:</span>
+            <span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c"># green; colors range from 0-1 instead of 0-255</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_rect</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_rect</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_update_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">pos</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">size</span>
+
+
+<span class="k">class</span> <span class="nc">MainApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">RootWidget</span><span class="p">()</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">CustomLayout</span><span class="p">()</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span>
+            <span class="n">AsyncImage</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="s">&quot;http://www.everythingzoomer.com/wp-content/uploads/2013/01/Monday-joke-289x277.jpg&quot;</span><span class="p">,</span>
+                <span class="n">size_hint</span><span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">),</span>
+                <span class="n">pos_hint</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;center_x&#39;</span><span class="p">:</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="s">&#39;center_y&#39;</span><span class="p">:</span><span class="o">.</span><span class="mi">5</span><span class="p">}))</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="n">AsyncImage</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s">&#39;http://www.stuffistumbledupon.com/wp-content/uploads/2012/05/Have-you-seen-this-dog-because-its-awesome-meme-puppy-doggy.jpg&#39;</span><span class="p">))</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">CustomLayout</span><span class="p">()</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span>
+            <span class="n">AsyncImage</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="s">&quot;http://www.stuffistumbledupon.com/wp-content/uploads/2012/04/Get-a-Girlfriend-Meme-empty-wallet.jpg&quot;</span><span class="p">,</span>
+                <span class="n">size_hint</span><span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">),</span>
+                <span class="n">pos_hint</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;center_x&#39;</span><span class="p">:</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="s">&#39;center_y&#39;</span><span class="p">:</span><span class="o">.</span><span class="mi">5</span><span class="p">}))</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">root</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">MainApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Using the kv Language:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.floatlayout</span> <span class="kn">import</span> <span class="n">FloatLayout</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.boxlayout</span> <span class="kn">import</span> <span class="n">BoxLayout</span>
+<span class="kn">from</span> <span class="nn">kivy.lang</span> <span class="kn">import</span> <span class="n">Builder</span>
+
+
+<span class="n">Builder</span><span class="o">.</span><span class="n">load_string</span><span class="p">(</span><span class="s">&#39;&#39;&#39;</span>
+<span class="s">&lt;CustomLayout&gt;</span>
+<span class="s">    canvas.before:</span>
+<span class="s">        Color:</span>
+<span class="s">            rgba: 0, 1, 0, 1</span>
+<span class="s">        Rectangle:</span>
+<span class="s">            pos: self.pos</span>
+<span class="s">            size: self.size</span>
+
+<span class="s">&lt;RootWidget&gt;</span>
+<span class="s">    CustomLayout:</span>
+<span class="s">        AsyncImage:</span>
+<span class="s">            source: &#39;http://www.everythingzoomer.com/wp-content/uploads/2013/01/Monday-joke-289x277.jpg&#39;</span>
+<span class="s">            size_hint: 1, .5</span>
+<span class="s">            pos_hint: {&#39;center_x&#39;:.5, &#39;center_y&#39;: .5}</span>
+<span class="s">    AsyncImage:</span>
+<span class="s">        source: &#39;http://www.stuffistumbledupon.com/wp-content/uploads/2012/05/Have-you-seen-this-dog-because-its-awesome-meme-puppy-doggy.jpg&#39;</span>
+<span class="s">    CustomLayout</span>
+<span class="s">        AsyncImage:</span>
+<span class="s">            source: &#39;http://www.stuffistumbledupon.com/wp-content/uploads/2012/04/Get-a-Girlfriend-Meme-empty-wallet.jpg&#39;</span>
+<span class="s">            size_hint: 1, .5</span>
+<span class="s">            pos_hint: {&#39;center_x&#39;:.5, &#39;center_y&#39;: .5}</span>
+<span class="s">&#39;&#39;&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">RootWidget</span><span class="p">(</span><span class="n">BoxLayout</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">CustomLayout</span><span class="p">(</span><span class="n">FloatLayout</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">MainApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">RootWidget</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">MainApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Both of the Apps should look something like this:</p>
+<img alt="../_images/custom_layout_background.png" src="../_images/custom_layout_background.png" />
+<p>Defining the background in the custom layout class, assures that it will be used
+in every instance of CustomLayout.</p>
+<p>Now, to add an image or color to the background of a built-in Kivy layout,
+<strong>globally</strong>, we need to override the kv rule for the layout in question.
+Consider GridLayout:</p>
+<div class="highlight-python"><pre>&lt;GridLayout&gt;
+    canvas.before:
+        Color:
+            rgba: 0, 1, 0, 1
+        BorderImage:
+            source: '../examples/widgets/sequenced_images/data/images/button_white.png'
+            pos: self.pos
+            size: self.size</pre>
+</div>
+<p>Then, when we put this snippet into a Kivy app:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.floatlayout</span> <span class="kn">import</span> <span class="n">FloatLayout</span>
+<span class="kn">from</span> <span class="nn">kivy.lang</span> <span class="kn">import</span> <span class="n">Builder</span>
+
+
+<span class="n">Builder</span><span class="o">.</span><span class="n">load_string</span><span class="p">(</span><span class="s">&#39;&#39;&#39;</span>
+<span class="s">&lt;GridLayout&gt;</span>
+<span class="s">    canvas.before:</span>
+<span class="s">        BorderImage:</span>
+<span class="s">            # BorderImage behaves like the CSS BorderImage</span>
+<span class="s">            border: 10, 10, 10, 10</span>
+<span class="s">            source: &#39;../examples/widgets/sequenced_images/data/images/button_white.png&#39;</span>
+<span class="s">            pos: self.pos</span>
+<span class="s">            size: self.size</span>
+
+<span class="s">&lt;RootWidget&gt;</span>
+<span class="s">    GridLayout:</span>
+<span class="s">        size_hint: .9, .9</span>
+<span class="s">        pos_hint: {&#39;center_x&#39;: .5, &#39;center_y&#39;: .5}</span>
+<span class="s">        rows:1</span>
+<span class="s">        Label:</span>
+<span class="s">            text: &quot;I don&#39;t suffer from insanity, I enjoy every minute of it&quot;</span>
+<span class="s">            text_size: self.width-20, self.height-20</span>
+<span class="s">            valign: &#39;top&#39;</span>
+<span class="s">        Label:</span>
+<span class="s">            text: &quot;When I was born I was so surprised; I didn&#39;t speak for a year and a half.&quot;</span>
+<span class="s">            text_size: self.width-20, self.height-20</span>
+<span class="s">            valign: &#39;middle&#39;</span>
+<span class="s">            halign: &#39;center&#39;</span>
+<span class="s">        Label:</span>
+<span class="s">            text: &quot;A consultant is someone who takes a subject you understand and makes it sound confusing&quot;</span>
+<span class="s">            text_size: self.width-20, self.height-20</span>
+<span class="s">            valign: &#39;bottom&#39;</span>
+<span class="s">            halign: &#39;justify&#39;</span>
+<span class="s">&#39;&#39;&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">RootWidget</span><span class="p">(</span><span class="n">FloatLayout</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">MainApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">RootWidget</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">MainApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The result should look something like this:</p>
+<img alt="../_images/global_background.png" src="../_images/global_background.png" />
+<p>As we are overriding the rule of the class GridLayout, any use of this
+class in our app will display that image.</p>
+<p>How about an <strong>Animated background</strong>?</p>
+<p>You can set the drawing instructions like Rectangle/BorderImage/Ellipse/... to
+use a particular texture:</p>
+<div class="highlight-python"><pre>Rectangle:
+    texture: reference to a texture</pre>
+</div>
+<p>We use this to display an animated background:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.floatlayout</span> <span class="kn">import</span> <span class="n">FloatLayout</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.gridlayout</span> <span class="kn">import</span> <span class="n">GridLayout</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.image</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">kivy.properties</span> <span class="kn">import</span> <span class="n">ObjectProperty</span>
+<span class="kn">from</span> <span class="nn">kivy.lang</span> <span class="kn">import</span> <span class="n">Builder</span>
+
+
+<span class="n">Builder</span><span class="o">.</span><span class="n">load_string</span><span class="p">(</span><span class="s">&#39;&#39;&#39;</span>
+<span class="s">&lt;CustomLayout&gt;</span>
+<span class="s">    canvas.before:</span>
+<span class="s">        BorderImage:</span>
+<span class="s">            # BorderImage behaves like the CSS BorderImage</span>
+<span class="s">            border: 10, 10, 10, 10</span>
+<span class="s">            texture: self.background_image.texture</span>
+<span class="s">            pos: self.pos</span>
+<span class="s">            size: self.size</span>
+
+<span class="s">&lt;RootWidget&gt;</span>
+<span class="s">    CustomLayout:</span>
+<span class="s">        size_hint: .9, .9</span>
+<span class="s">        pos_hint: {&#39;center_x&#39;: .5, &#39;center_y&#39;: .5}</span>
+<span class="s">        rows:1</span>
+<span class="s">        Label:</span>
+<span class="s">            text: &quot;I don&#39;t suffer from insanity, I enjoy every minute of it&quot;</span>
+<span class="s">            text_size: self.width-20, self.height-20</span>
+<span class="s">            valign: &#39;top&#39;</span>
+<span class="s">        Label:</span>
+<span class="s">            text: &quot;When I was born I was so surprised; I didn&#39;t speak for a year and a half.&quot;</span>
+<span class="s">            text_size: self.width-20, self.height-20</span>
+<span class="s">            valign: &#39;middle&#39;</span>
+<span class="s">            halign: &#39;center&#39;</span>
+<span class="s">        Label:</span>
+<span class="s">            text: &quot;A consultant is someone who takes a subject you understand and makes it sound confusing&quot;</span>
+<span class="s">            text_size: self.width-20, self.height-20</span>
+<span class="s">            valign: &#39;bottom&#39;</span>
+<span class="s">            halign: &#39;justify&#39;</span>
+<span class="s">&#39;&#39;&#39;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">CustomLayout</span><span class="p">(</span><span class="n">GridLayout</span><span class="p">):</span>
+
+    <span class="n">background_image</span> <span class="o">=</span> <span class="n">ObjectProperty</span><span class="p">(</span>
+        <span class="n">Image</span><span class="p">(</span>
+            <span class="n">source</span><span class="o">=</span><span class="s">&#39;../examples/widgets/sequenced_images/data/images/button_white_animated.zip&#39;</span><span class="p">,</span>
+            <span class="n">anim_delay</span><span class="o">=.</span><span class="mi">1</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">RootWidget</span><span class="p">(</span><span class="n">FloatLayout</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">MainApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">RootWidget</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">MainApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To try to understand what is happening here, start from line 13:</p>
+<div class="highlight-python"><pre>texture: self.background_image.texture</pre>
+</div>
+<p>This specifies that the <cite>texture</cite> property of <cite>BorderImage</cite> will be updated
+whenever the <cite>texture</cite> property of <cite>background_inage</cite> updates. We define the
+background_image property at line 40:</p>
+<div class="highlight-python"><pre>background_image = ObjectProperty(...</pre>
+</div>
+<p>This sets up <cite>background_image</cite> as an <a class="reference internal" href="../api-kivy.properties.html#kivy.properties.ObjectProperty" title="kivy.properties.ObjectProperty"><tt class="xref py py-class docutils literal"><span class="pre">ObjectProperty</span></tt></a> in which we add an <a class="reference internal" href="../api-kivy.uix.image.html#kivy.uix.image.Image" title="kivy.uix.image.Image"><tt class="xref py py-class docutils literal"><span class="pre">Image</span></tt></a>
+widget. An image widget has a <cite>texture</cite> property; where you see
+<cite>self.background_image.texture</cite>, this sets a reference, <cite>texture</cite>, to this property.
+The <a class="reference internal" href="../api-kivy.uix.image.html#kivy.uix.image.Image" title="kivy.uix.image.Image"><tt class="xref py py-class docutils literal"><span class="pre">Image</span></tt></a> widget supports animation: the texture of the image is updated whenever
+the animation changes, and the texture of BorderImage instruction is updated in
+the process.</p>
+<p>You can also just blit custom data to the texture. For details, look at the
+documention of <a class="reference internal" href="../api-kivy.graphics.texture.html#kivy.graphics.texture.Texture" title="kivy.graphics.texture.Texture"><tt class="xref py py-class docutils literal"><span class="pre">Texture</span></tt></a>.</p>
+</div>
+<div class="section" id="nesting-layouts">
+<h2>Nesting Layouts<a class="headerlink" href="#nesting-layouts" title="Permalink to this headline">¶</a></h2>
+<p>Yes! It is quite fun to see how extensible the process can be.</p>
+</div>
+<div class="section" id="size-and-position-metrics">
+<h2>Size and position metrics<a class="headerlink" href="#size-and-position-metrics" title="Permalink to this headline">¶</a></h2>
+<p>Kivy&#8217;s default unit for length is the pixel, all sizes and positions are
+expressed in it by default. You can express them in other units, which is
+useful to achieve better consistency across devices (they get converted to the
+size in pixels automatically).</p>
+<p>Available units are <a class="reference internal" href="../api-kivy.metrics.html#kivy.metrics.pt" title="kivy.metrics.pt"><tt class="xref py py-attr docutils literal"><span class="pre">pt</span></tt></a>, <a class="reference internal" href="../api-kivy.metrics.html#kivy.metrics.mm" title="kivy.metrics.mm"><tt class="xref py py-attr docutils literal"><span class="pre">mm</span></tt></a>, <a class="reference internal" href="../api-kivy.metrics.html#kivy.metrics.cm" title="kivy.metrics.cm"><tt class="xref py py-attr docutils literal"><span class="pre">cm</span></tt></a>, <a class="reference internal" href="../api-kivy.metrics.html#kivy.metrics.inch" title="kivy.metrics.inch"><tt class="xref py py-attr docutils literal"><span class="pre">inch</span></tt></a>, <a class="reference internal" href="../api-kivy.metrics.html#kivy.metrics.dp" title="kivy.metrics.dp"><tt class="xref py py-attr docutils literal"><span class="pre">dp</span></tt></a> and <a class="reference internal" href="../api-kivy.metrics.html#kivy.metrics.sp" title="kivy.metrics.sp"><tt class="xref py py-attr docutils literal"><span class="pre">sp</span></tt></a>. You can learn about
+their usage in the <a class="reference internal" href="../api-kivy.metrics.html#module-kivy.metrics" title="kivy.metrics"><tt class="xref py py-mod docutils literal"><span class="pre">metrics</span></tt></a> documentation.</p>
+<p>You can also experiment with the <a class="reference internal" href="../api-kivy.modules.screen.html#module-kivy.modules.screen" title="kivy.modules.screen"><tt class="xref py py-mod docutils literal"><span class="pre">screen</span></tt></a> usage to simulate various devices
+screens for your application.</p>
+</div>
+<div class="section" id="screen-separation-with-screen-manager">
+<h2>Screen Separation with Screen Manager<a class="headerlink" href="#screen-separation-with-screen-manager" title="Permalink to this headline">¶</a></h2>
+<p>If your application is composed of various screens, you likely want an easy
+way to navigate from one <a class="reference internal" href="../api-kivy.uix.screenmanager.html#kivy.uix.screenmanager.Screen" title="kivy.uix.screenmanager.Screen"><tt class="xref py py-class docutils literal"><span class="pre">Screen</span></tt></a> to another. Fortunately, there is the
+<a class="reference internal" href="../api-kivy.uix.screenmanager.html#kivy.uix.screenmanager.ScreenManager" title="kivy.uix.screenmanager.ScreenManager"><tt class="xref py py-class docutils literal"><span class="pre">ScreenManager</span></tt></a> class, that allows you to define screens separately, and to set
+the <a class="reference internal" href="../api-kivy.uix.screenmanager.html#kivy.uix.screenmanager.TransitionBase" title="kivy.uix.screenmanager.TransitionBase"><tt class="xref py py-class docutils literal"><span class="pre">TransitionBase</span></tt></a> from one to another.</p>
+</div>
+</div>
+
+
+            <div class="footerlinks">
+            <table>
+                <tr>
+                    <td class="leftlink">
+                  <a href="inputs.html" title="previous chapter">&laquo; Input management</a></li>
+                  </td>
+                  <td class="rightlink">
+                  <a href="graphics.html" title="next chapter">Graphics &raquo;</a>
+                      </td>
+                  </tr>
+              </table>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    </div>
+<!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://txzone.net/piwik/" : "http://txzone.net/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 8);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://txzone.net/piwik/piwik.php?idsite=8" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+    <!--
+    <div class="footer">
+      &copy; Copyright 2010, The Kivy Authors.
+      Last updated on Dec 11, 2014.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2b1.
+</div>
+-->
+  </body>
+
+<!-- Mirrored from kivy.org/docs/guide/widgets.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:12 GMT -->
+</html>

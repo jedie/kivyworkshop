@@ -1,0 +1,604 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from kivy.org/docs/installation/installation-windows.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:34 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="twitter:site" content="@kivyframework">
+    
+    <title>Installation on Windows &mdash; Kivy 1.9.0-dev documentation</title>
+    <link href='../../../fonts.googleapis.com/css8da2.css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../_static/fresh.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0-dev',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../cdn.mathjax.org/mathjax/latest/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery-effects-core-and-slide.js"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/kivy.js"></script>
+    <link rel="top" title="Kivy 1.9.0-dev documentation" href="../index-2.html" />
+    <link rel="up" title="Installation" href="installation.html" />
+    <link rel="next" title="Installation on MacOSX" href="installation-macosx.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head>
+  <body>
+
+    <div id="topbar">
+        <div id="topwrapper">
+        <div id="toplogo">
+            <a href="http://kivy.org/">
+                <img src="../_static/logo-kivy.png" alt="Kivy" height="50"/>
+            </a>
+        </div>
+        <div id="topmenu">
+            <ul class="navigation">
+                <li><a class="nav-guides" href="../gettingstarted/intro.html">Guides</a></li>
+                <li><a class="nav-garden" href="http://kivy-garden.github.io/">Garden</a></li>
+                <li><a class="nav-api" href="../api-kivy.html">API Reference</a></li>
+                <li><a class="nav-pdf" href="../pdf/Kivy-latest.pdf">PDF</a></li>
+                <li><a class="nav-wiki" href="http://wiki.kivy.org/">Wiki</a></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+<div id="contentall">
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>Quick search</h3>
+            <form class="search" action="http://kivy.org/docs/search.html" method="get">
+                &nbsp;
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+                <input type="text" class="text" name="q" />
+            </form>
+          <!--
+          <h3><a href="../index.html">Installation on Windows</a></h3>
+          <ul>
+<li><a class="reference internal" href="#">Installation on Windows</a><ul>
+<li><a class="reference internal" href="#installing-the-portable-version">Installing the portable version</a></li>
+<li><a class="reference internal" href="#start-a-kivy-application">Start a Kivy Application</a><ul>
+<li><a class="reference internal" href="#send-to-method">Send-to method</a></li>
+<li><a class="reference internal" href="#double-click-method">Double-click method</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#start-from-the-command-line-using-bash">Start from the Command-line (using bash)</a></li>
+<li><a class="reference internal" href="#start-from-the-command-line-or-double-click-using-python-launcher-for-windows">Start from the Command-line or Double-click (using Python launcher for Windows)</a></li>
+<li><a class="reference internal" href="#use-development-kivy">Use development Kivy</a></li>
+<li><a class="reference internal" href="#other-environments">Other Environments</a></li>
+<li><a class="reference internal" href="#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+
+          <h3><a href="../index.html">Table Of Contents</a></h3>
+          -->
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/first_app.html">A first App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/rules.html">Kv Design Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/events.html">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/framework.html">Non-widget stuff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/layouts.html">Layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/diving.html">Diving in</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../user-guide.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../philosophy.html">Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contact.html">Contact Us</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guide-index.html">Programming Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guide/basic.html">Kivy Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/environment.html">Controlling the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/config.html">Configure Kivy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/architecture.html">Architectural Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/events.html">Events and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/inputs.html">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/lang.html">Kv language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/other-frameworks.html">Integrating with other Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/bestpractices.html">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/advancedgraphics.html">Advanced Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/packaging.html">Packaging your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/pong.html">Pong Game Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/firstwidget.html">A Simple Paint App</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api-index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.html">Kivy framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.html">Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.adapter.html">Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.args_converters.html">List Item View Argument Converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.dictadapter.html">DictAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.listadapter.html">ListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.models.html">SelectableDataItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.simplelistadapter.html">SimpleListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.animation.html">Animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.app.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.atlas.html">Atlas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.base.html">Kivy Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.cache.html">Cache manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.clock.html">Clock object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.compat.html">Compatibility module for Python 2.7 and &gt; 3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.config.html">Configuration object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.context.html">Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.html">Core Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.clipboard.html">Clipboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.gl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.spelling.html">Spelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.text.html">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.text.markup.html">Text Markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.text.text_layout.html">Text layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.html">Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.dampedscroll.html">Damped scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.kinetic.html">Kinetic effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.opacityscroll.html">Opacity scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.scroll.html">Scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.event.html">Event dispatcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.ext.html">Extension Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.factory.html">Factory object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.garden.html">Garden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.geometry.html">Geometry utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.gesture.html">Gesture recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.compiler.html">Graphics compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.context.html">Context management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.context_instructions.html">Context instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.fbo.html">Framebuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.gl_instructions.html">GL instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.instructions.html">Canvas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.opengl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.opengl_utils.html">OpenGL utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.shader.html">Shader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.stencil_instructions.html">Stencil instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.svg.html">SVG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.tesselator.html">Tesselator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.texture.html">Texture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.transformation.html">Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.html">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.factory.html">Motion Event Factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.motionevent.html">Motion Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.html">Input Postprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.dejitter.html">Dejitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.doubletap.html">Double Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.ignorelist.html">Ignore list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.retaintouch.html">Retain Touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.tripletap.html">Triple Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.provider.html">Motion Event Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.html">Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.androidjoystick.html">Android Joystick Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.hidinput.html">Native support for HID input from the linux kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.leapfinger.html">Leap Motion - finger only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.linuxwacom.html">Native support of Wacom tablet from linuxwacom driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.mactouch.html">Native support of MultitouchSupport framework for MacBook (MaxOSX platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.mouse.html">Mouse provider implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.mtdev.html">Native support for Multitouch devices on Linux, using libmtdev.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.probesysfs.html">Auto Create Input Provider Config Entry for Available MT Hardware (linux only).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.tuio.html">TUIO Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.wm_common.html">Common definitions for a Windows provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.wm_pen.html">Support for WM_PEN messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.wm_touch.html">Support for WM_TOUCH messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.recorder.html">Input recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.shape.html">Motion Event Shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.interactive.html">Interactive launcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.lang.html">Kivy Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.lib.html">External libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.lib.gstplayer.html">GstPlayer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.loader.html">Asynchronous data loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.logger.html">Logger object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.metrics.html">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.html">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.inspector.html">Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.keybinding.html">Keybinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.monitor.html">Monitor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.recorder.html">Recorder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.screen.html">Screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.touchring.html">Touchring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.webdebugger.html">Web Debugger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.multistroke.html">Multistroke gesture recognizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.network.html">Network support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.network.urlrequest.html">Url Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.parser.html">Parser utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.resources.html">Resources management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.dictstore.html">Dictionary store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.jsonstore.html">JSON store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.redisstore.html">Redis Store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.support.html">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.abstractview.html">Abstract View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.accordion.html">Accordion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.actionbar.html">Action Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.anchorlayout.html">Anchor Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.boxlayout.html">Box Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.bubble.html">Bubble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.button.html">Button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.carousel.html">Carousel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.checkbox.html">CheckBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.codeinput.html">Code Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.colorpicker.html">Color Picker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.dropdown.html">Drop-Down List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.effectwidget.html">EffectWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.filechooser.html">FileChooser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.floatlayout.html">Float Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.gesturesurface.html">Gesture Surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.gridlayout.html">Grid Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.label.html">Label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.layout.html">Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.listview.html">List View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.modalview.html">ModalView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.pagelayout.html">PageLayout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.popup.html">Popup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.progressbar.html">Progress Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.relativelayout.html">Relative Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.rst.html">reStructuredText renderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.sandbox.html">Sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.scatter.html">Scatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.scatterlayout.html">Scatter Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.screenmanager.html">Screen Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.scrollview.html">Scroll View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.slider.html">Slider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.spinner.html">Spinner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.splitter.html">Splitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.stacklayout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.stencilview.html">Stencil View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.switch.html">Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.tabbedpanel.html">TabbedPanel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.textinput.html">Text Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.togglebutton.html">Toggle button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.treeview.html">Tree View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.videoplayer.html">Video player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.vkeyboard.html">VKeyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.widget.html">Widget class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.vector.html">Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.weakmethod.html">Weak Method</a></li>
+</ul>
+</li>
+</ul>
+
+          <!--
+          <h3>Related Topics</h3>
+          <ul>
+              <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
+              <li>Next: <a href="installation-macosx.html" title="next chapter">Installation on MacOSX</a></li>
+          </ul>
+          -->
+        </div>
+      </div>
+    <div id="content">
+    <div class="wrapper">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div class="toc"><h2>Table Of Contents</h2><ul>
+<li><a class="reference internal" href="#">Installation on Windows</a><ul>
+<li><a class="reference internal" href="#installing-the-portable-version">Installing the portable version</a></li>
+<li><a class="reference internal" href="#start-a-kivy-application">Start a Kivy Application</a><ul>
+<li><a class="reference internal" href="#send-to-method">Send-to method</a></li>
+<li><a class="reference internal" href="#double-click-method">Double-click method</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#start-from-the-command-line-using-bash">Start from the Command-line (using bash)</a></li>
+<li><a class="reference internal" href="#start-from-the-command-line-or-double-click-using-python-launcher-for-windows">Start from the Command-line or Double-click (using Python launcher for Windows)</a></li>
+<li><a class="reference internal" href="#use-development-kivy">Use development Kivy</a></li>
+<li><a class="reference internal" href="#other-environments">Other Environments</a></li>
+<li><a class="reference internal" href="#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+  <div class="section" id="installation-on-windows">
+<span id="installation-windows"></span><h1>Installation on Windows<a class="headerlink" href="#installation-on-windows" title="Permalink to this headline">¶</a></h1>
+<p>For Windows, we provide what we call a &#8216;portable package&#8217;. This is the easiest
+way to get Kivy running as you don&#8217;t have to install anything &#8220;system&#8221; wide.
+You can just unzip &amp; run it.</p>
+<p>This installation method is simple because it bundles the Python interpreter
+together with the Kivy environment and libraries. If you wish to install Kivy
+into an existing Python environment or install the development environment,
+please see the <a class="reference internal" href="#other-environments"><em>Other Environments</em></a> section below.</p>
+<div class="section" id="installing-the-portable-version">
+<h2>Installing the portable version<a class="headerlink" href="#installing-the-portable-version" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Download the latest version from <a class="reference external" href="http://kivy.org/#download">http://kivy.org/#download</a></p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/win-step1.png"><img alt="../_images/win-step1.png" src="../_images/win-step1.png" /></a>
+</div></blockquote>
+</li>
+<li><p class="first">Unzip the package</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/win-step3.png"><img alt="../_images/win-step3.png" src="../_images/win-step3.png" /></a>
+</div></blockquote>
+</li>
+<li><p class="first">In the folder where you unzipped the package, you have a script called <cite>kivy.bat</cite>.
+Use this file for launching any kivy application as described below.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Launching the kivy.bat file will open a command window already set up to run kivy&#8217;s
+Python. The environment settings are only changed for this command window and will
+not effect the system environment.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="start-a-kivy-application">
+<span id="windows-run-app"></span><h2>Start a Kivy Application<a class="headerlink" href="#start-a-kivy-application" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="send-to-method">
+<h3>Send-to method<a class="headerlink" href="#send-to-method" title="Permalink to this headline">¶</a></h3>
+<p>You can launch a .py file with our Python using the Send-to menu:</p>
+<ol class="arabic">
+<li><p class="first">Copy the kivy.bat file to the Clipboard</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/win-step4.png"><img alt="../_images/win-step4.png" src="../_images/win-step4.png" /></a>
+</div></blockquote>
+</li>
+<li><p class="first">Open Windows explorer (File explorer in Windows 8), and to go the address &#8216;shell:sendto&#8217;</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/win-step5.png"><img alt="../_images/win-step5.png" src="../_images/win-step5.png" /></a>
+</div></blockquote>
+</li>
+<li><p class="first">You should get the special Windows directory <cite>SendTo</cite></p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/win-step6.png"><img alt="../_images/win-step6.png" src="../_images/win-step6.png" /></a>
+</div></blockquote>
+</li>
+<li><p class="first">Paste the previously copied kivy.bat file <strong>as a shortcut</strong></p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/win-step7.png"><img alt="../_images/win-step7.png" src="../_images/win-step7.png" /></a>
+</div></blockquote>
+</li>
+<li><p class="first">Rename it to Kivy &lt;kivy-version&gt;</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/win-step8.png"><img alt="../_images/win-step8.png" src="../_images/win-step8.png" /></a>
+</div></blockquote>
+</li>
+</ol>
+<p>You can now execute your application by right clicking on the .py file -&gt;
+&#8220;Send To&#8221; -&gt; &#8220;Kivy &lt;version&gt;&#8221;.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/win-step9.png"><img alt="../_images/win-step9.png" src="../_images/win-step9.png" /></a>
+</div></blockquote>
+</div>
+<div class="section" id="double-click-method">
+<h3>Double-click method<a class="headerlink" href="#double-click-method" title="Permalink to this headline">¶</a></h3>
+<p>There are some simple steps that you need to complete in order to be able
+to launch Kivy applications by just double-clicking them:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Right click on the main Python file (.py file extention) of the application you want to launch</li>
+<li>From the context menu that appears, select <em>Open With</em></li>
+<li>Browse your hard disk drive and find the file <tt class="docutils literal"><span class="pre">kivy.bat</span></tt> from the portable package. Select it.</li>
+<li>Select &#8220;Always open the file with...&#8221; if you don&#8217;t want to repeat this procedure every time you
+double click a .py file.</li>
+<li>You are done. Open the file.</li>
+</ol>
+</div></blockquote>
+<p>The next time you double click a .py file, it will be executed with the version
+of Python that Kivy ships with.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">On Windows we have to ship our own version of Python since it&#8217;s not
+installed by default on Windows (unlike Mac OS X and Linux). By
+following the steps above, you will set Kivy&#8217;s version of Python as the
+default for opening .py files for your user.
+Normally this should not be harmful as it&#8217;s just a normal version of
+Python with the <a class="reference internal" href="#winpackagecontents"><em>necessary third party libraries</em></a>
+added to the module search path.
+If you do encounter unexpected problems, please <a class="reference internal" href="../contact.html#contact"><em>Contact Us</em></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="start-from-the-command-line-using-bash">
+<h2>Start from the Command-line (using bash)<a class="headerlink" href="#start-from-the-command-line-using-bash" title="Permalink to this headline">¶</a></h2>
+<p>If you just want to use or develop with the latest stable Kivy version, this can
+be achieved using the console. You will need a minimalist GNU system installed.
+We recommend <a class="reference external" href="http://code.google.com/p/msysgit/">msysGit</a>.</p>
+<p>When you install msysGit, you must select these options:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Don&#8217;t replace windows shell</li>
+<li>Checkout as-is, commit as-is (no CLRF replacement!)</li>
+</ul>
+</div></blockquote>
+<p>You&#8217;ll have an icon &#8220;Git bash&#8221; on your desktop. This is the console we want:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Start &#8220;Git bash&#8221;</li>
+<li><tt class="docutils literal"><span class="pre">cd</span> <span class="pre">&lt;directory</span> <span class="pre">of</span> <span class="pre">portable</span> <span class="pre">kivy&gt;</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">source</span> <span class="pre">kivyenv.sh</span> <span class="pre">&lt;full</span> <span class="pre">directory</span> <span class="pre">path</span> <span class="pre">of</span> <span class="pre">portable</span> <span class="pre">kivy&gt;</span></tt> # (don&#8217;t use .)</li>
+</ol>
+</div></blockquote>
+<p>You are now ready to launch Python/Kivy from the command-line! Just do:</p>
+<div class="highlight-python"><pre>python &lt;filename.py&gt;</pre>
+</div>
+<p>Also, all other scripts and binaries are available, such as:</p>
+<blockquote>
+<div><ul class="simple">
+<li>cython</li>
+<li>gcc / make...</li>
+<li>easy_install</li>
+<li>gst-inspect-0.10</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="start-from-the-command-line-or-double-click-using-python-launcher-for-windows">
+<h2>Start from the Command-line or Double-click (using Python launcher for Windows)<a class="headerlink" href="#start-from-the-command-line-or-double-click-using-python-launcher-for-windows" title="Permalink to this headline">¶</a></h2>
+<p>The Python launcher for Windows is available as a separate download
+from <a class="reference external" href="https://bitbucket.org/vinay.sajip/pylauncher">pylauncher</a>,
+but is most conveniently installed by simply installing Python 3.3 (or later).
+Don&#8217;t worry, this installation is designed to cause minimum disruption, it will run your latest Python 2 by default.</p>
+<p>The launcher defines a <tt class="docutils literal"><span class="pre">PY</span></tt> command which can launch scripts for any version of Python installed on the workstation.
+It also connects itself as the default processor for all files with a .py extension.
+It scans the Python file to see if the first line starts with the string &#8220;#!&#8221; and, if it does, uses that string to
+select the appropriate version of Python to run. We will define a customized command so that we can tell it to
+start the correct version of python for Kivy.</p>
+<p>Create a file named <tt class="docutils literal"><span class="pre">py.ini</span></tt> and place it either in your users <tt class="docutils literal"><span class="pre">application</span> <span class="pre">data</span></tt> directory, or in <tt class="docutils literal"><span class="pre">C:\Windows</span></tt>.
+It will contain the path used to start Kivy.  I put my Kivy installation at <tt class="docutils literal"><span class="pre">C:\utils\kivy</span></tt> so my copy says:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">commands</span><span class="p">]</span>
+<span class="n">kivy</span><span class="o">=</span><span class="s">&quot;c:\utils\kivy\kivy.bat&quot;</span>
+</pre></div>
+</div>
+<p>(You could also add commands to start other script interpreters, such as jython or IronPython.)</p>
+<p>Now add a new first line to your <tt class="docutils literal"><span class="pre">main.py</span></tt> specifying your Python of choice:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/kivy</span>
+</pre></div>
+</div>
+<p>You can now launch your Kivy (or any other Python script) either by double-clicking or typing:</p>
+<div class="highlight-python"><pre>py &lt;filename.py&gt;</pre>
+</div>
+<p>Programs without a <tt class="docutils literal"><span class="pre">#!</span></tt> first line will continue to be run be the default Python version 2 interpreter.
+Programs beginning with <tt class="docutils literal"><span class="pre">#!/usr/bin/python3</span></tt> will launch Python 3.</p>
+<p>The <tt class="docutils literal"><span class="pre">/usr/bin</span></tt> part will be ignored by the Windows launcher, we add it so that Linux users will also be able to
+pick a specific Python version. (On my Linux workstation, <tt class="docutils literal"><span class="pre">/usr/bin/kivy</span></tt> is soft-linked to a virtualenv.)
+NOTE: In order to work correctly on Linux, your Python file must be saved with Unix-style (LF-only) line endings.</p>
+<p>Full documentation can be found at:
+<a class="reference external" href="http://docs.python.org/3.3/using/windows.html#launcher">Python3.3 docs</a> and
+<a class="reference external" href="http://www.python.org/dev/peps/pep-0397/">PEP 397</a>.</p>
+</div>
+<div class="section" id="use-development-kivy">
+<h2>Use development Kivy<a class="headerlink" href="#use-development-kivy" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Using the latest development version can be risky and you might encounter
+issues during development. If you encounter any bugs, please report them.</p>
+</div>
+<p>If you want to use the latest development version of Kivy, you can follow these steps:</p>
+<ol class="arabic">
+<li><p class="first">Download and install Kivy for Windows as explained above</p>
+</li>
+<li><p class="first">Go into the portable Kivy directory. This contains the <cite>kivy.bat</cite> file and the <cite>Python</cite>, <cite>kivy</cite>, <cite>Mingw</cite> folders etc.</p>
+</li>
+<li><p class="first">Rename the kivy directory to kivy.stable</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/kivy/kivy/archive/master.zip">Download the latest development version of Kivy from GitHub</a></p>
+</li>
+<li><p class="first">Extract the zip into the Kivy portable directory</p>
+</li>
+<li><p class="first">Rename the directory named &#8220;kivy-&lt;some hash&gt;&#8221; to just &#8220;kivy&#8221;</p>
+</li>
+<li><p class="first">Launch kivy.bat</p>
+</li>
+<li><p class="first">Go to the Kivy portable directory/kivy</p>
+</li>
+<li><p class="first">Type:</p>
+<div class="highlight-python"><pre>make force</pre>
+</div>
+</li>
+<li><p class="first">That&#8217;s all, you have a latest development version!</p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you get errors you may need to upgrade Cython:</p>
+<ol class="last arabic simple">
+<li>Launch kivy.bat</li>
+<li><tt class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">cython</span></tt></li>
+</ol>
+</div>
+</div>
+<div class="section" id="other-environments">
+<span id="id1"></span><h2>Other Environments<a class="headerlink" href="#other-environments" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/kivy/kivy/wiki/Using-Kivy-with-an-existing-Python-installation-on-Windows-(64-or-32-bit)">Using Kivy with an existing Python installation</a>.</p>
+<p><a class="reference external" href="https://github.com/kivy/kivy/wiki/Creating-a-64-bit-development-environment-with-MinGW-on-Windows">Creating a 64 bit development environment with MinGW</a>.</p>
+</div>
+<div class="section" id="package-contents">
+<span id="winpackagecontents"></span><h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h2>
+<p>The latest Windows package contains:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Latest stable kivy version</li>
+<li>Python 2.7.1</li>
+<li>Glew 1.5.7</li>
+<li>Pygame 1.9.2</li>
+<li>Cython 0.14</li>
+<li>MinGW</li>
+<li>GStreamer</li>
+<li>Setuptools</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+            <div class="footerlinks">
+            <table>
+                <tr>
+                    <td class="leftlink">
+                  <a href="installation.html" title="previous chapter">&laquo; Installation</a></li>
+                  </td>
+                  <td class="rightlink">
+                  <a href="installation-macosx.html" title="next chapter">Installation on MacOSX &raquo;</a>
+                      </td>
+                  </tr>
+              </table>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    </div>
+<!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://txzone.net/piwik/" : "http://txzone.net/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 8);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://txzone.net/piwik/piwik.php?idsite=8" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+    <!--
+    <div class="footer">
+      &copy; Copyright 2010, The Kivy Authors.
+      Last updated on Dec 11, 2014.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2b1.
+</div>
+-->
+  </body>
+
+<!-- Mirrored from kivy.org/docs/installation/installation-windows.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:34 GMT -->
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from kivy.org/docs/guide/inputs.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:12 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="twitter:site" content="@kivyframework">
+    
+    <title>Input management &mdash; Kivy 1.9.0-dev documentation</title>
+    <link href='../../../fonts.googleapis.com/css8da2.css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../_static/fresh.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0-dev',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../cdn.mathjax.org/mathjax/latest/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery-effects-core-and-slide.js"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/kivy.js"></script>
+    <link rel="top" title="Kivy 1.9.0-dev documentation" href="../index-2.html" />
+    <link rel="up" title="Programming Guide" href="../guide-index.html" />
+    <link rel="next" title="Widgets" href="widgets.html" />
+    <link rel="prev" title="Events and Properties" href="events.html" /> 
+  </head>
+  <body>
+
+    <div id="topbar">
+        <div id="topwrapper">
+        <div id="toplogo">
+            <a href="http://kivy.org/">
+                <img src="../_static/logo-kivy.png" alt="Kivy" height="50"/>
+            </a>
+        </div>
+        <div id="topmenu">
+            <ul class="navigation">
+                <li><a class="nav-guides" href="../gettingstarted/intro.html">Guides</a></li>
+                <li><a class="nav-garden" href="http://kivy-garden.github.io/">Garden</a></li>
+                <li><a class="nav-api" href="../api-kivy.html">API Reference</a></li>
+                <li><a class="nav-pdf" href="../pdf/Kivy-latest.pdf">PDF</a></li>
+                <li><a class="nav-wiki" href="http://wiki.kivy.org/">Wiki</a></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+<div id="contentall">
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>Quick search</h3>
+            <form class="search" action="http://kivy.org/docs/search.html" method="get">
+                &nbsp;
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+                <input type="text" class="text" name="q" />
+            </form>
+          <!--
+          <h3><a href="../index.html">Input management</a></h3>
+          <ul>
+<li><a class="reference internal" href="#">Input management</a><ul>
+<li><a class="reference internal" href="#input-architecture">Input architecture</a></li>
+<li><a class="reference internal" href="#motion-event-profiles">Motion event profiles</a></li>
+<li><a class="reference internal" href="#touch-events">Touch events</a><ul>
+<li><a class="reference internal" href="#touch-shapes">Touch shapes</a></li>
+<li><a class="reference internal" href="#double-tap">Double tap</a></li>
+<li><a class="reference internal" href="#triple-tap">Triple tap</a></li>
+<li><a class="reference internal" href="#grabbing-touch-events">Grabbing touch events</a></li>
+<li><a class="reference internal" href="#touch-event-management">Touch Event Management</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          <h3><a href="../index.html">Table Of Contents</a></h3>
+          -->
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/first_app.html">A first App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/rules.html">Kv Design Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/events.html">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/framework.html">Non-widget stuff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/layouts.html">Layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/diving.html">Diving in</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user-guide.html">User&#8217;s Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../philosophy.html">Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contact.html">Contact Us</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guide-index.html">Programming Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basic.html">Kivy Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">Controlling the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Configure Kivy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">Architectural Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Events and Properties</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lang.html">Kv language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other-frameworks.html">Integrating with other Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bestpractices.html">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advancedgraphics.html">Advanced Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packaging.html">Packaging your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/pong.html">Pong Game Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/firstwidget.html">A Simple Paint App</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api-index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.html">Kivy framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.html">Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.adapter.html">Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.args_converters.html">List Item View Argument Converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.dictadapter.html">DictAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.listadapter.html">ListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.models.html">SelectableDataItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.simplelistadapter.html">SimpleListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.animation.html">Animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.app.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.atlas.html">Atlas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.base.html">Kivy Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.cache.html">Cache manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.clock.html">Clock object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.compat.html">Compatibility module for Python 2.7 and &gt; 3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.config.html">Configuration object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.context.html">Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.html">Core Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.clipboard.html">Clipboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.gl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.spelling.html">Spelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.text.html">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.text.markup.html">Text Markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.text.text_layout.html">Text layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.html">Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.dampedscroll.html">Damped scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.kinetic.html">Kinetic effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.opacityscroll.html">Opacity scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.scroll.html">Scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.event.html">Event dispatcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.ext.html">Extension Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.factory.html">Factory object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.garden.html">Garden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.geometry.html">Geometry utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.gesture.html">Gesture recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.compiler.html">Graphics compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.context.html">Context management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.context_instructions.html">Context instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.fbo.html">Framebuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.gl_instructions.html">GL instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.instructions.html">Canvas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.opengl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.opengl_utils.html">OpenGL utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.shader.html">Shader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.stencil_instructions.html">Stencil instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.svg.html">SVG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.tesselator.html">Tesselator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.texture.html">Texture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.transformation.html">Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.html">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.factory.html">Motion Event Factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.motionevent.html">Motion Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.html">Input Postprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.dejitter.html">Dejitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.doubletap.html">Double Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.ignorelist.html">Ignore list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.retaintouch.html">Retain Touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.tripletap.html">Triple Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.provider.html">Motion Event Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.html">Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.androidjoystick.html">Android Joystick Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.hidinput.html">Native support for HID input from the linux kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.leapfinger.html">Leap Motion - finger only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.linuxwacom.html">Native support of Wacom tablet from linuxwacom driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.mactouch.html">Native support of MultitouchSupport framework for MacBook (MaxOSX platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.mouse.html">Mouse provider implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.mtdev.html">Native support for Multitouch devices on Linux, using libmtdev.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.probesysfs.html">Auto Create Input Provider Config Entry for Available MT Hardware (linux only).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.tuio.html">TUIO Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.wm_common.html">Common definitions for a Windows provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.wm_pen.html">Support for WM_PEN messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.wm_touch.html">Support for WM_TOUCH messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.recorder.html">Input recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.shape.html">Motion Event Shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.interactive.html">Interactive launcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.lang.html">Kivy Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.lib.html">External libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.lib.gstplayer.html">GstPlayer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.loader.html">Asynchronous data loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.logger.html">Logger object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.metrics.html">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.html">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.inspector.html">Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.keybinding.html">Keybinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.monitor.html">Monitor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.recorder.html">Recorder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.screen.html">Screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.touchring.html">Touchring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.webdebugger.html">Web Debugger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.multistroke.html">Multistroke gesture recognizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.network.html">Network support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.network.urlrequest.html">Url Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.parser.html">Parser utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.resources.html">Resources management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.dictstore.html">Dictionary store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.jsonstore.html">JSON store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.redisstore.html">Redis Store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.support.html">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.abstractview.html">Abstract View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.accordion.html">Accordion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.actionbar.html">Action Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.anchorlayout.html">Anchor Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.boxlayout.html">Box Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.bubble.html">Bubble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.button.html">Button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.carousel.html">Carousel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.checkbox.html">CheckBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.codeinput.html">Code Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.colorpicker.html">Color Picker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.dropdown.html">Drop-Down List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.effectwidget.html">EffectWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.filechooser.html">FileChooser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.floatlayout.html">Float Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.gesturesurface.html">Gesture Surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.gridlayout.html">Grid Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.label.html">Label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.layout.html">Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.listview.html">List View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.modalview.html">ModalView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.pagelayout.html">PageLayout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.popup.html">Popup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.progressbar.html">Progress Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.relativelayout.html">Relative Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.rst.html">reStructuredText renderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.sandbox.html">Sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.scatter.html">Scatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.scatterlayout.html">Scatter Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.screenmanager.html">Screen Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.scrollview.html">Scroll View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.slider.html">Slider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.spinner.html">Spinner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.splitter.html">Splitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.stacklayout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.stencilview.html">Stencil View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.switch.html">Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.tabbedpanel.html">TabbedPanel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.textinput.html">Text Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.togglebutton.html">Toggle button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.treeview.html">Tree View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.videoplayer.html">Video player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.vkeyboard.html">VKeyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.widget.html">Widget class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.vector.html">Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.weakmethod.html">Weak Method</a></li>
+</ul>
+</li>
+</ul>
+
+          <!--
+          <h3>Related Topics</h3>
+          <ul>
+              <li>Previous: <a href="events.html" title="previous chapter">Events and Properties</a></li>
+              <li>Next: <a href="widgets.html" title="next chapter">Widgets</a></li>
+          </ul>
+          -->
+        </div>
+      </div>
+    <div id="content">
+    <div class="wrapper">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div class="toc"><h2>Table Of Contents</h2><ul>
+<li><a class="reference internal" href="#">Input management</a><ul>
+<li><a class="reference internal" href="#input-architecture">Input architecture</a></li>
+<li><a class="reference internal" href="#motion-event-profiles">Motion event profiles</a></li>
+<li><a class="reference internal" href="#touch-events">Touch events</a><ul>
+<li><a class="reference internal" href="#touch-shapes">Touch shapes</a></li>
+<li><a class="reference internal" href="#double-tap">Double tap</a></li>
+<li><a class="reference internal" href="#triple-tap">Triple tap</a></li>
+<li><a class="reference internal" href="#grabbing-touch-events">Grabbing touch events</a></li>
+<li><a class="reference internal" href="#touch-event-management">Touch Event Management</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+  <div class="section" id="input-management">
+<h1>Input management<a class="headerlink" href="#input-management" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="input-architecture">
+<h2>Input architecture<a class="headerlink" href="#input-architecture" title="Permalink to this headline">¶</a></h2>
+<p>Kivy is able to handle most types of input: mouse, touchscreen, accelerometer,
+gyroscope, etc. It handles the native multitouch protocols on the following
+platforms: Tuio, WM_Touch, MacMultitouchSupport, MT Protocol A/B and Android.</p>
+<p>The global architecture can be viewed as:</p>
+<div class="highlight-python"><pre>Input providers -&gt; Motion event -&gt; Post processing -&gt; Dispatch to Window</pre>
+</div>
+<p>The class of all input events is the
+<a class="reference internal" href="../api-kivy.input.motionevent.html#kivy.input.motionevent.MotionEvent" title="kivy.input.motionevent.MotionEvent"><tt class="xref py py-class docutils literal"><span class="pre">MotionEvent</span></tt></a>. It generates 2 kinds of
+events:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Touch events: a motion event that contains at least an X and Y position.
+All the touch events are dispatched across the Widget tree.</li>
+<li>No-touch events: all the rest. For example, the accelerometer is a
+continuous event, without position. It never starts or stops. These events
+are not dispatched across the Widget tree.</li>
+</ul>
+</div></blockquote>
+<p>A Motion event is generated by an <a class="reference internal" href="../api-kivy.input.providers.html#module-kivy.input.providers" title="kivy.input.providers"><tt class="xref py py-mod docutils literal"><span class="pre">Input</span> <span class="pre">Provider</span></tt></a>.
+An Input Provider is responsible for reading the input event from the operating
+system, the network or even from another application. Several input providers
+exist, such as:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../api-kivy.input.providers.tuio.html#kivy.input.providers.tuio.TuioMotionEventProvider" title="kivy.input.providers.tuio.TuioMotionEventProvider"><tt class="xref py py-class docutils literal"><span class="pre">TuioMotionEventProvider</span></tt></a>: create a
+UDP server and listen for TUIO/OSC messages.</li>
+<li><tt class="xref py py-class docutils literal"><span class="pre">WM_MotionEventProvider</span></tt>: use the
+windows API for reading multitouch information and sending it to Kivy.</li>
+<li><tt class="xref py py-class docutils literal"><span class="pre">ProbeSysfsHardwareProbe</span></tt>:
+In Linux, iterate over all the hardware connected to the computer, and
+attaches a multitouch input provider for each multitouch device found.</li>
+<li>and much more!</li>
+</ul>
+</div></blockquote>
+<p>When you write an application, you don&#8217;t need to create an input provider. Kivy
+tries to automatically detect available hardware. However, if you want to
+support custom hardware, you will need to configure kivy to make it work.</p>
+<p>Before the newly-created Motion Event is passed to the user, Kivy applies
+post-processing to the input. Every motion event is analyzed to detect and
+correct faulty input, as well as make meaningful interpretations like:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Double/triple-tap detection, according to a distance and time threshold</li>
+<li>Making events more accurate when the hardware is not accurate</li>
+<li>Reducing the amount of generated events if the native touch hardware is
+sending events with nearly the same position</li>
+</ul>
+</div></blockquote>
+<p>After processing, the motion event is dispatched to the Window. As explained
+previously, not all events are dispatched to the whole widget tree: the window
+filters them. For a given event:</p>
+<blockquote>
+<div><ul class="simple">
+<li>if it&#8217;s only a motion event, it will be dispatched to
+<a class="reference internal" href="../api-kivy.core.window.html#kivy.core.window.WindowBase.on_motion" title="kivy.core.window.WindowBase.on_motion"><tt class="xref py py-meth docutils literal"><span class="pre">on_motion()</span></tt></a></li>
+<li>if it&#8217;s a touch event, the (x,y) position of the touch (0-1 range) will be
+scaled to the Window size (width/height), and dispatched to:<ul>
+<li><a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.on_touch_down" title="kivy.uix.widget.Widget.on_touch_down"><tt class="xref py py-meth docutils literal"><span class="pre">on_touch_down()</span></tt></a></li>
+<li><a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.on_touch_move" title="kivy.uix.widget.Widget.on_touch_move"><tt class="xref py py-meth docutils literal"><span class="pre">on_touch_move()</span></tt></a></li>
+<li><a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.on_touch_up" title="kivy.uix.widget.Widget.on_touch_up"><tt class="xref py py-meth docutils literal"><span class="pre">on_touch_up()</span></tt></a></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="motion-event-profiles">
+<h2>Motion event profiles<a class="headerlink" href="#motion-event-profiles" title="Permalink to this headline">¶</a></h2>
+<p>Depending on your hardware and the input providers used, more information may be
+made available to you. For example, a touch input has an (x,y) position, but
+might also have pressure information, blob size, an acceleration vector, etc.</p>
+<p>A profile is a string that indicates what features are available inside the
+motion event. Let&#8217;s imagine that you are in an <tt class="docutils literal"><span class="pre">on_touch_move</span></tt> method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">on_touch_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">touch</span><span class="o">.</span><span class="n">profile</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">on_touch_move</span><span class="p">(</span><span class="n">touch</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The print could output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="s">&#39;pos&#39;</span><span class="p">,</span> <span class="s">&#39;angle&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Many people mix up the profile&#8217;s name and the name of the corresponding
+property. Just because <tt class="docutils literal"><span class="pre">'angle'</span></tt> is in the available profile doesn&#8217;t
+mean that the touch event object will have an <tt class="docutils literal"><span class="pre">angle</span></tt> property.</p>
+</div>
+<p>For the <tt class="docutils literal"><span class="pre">'pos'</span></tt> profile, the properties <tt class="docutils literal"><span class="pre">pos</span></tt>, <tt class="docutils literal"><span class="pre">x</span></tt>, and <tt class="docutils literal"><span class="pre">y</span></tt> will be
+available. With the <tt class="docutils literal"><span class="pre">'angle'</span></tt> profile, the property <tt class="docutils literal"><span class="pre">a</span></tt> will be available.
+As we said, for touch events <tt class="docutils literal"><span class="pre">'pos'</span></tt> is a mandatory profile, but not
+<tt class="docutils literal"><span class="pre">'angle'</span></tt>. You can extend your interaction by checking if the <tt class="docutils literal"><span class="pre">'angle'</span></tt>
+profile exists:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">on_touch_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;The touch is at position&#39;</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;angle&#39;</span> <span class="ow">in</span> <span class="n">touch</span><span class="o">.</span><span class="n">profile</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;The touch angle is&#39;</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can find a list of available profiles in the
+<a class="reference internal" href="../api-kivy.input.motionevent.html#module-kivy.input.motionevent" title="kivy.input.motionevent"><tt class="xref py py-mod docutils literal"><span class="pre">motionevent</span></tt></a> documentation.</p>
+</div>
+<div class="section" id="touch-events">
+<h2>Touch events<a class="headerlink" href="#touch-events" title="Permalink to this headline">¶</a></h2>
+<p>A touch event is a specialized <a class="reference internal" href="../api-kivy.input.motionevent.html#kivy.input.motionevent.MotionEvent" title="kivy.input.motionevent.MotionEvent"><tt class="xref py py-class docutils literal"><span class="pre">MotionEvent</span></tt></a>
+where the property <a class="reference internal" href="../api-kivy.input.motionevent.html#kivy.input.motionevent.MotionEvent.is_touch" title="kivy.input.motionevent.MotionEvent.is_touch"><tt class="xref py py-attr docutils literal"><span class="pre">is_touch</span></tt></a>
+evaluates to True. For all touch events, you automatically have the X and Y
+positions available, scaled to the Window width and height. In other words, all
+touch events have the <tt class="docutils literal"><span class="pre">'pos'</span></tt> profile.</p>
+<p>You must take care of matrix transformation in your touch as soon as you use
+a widget with matrix transformation. Some widgets such as
+<a class="reference internal" href="../api-kivy.uix.scatter.html#kivy.uix.scatter.Scatter" title="kivy.uix.scatter.Scatter"><tt class="xref py py-class docutils literal"><span class="pre">Scatter</span></tt></a> have their own matrix transformation,
+meaning the touch must be multiplied by the scatter
+matrix to be able to correctly dispatch touch positions to the Scatter&#8217;s
+children.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Get coordinate from parent space to local space:
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.to_local" title="kivy.uix.widget.Widget.to_local"><tt class="xref py py-meth docutils literal"><span class="pre">to_local()</span></tt></a></li>
+<li>Get coordinate from local space to parent space:
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.to_parent" title="kivy.uix.widget.Widget.to_parent"><tt class="xref py py-meth docutils literal"><span class="pre">to_parent()</span></tt></a></li>
+<li>Get coordinate from local space to window space:
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.to_window" title="kivy.uix.widget.Widget.to_window"><tt class="xref py py-meth docutils literal"><span class="pre">to_window()</span></tt></a></li>
+<li>Get coordinate from window space to local space:
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget.to_widget" title="kivy.uix.widget.Widget.to_widget"><tt class="xref py py-meth docutils literal"><span class="pre">to_widget()</span></tt></a></li>
+</ul>
+</div></blockquote>
+<p>You must use one of them to scale coordinates correctly to the context.
+Let&#8217;s look the scatter implementation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">on_touch_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+    <span class="c"># push the current coordinate, to be able to restore it later</span>
+    <span class="n">touch</span><span class="o">.</span><span class="n">push</span><span class="p">()</span>
+
+    <span class="c"># transform the touch coordinate to local space</span>
+    <span class="n">touch</span><span class="o">.</span><span class="n">apply_transform_2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_local</span><span class="p">)</span>
+
+    <span class="c"># dispatch the touch as usual to children</span>
+    <span class="c"># the coordinate in the touch is now in local space</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">on_touch_down</span><span class="p">(</span><span class="n">touch</span><span class="p">)</span>
+
+    <span class="c"># whatever the result, don&#39;t forget to pop your transformation</span>
+    <span class="c"># after the call, so the coordinate will be back in parent space</span>
+    <span class="n">touch</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="c"># return the result (depending what you want.)</span>
+    <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+</div>
+<div class="section" id="touch-shapes">
+<h3>Touch shapes<a class="headerlink" href="#touch-shapes" title="Permalink to this headline">¶</a></h3>
+<p>If the touch has a shape, it will be reflected in the &#8216;shape&#8217; property. Right
+now, only a <a class="reference internal" href="../api-kivy.input.shape.html#kivy.input.shape.ShapeRect" title="kivy.input.shape.ShapeRect"><tt class="xref py py-class docutils literal"><span class="pre">ShapeRect</span></tt></a> can be exposed:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.input.shape</span> <span class="kn">import</span> <span class="n">ShapeRect</span>
+
+<span class="k">def</span> <span class="nf">on_touch_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">touch</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">ShapeRect</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;My touch have a rectangle shape of size&#39;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">touch</span><span class="o">.</span><span class="n">shape</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">shape</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
+    <span class="c"># ...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="double-tap">
+<h3>Double tap<a class="headerlink" href="#double-tap" title="Permalink to this headline">¶</a></h3>
+<p>A double tap is the action of tapping twice within a time and a distance.
+It&#8217;s calculated by the doubletap post-processing module. You can test if the
+current touch is one of a double tap or not:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">on_touch_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">touch</span><span class="o">.</span><span class="n">is_double_tap</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;Touch is a double tap !&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39; - interval is&#39;</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">double_tap_time</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39; - distance between previous is&#39;</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">double_tap_distance</span><span class="p">)</span>
+    <span class="c"># ...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="triple-tap">
+<h3>Triple tap<a class="headerlink" href="#triple-tap" title="Permalink to this headline">¶</a></h3>
+<p>A triple tap is the action of tapping thrice within a time and a distance.
+It&#8217;s calculated by the tripletap post-processing module. You can test if the
+current touch is one of a triple tap or not:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">on_touch_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">touch</span><span class="o">.</span><span class="n">is_triple_tap</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;Touch is a triple tap !&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39; - interval is&#39;</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">triple_tap_time</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39; - distance between previous is&#39;</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">triple_tap_distance</span><span class="p">)</span>
+    <span class="c"># ...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="grabbing-touch-events">
+<h3>Grabbing touch events<a class="headerlink" href="#grabbing-touch-events" title="Permalink to this headline">¶</a></h3>
+<p>It&#8217;s possible for the parent widget to dispatch a touch event to a child
+widget from within <tt class="docutils literal"><span class="pre">on_touch_down</span></tt>, but not from <tt class="docutils literal"><span class="pre">on_touch_move</span></tt> or
+<tt class="docutils literal"><span class="pre">on_touch_up</span></tt>. This can happen in certain scenarios, like when a touch
+movement is outside the bounding box of the parent, so the parent decides not to
+notify its children of the movement.</p>
+<p>But you might want to do something in <tt class="docutils literal"><span class="pre">on_touch_up</span></tt>. Say you started something in
+the <tt class="docutils literal"><span class="pre">on_touch_down</span></tt> event, like playing a sound, and you&#8217;d like to finish things
+on the <tt class="docutils literal"><span class="pre">on_touch_up</span></tt> event. Grabbing is what you need.</p>
+<p>When you grab a touch, you will always receive the move and up event. But there
+are some limitations to grabbing:</p>
+<blockquote>
+<div><ul class="simple">
+<li>You will receive the event at least twice: one time from your parent (the
+normal event), and one time from the window (grab).</li>
+<li>You might receive an event with a grabbed touch, but not from you: it can be
+because the parent has sent the touch to its children while it was in
+the grabbed state.</li>
+<li>The touch coordinate is not translated to your widget space because the
+touch is coming directly from the Window. It&#8217;s your job to convert the
+coordinate to your local space.</li>
+</ul>
+</div></blockquote>
+<p>Here is an example of how to use grabbing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">on_touch_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">collide_point</span><span class="p">(</span><span class="o">*</span><span class="n">touch</span><span class="o">.</span><span class="n">pos</span><span class="p">):</span>
+
+        <span class="c"># if the touch collides with our widget, let&#39;s grab it</span>
+        <span class="n">touch</span><span class="o">.</span><span class="n">grab</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c"># and accept the touch.</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+<span class="k">def</span> <span class="nf">on_touch_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+    <span class="c"># here, you don&#39;t check if the touch collides or things like that.</span>
+    <span class="c"># you just need to check if it&#39;s a grabbed touch event</span>
+    <span class="k">if</span> <span class="n">touch</span><span class="o">.</span><span class="n">grab_current</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">:</span>
+
+        <span class="c"># ok, the current touch is dispatched for us.</span>
+        <span class="c"># do something interesting here</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;Hello world!&#39;</span><span class="p">)</span>
+
+        <span class="c"># don&#39;t forget to ungrab ourself, or you might have side effects</span>
+        <span class="n">touch</span><span class="o">.</span><span class="n">ungrab</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c"># and accept the last up</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="touch-event-management">
+<h3>Touch Event Management<a class="headerlink" href="#touch-event-management" title="Permalink to this headline">¶</a></h3>
+<p>In order to see how touch events are controlled and propogated between
+widgets, please refer to the
+<a class="reference internal" href="../api-kivy.uix.widget.html#widget-event-bubbling"><em>Widget touch event bubbling</em></a> section.</p>
+</div>
+</div>
+</div>
+
+
+            <div class="footerlinks">
+            <table>
+                <tr>
+                    <td class="leftlink">
+                  <a href="events.html" title="previous chapter">&laquo; Events and Properties</a></li>
+                  </td>
+                  <td class="rightlink">
+                  <a href="widgets.html" title="next chapter">Widgets &raquo;</a>
+                      </td>
+                  </tr>
+              </table>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    </div>
+<!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://txzone.net/piwik/" : "http://txzone.net/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 8);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://txzone.net/piwik/piwik.php?idsite=8" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+    <!--
+    <div class="footer">
+      &copy; Copyright 2010, The Kivy Authors.
+      Last updated on Dec 11, 2014.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2b1.
+</div>
+-->
+  </body>
+
+<!-- Mirrored from kivy.org/docs/guide/inputs.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:12 GMT -->
+</html>

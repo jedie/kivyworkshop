@@ -1,0 +1,953 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from kivy.org/docs/tutorials/firstwidget.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:14 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="twitter:site" content="@kivyframework">
+    
+    <title>A Simple Paint App &mdash; Kivy 1.9.0-dev documentation</title>
+    <link href='../../../fonts.googleapis.com/css8da2.css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../_static/fresh.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.9.0-dev',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../cdn.mathjax.org/mathjax/latest/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery-effects-core-and-slide.js"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/kivy.js"></script>
+    <link rel="top" title="Kivy 1.9.0-dev documentation" href="../index-2.html" />
+    <link rel="up" title="Tutorials" href="../tutorials-index.html" />
+    <link rel="next" title="API Reference" href="../api-index.html" />
+    <link rel="prev" title="Pong Game Tutorial" href="pong.html" /> 
+  </head>
+  <body>
+
+    <div id="topbar">
+        <div id="topwrapper">
+        <div id="toplogo">
+            <a href="http://kivy.org/">
+                <img src="../_static/logo-kivy.png" alt="Kivy" height="50"/>
+            </a>
+        </div>
+        <div id="topmenu">
+            <ul class="navigation">
+                <li><a class="nav-guides" href="../gettingstarted/intro.html">Guides</a></li>
+                <li><a class="nav-garden" href="http://kivy-garden.github.io/">Garden</a></li>
+                <li><a class="nav-api" href="../api-kivy.html">API Reference</a></li>
+                <li><a class="nav-pdf" href="../pdf/Kivy-latest.pdf">PDF</a></li>
+                <li><a class="nav-wiki" href="http://wiki.kivy.org/">Wiki</a></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+<div id="contentall">
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>Quick search</h3>
+            <form class="search" action="http://kivy.org/docs/search.html" method="get">
+                &nbsp;
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+                <input type="text" class="text" name="q" />
+            </form>
+          <!--
+          <h3><a href="../index.html">A Simple Paint App</a></h3>
+          <ul>
+<li><a class="reference internal" href="#">A Simple Paint App</a><ul>
+<li><a class="reference internal" href="#basic-considerations">Basic Considerations</a></li>
+<li><a class="reference internal" href="#paint-widget">Paint Widget</a><ul>
+<li><a class="reference internal" href="#initial-structure">Initial Structure</a></li>
+<li><a class="reference internal" href="#adding-behaviour">Adding Behaviour</a></li>
+<li><a class="reference internal" href="#bonus-points">Bonus Points</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          <h3><a href="../index.html">Table Of Contents</a></h3>
+          -->
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/first_app.html">A first App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/rules.html">Kv Design Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/events.html">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/framework.html">Non-widget stuff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/layouts.html">Layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gettingstarted/diving.html">Diving in</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user-guide.html">User&#8217;s Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../philosophy.html">Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contact.html">Contact Us</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guide-index.html">Programming Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guide/basic.html">Kivy Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/environment.html">Controlling the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/config.html">Configure Kivy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/architecture.html">Architectural Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/events.html">Events and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/inputs.html">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/lang.html">Kv language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/other-frameworks.html">Integrating with other Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/bestpractices.html">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/advancedgraphics.html">Advanced Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/packaging.html">Packaging your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials-index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pong.html">Pong Game Tutorial</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">A Simple Paint App</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api-index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.html">Kivy framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.html">Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.adapter.html">Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.args_converters.html">List Item View Argument Converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.dictadapter.html">DictAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.listadapter.html">ListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.models.html">SelectableDataItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.adapters.simplelistadapter.html">SimpleListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.animation.html">Animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.app.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.atlas.html">Atlas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.base.html">Kivy Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.cache.html">Cache manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.clock.html">Clock object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.compat.html">Compatibility module for Python 2.7 and &gt; 3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.config.html">Configuration object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.context.html">Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.html">Core Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.clipboard.html">Clipboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.gl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.spelling.html">Spelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.text.html">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.text.markup.html">Text Markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.text.text_layout.html">Text layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.core.window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.html">Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.dampedscroll.html">Damped scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.kinetic.html">Kinetic effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.opacityscroll.html">Opacity scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.effects.scroll.html">Scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.event.html">Event dispatcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.ext.html">Extension Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.factory.html">Factory object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.garden.html">Garden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.geometry.html">Geometry utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.gesture.html">Gesture recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.compiler.html">Graphics compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.context.html">Context management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.context_instructions.html">Context instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.fbo.html">Framebuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.gl_instructions.html">GL instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.instructions.html">Canvas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.opengl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.opengl_utils.html">OpenGL utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.shader.html">Shader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.stencil_instructions.html">Stencil instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.svg.html">SVG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.tesselator.html">Tesselator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.texture.html">Texture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.graphics.transformation.html">Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.html">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.factory.html">Motion Event Factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.motionevent.html">Motion Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.html">Input Postprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.dejitter.html">Dejitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.doubletap.html">Double Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.ignorelist.html">Ignore list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.retaintouch.html">Retain Touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.postproc.tripletap.html">Triple Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.provider.html">Motion Event Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.html">Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.androidjoystick.html">Android Joystick Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.hidinput.html">Native support for HID input from the linux kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.leapfinger.html">Leap Motion - finger only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.linuxwacom.html">Native support of Wacom tablet from linuxwacom driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.mactouch.html">Native support of MultitouchSupport framework for MacBook (MaxOSX platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.mouse.html">Mouse provider implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.mtdev.html">Native support for Multitouch devices on Linux, using libmtdev.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.probesysfs.html">Auto Create Input Provider Config Entry for Available MT Hardware (linux only).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.tuio.html">TUIO Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.wm_common.html">Common definitions for a Windows provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.wm_pen.html">Support for WM_PEN messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.providers.wm_touch.html">Support for WM_TOUCH messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.recorder.html">Input recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.input.shape.html">Motion Event Shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.interactive.html">Interactive launcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.lang.html">Kivy Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.lib.html">External libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.lib.gstplayer.html">GstPlayer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.loader.html">Asynchronous data loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.logger.html">Logger object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.metrics.html">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.html">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.inspector.html">Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.keybinding.html">Keybinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.monitor.html">Monitor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.recorder.html">Recorder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.screen.html">Screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.touchring.html">Touchring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.modules.webdebugger.html">Web Debugger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.multistroke.html">Multistroke gesture recognizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.network.html">Network support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.network.urlrequest.html">Url Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.parser.html">Parser utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.resources.html">Resources management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.dictstore.html">Dictionary store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.jsonstore.html">JSON store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.storage.redisstore.html">Redis Store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.support.html">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.abstractview.html">Abstract View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.accordion.html">Accordion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.actionbar.html">Action Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.anchorlayout.html">Anchor Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.boxlayout.html">Box Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.bubble.html">Bubble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.button.html">Button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.carousel.html">Carousel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.checkbox.html">CheckBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.codeinput.html">Code Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.colorpicker.html">Color Picker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.dropdown.html">Drop-Down List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.effectwidget.html">EffectWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.filechooser.html">FileChooser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.floatlayout.html">Float Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.gesturesurface.html">Gesture Surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.gridlayout.html">Grid Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.label.html">Label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.layout.html">Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.listview.html">List View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.modalview.html">ModalView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.pagelayout.html">PageLayout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.popup.html">Popup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.progressbar.html">Progress Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.relativelayout.html">Relative Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.rst.html">reStructuredText renderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.sandbox.html">Sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.scatter.html">Scatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.scatterlayout.html">Scatter Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.screenmanager.html">Screen Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.scrollview.html">Scroll View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.slider.html">Slider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.spinner.html">Spinner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.splitter.html">Splitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.stacklayout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.stencilview.html">Stencil View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.switch.html">Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.tabbedpanel.html">TabbedPanel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.textinput.html">Text Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.togglebutton.html">Toggle button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.treeview.html">Tree View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.videoplayer.html">Video player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.vkeyboard.html">VKeyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.uix.widget.html">Widget class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.vector.html">Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-kivy.weakmethod.html">Weak Method</a></li>
+</ul>
+</li>
+</ul>
+
+          <!--
+          <h3>Related Topics</h3>
+          <ul>
+              <li>Previous: <a href="pong.html" title="previous chapter">Pong Game Tutorial</a></li>
+              <li>Next: <a href="../api-index.html" title="next chapter">API Reference</a></li>
+          </ul>
+          -->
+        </div>
+      </div>
+    <div id="content">
+    <div class="wrapper">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div class="toc"><h2>Table Of Contents</h2><ul>
+<li><a class="reference internal" href="#">A Simple Paint App</a><ul>
+<li><a class="reference internal" href="#basic-considerations">Basic Considerations</a></li>
+<li><a class="reference internal" href="#paint-widget">Paint Widget</a><ul>
+<li><a class="reference internal" href="#initial-structure">Initial Structure</a></li>
+<li><a class="reference internal" href="#adding-behaviour">Adding Behaviour</a></li>
+<li><a class="reference internal" href="#bonus-points">Bonus Points</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+            
+  <div class="section" id="a-simple-paint-app">
+<h1>A Simple Paint App<a class="headerlink" href="#a-simple-paint-app" title="Permalink to this headline">¶</a></h1>
+<p>In the following tutorial, you will be guided through the creation of your
+first widget. This provides powerful and important knowledge when
+programming Kivy applications, as it lets you create completely new user
+interfaces with custom elements for your specific purpose.</p>
+<div class="section" id="basic-considerations">
+<h2>Basic Considerations<a class="headerlink" href="#basic-considerations" title="Permalink to this headline">¶</a></h2>
+<p>When creating an application, you have to ask yourself three important questions:</p>
+<blockquote>
+<div><ul class="simple">
+<li>What data does my application process?</li>
+<li>How do I visually represent that data?</li>
+<li>How does the user interact with that data?</li>
+</ul>
+</div></blockquote>
+<p>If you want to write a very simple line drawing application for example, you
+most likely want the user to just draw on the screen with his/her fingers.
+That&#8217;s how the user <em>interacts</em> with your application. While doing so,
+your application would memorize the positions where the user&#8217;s finger were,
+so that you can later draw lines between those positions. So the points
+where the fingers were would be your <em>data</em> and the lines that you draw
+between them would be your <em>visual representation</em>.</p>
+<p>In Kivy, an application&#8217;s user interface is composed of Widgets. Everything
+that you see on the screen is somehow drawn by a widget. Often you would
+like to be able to reuse code that you already wrote in a different
+context, which is why widgets typically represent one specific instance
+that answers the three questions above. A widget encapsulates data,
+defines the user&#8217;s interaction with that data and draws its visual
+representation.
+You can build anything from simple to complex user interfaces by
+nesting widgets. There are many widgets built in, such as buttons, sliders
+and other common stuff. In many cases, however, you need a custom widget
+that is beyond the scope of what is shipped with Kivy (e.g. a
+medical visualization widget).</p>
+<p>So keep these three questions in mind when you design your widgets. Try to
+write them in a minimal and reusable manner (i.e. a widget does exactly
+what its supposed to do and nothing more. If you need more, write more
+widgets or compose other widgets of smaller widgets. We try to adhere to the
+<a class="reference external" href="http://en.wikipedia.org/wiki/Single_responsibility_principle">Single Responsibility Principle</a>).</p>
+</div>
+<div class="section" id="paint-widget">
+<h2>Paint Widget<a class="headerlink" href="#paint-widget" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;re sure one of your childhood dreams has always been creating your own
+multitouch paint program. Allow us to help you achieve that. In the
+following sections you will successively learn how to write a program like
+that using Kivy. Make sure that you have read and understood
+<a class="reference internal" href="../guide/basic.html#quickstart"><em>Create an application</em></a>. You have? Great! Let&#8217;s get started!</p>
+<div class="section" id="initial-structure">
+<h3>Initial Structure<a class="headerlink" href="#initial-structure" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s start by writing the very basic code structure that we need.  By the way,
+all the different pieces of code that are used in this section are also
+available in the <tt class="docutils literal"><span class="pre">examples/guide/firstwidget</span></tt> directory that comes with Kivy,
+so you don&#8217;t need to copy &amp; paste it all the time.
+Here is the basic code skeleton that we will need:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.widget</span> <span class="kn">import</span> <span class="n">Widget</span>
+
+
+<span class="k">class</span> <span class="nc">MyPaintWidget</span><span class="p">(</span><span class="n">Widget</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">MyPaintApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MyPaintWidget</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">MyPaintApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>This is actually really simple. Save it as paint.py.
+If you run it, you should only see a black screen.
+As you can see, instead of using a built-in widget such as a Button (see
+<a class="reference internal" href="../guide/basic.html#quickstart"><em>Create an application</em></a>), we are going to write our own widget to do the drawing.
+We do that by creating a class that inherits from
+<a class="reference internal" href="../api-kivy.uix.widget.html#kivy.uix.widget.Widget" title="kivy.uix.widget.Widget"><tt class="xref py py-class docutils literal"><span class="pre">Widget</span></tt></a> (line 5-6) and although that class does nothing
+yet, we can still treat it like a normal Kivy widget (line 11).
+The <tt class="docutils literal"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">...</span></tt> construct (line 14) is a Python mechanism that prevents
+you from executing the code in the if-statement when importing from the file,
+i.e. if you write <tt class="docutils literal"><span class="pre">import</span> <span class="pre">paint</span></tt>, it won&#8217;t do something unexpected but
+just nicely provide the classes defined in the file.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You may be wondering why you have to import App and Widget separately,
+instead of doing something like <tt class="docutils literal"><span class="pre">from</span> <span class="pre">kivy</span> <span class="pre">import</span> <span class="pre">*</span></tt>. While shorter,
+this would have the disadvantage of <a class="reference external" href="http://en.wikipedia.org/wiki/Namespace_(computer_science)#Python">polluting  your namespace</a>
+and make the start of the application potentially much slower.
+It can also introduce ambiguity into class and variable naming,
+so is generally frowned upon in the Python community. The way we do it is
+faster and cleaner.</p>
+</div>
+</div>
+<div class="section" id="adding-behaviour">
+<h3>Adding Behaviour<a class="headerlink" href="#adding-behaviour" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s now add some actual behaviour to the widget, i.e. make it react to user
+input. Change the code like so:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.widget</span> <span class="kn">import</span> <span class="n">Widget</span>
+
+
+<span class="k">class</span> <span class="nc">MyPaintWidget</span><span class="p">(</span><span class="n">Widget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_touch_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">touch</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MyPaintApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MyPaintWidget</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">MyPaintApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>This is just to show how easy it is to react to user input. When a
+<a class="reference internal" href="../api-kivy.input.motionevent.html#kivy.input.motionevent.MotionEvent" title="kivy.input.motionevent.MotionEvent"><tt class="xref py py-class docutils literal"><span class="pre">MotionEvent</span></tt></a> (i.e. a touch, click, etc.) occurs,
+we simply print the information about the touch object to the console.
+You won&#8217;t see anything on the screen, but if you observe the command-line from
+which you are running the program, you will see a message for every touch.
+This also demonstrates that a widget does not have to
+have a visual representation.</p>
+<p>Now that&#8217;s not really an overwhelming user experience. Let&#8217;s add some code
+that actually draws something into our window:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.widget</span> <span class="kn">import</span> <span class="n">Widget</span>
+<span class="kn">from</span> <span class="nn">kivy.graphics</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Ellipse</span>
+
+
+<span class="k">class</span> <span class="nc">MyPaintWidget</span><span class="p">(</span><span class="n">Widget</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">on_touch_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">:</span>
+            <span class="n">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="mf">30.</span>
+            <span class="n">Ellipse</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="n">touch</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">d</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">d</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">MyPaintApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MyPaintWidget</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">MyPaintApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="../_images/guide-3.jpg" class="align-center" src="../_images/guide-3.jpg" />
+<p>If you run your code with these modifications, you will see that every time
+you touch, there will be a small yellow circle drawn where you touched.
+How does it work?</p>
+<blockquote>
+<div><ul class="simple">
+<li>Line 8: We use Python&#8217;s <tt class="docutils literal"><span class="pre">with</span></tt> statement with the widget&#8217;s
+<a class="reference internal" href="../api-kivy.graphics.instructions.html#kivy.graphics.instructions.Canvas" title="kivy.graphics.instructions.Canvas"><tt class="xref py py-class docutils literal"><span class="pre">Canvas</span></tt></a> object. This is like an
+area in which the widget can draw things to represent itself on the
+screen. By using the <tt class="docutils literal"><span class="pre">with</span></tt> statement with it, all successive
+drawing commands that are properly indented will modify this canvas.
+The <tt class="docutils literal"><span class="pre">with</span></tt> statement also makes sure that after our drawing,
+internal state can be cleaned up properly.</li>
+<li>Line 9: You might have guessed it already: This sets the
+<a class="reference internal" href="../api-kivy.graphics.context_instructions.html#kivy.graphics.context_instructions.Color" title="kivy.graphics.context_instructions.Color"><tt class="xref py py-class docutils literal"><span class="pre">Color</span></tt></a> for successive
+drawing operations to yellow (default color format is RGB, so (1, 1, 0) is
+yellow). This is true until another
+<a class="reference internal" href="../api-kivy.graphics.context_instructions.html#kivy.graphics.context_instructions.Color" title="kivy.graphics.context_instructions.Color"><tt class="xref py py-class docutils literal"><span class="pre">Color</span></tt></a> is set.
+Think of this as dipping your brushes in that color, which you can
+then use to draw on a canvas until you dip the brushes into another color.</li>
+<li>Line 10: We specify the diameter for the circle that we are about to
+draw. Using a variable for that is preferable since we need to refer
+to that value multiple times and we don&#8217;t want to have to change it
+in several places if we want the circle bigger or smaller.</li>
+<li>Line 11: To draw a circle, we simply draw an
+<a class="reference internal" href="../api-kivy.graphics.vertex_instructions.html#kivy.graphics.vertex_instructions.Ellipse" title="kivy.graphics.vertex_instructions.Ellipse"><tt class="xref py py-class docutils literal"><span class="pre">Ellipse</span></tt></a> with equal width
+and height. Since we want the circle to be drawn where the user
+touches, we pass the touch&#8217;s position to the ellipse.
+Note that we need to shift the ellipse by <tt class="docutils literal"><span class="pre">-d/2</span></tt> in the x and y
+directions (i.e. left and downwards) because the position specifies the
+bottom left corner of the ellipse&#8217;s bounding box, and we want it to be
+centered around our touch.</li>
+</ul>
+</div></blockquote>
+<p>That was easy, wasn&#8217;t it?
+It gets better! Update the code to look like this:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.widget</span> <span class="kn">import</span> <span class="n">Widget</span>
+<span class="kn">from</span> <span class="nn">kivy.graphics</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Ellipse</span><span class="p">,</span> <span class="n">Line</span>
+
+
+<span class="k">class</span> <span class="nc">MyPaintWidget</span><span class="p">(</span><span class="n">Widget</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">on_touch_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">:</span>
+            <span class="n">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="mf">30.</span>
+            <span class="n">Ellipse</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="n">touch</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">d</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">d</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+            <span class="n">touch</span><span class="o">.</span><span class="n">ud</span><span class="p">[</span><span class="s">&#39;line&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="p">(</span><span class="n">touch</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_touch_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+        <span class="n">touch</span><span class="o">.</span><span class="n">ud</span><span class="p">[</span><span class="s">&#39;line&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">points</span> <span class="o">+=</span> <span class="p">[</span><span class="n">touch</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">y</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">MyPaintApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MyPaintWidget</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">MyPaintApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="../_images/guide-4.jpg" class="align-center" src="../_images/guide-4.jpg" />
+<dl class="docutils">
+<dt>This is what has changed:</dt>
+<dd><ul class="first last simple">
+<li>Line 3: We now not only import the
+<a class="reference internal" href="../api-kivy.graphics.vertex_instructions.html#kivy.graphics.vertex_instructions.Ellipse" title="kivy.graphics.vertex_instructions.Ellipse"><tt class="xref py py-class docutils literal"><span class="pre">Ellipse</span></tt></a> drawing instruction,
+but also the <a class="reference internal" href="../api-kivy.graphics.vertex_instructions.html#kivy.graphics.vertex_instructions.Line" title="kivy.graphics.vertex_instructions.Line"><tt class="xref py py-class docutils literal"><span class="pre">Line</span></tt></a>
+drawing instruction. If you look at the documentation for
+<a class="reference internal" href="../api-kivy.graphics.vertex_instructions.html#kivy.graphics.vertex_instructions.Line" title="kivy.graphics.vertex_instructions.Line"><tt class="xref py py-class docutils literal"><span class="pre">Line</span></tt></a>, you will see that
+it accepts a <tt class="docutils literal"><span class="pre">points</span></tt> argument that has to be a list of 2D point
+coordinates, like <tt class="docutils literal"><span class="pre">(x1,</span> <span class="pre">y1,</span> <span class="pre">x2,</span> <span class="pre">y2,</span> <span class="pre">...,</span> <span class="pre">xN,</span> <span class="pre">yN)</span></tt>.</li>
+<li>Line 13: This is where it gets interesting. <tt class="docutils literal"><span class="pre">touch.ud</span></tt> is a Python
+dictionary (type &lt;dict&gt;) that allows us to store <em>custom attributes</em>
+for a touch.</li>
+<li>Line 13: We make use of the Line instruction that we imported and
+set a Line up for drawing. Since this is done in <tt class="docutils literal"><span class="pre">on_touch_down</span></tt>,
+there will be a new line for every new touch. By creating the line
+inside the <tt class="docutils literal"><span class="pre">with</span></tt> block, the canvas automatically knows about the
+line and will draw it. We just want to modify the line later, so we
+store a reference to it in the <tt class="docutils literal"><span class="pre">touch.ud</span></tt> dictionary under the
+arbitrarily chosen but aptly named key &#8216;line&#8217;.
+We pass the line that we&#8217;re creating the initial touch position
+because that&#8217;s where our line will begin.</li>
+<li>Lines 15: We add a new method to our widget. This is similar to the
+<tt class="docutils literal"><span class="pre">on_touch_down</span></tt> method, but instead of being called when a <em>new</em>
+touch occurs, this method is being called when an <em>existing</em> touch
+(for which <tt class="docutils literal"><span class="pre">on_touch_down</span></tt> was already called) moves, i.e. its
+position changes. Note that this is the <strong>same</strong>
+<a class="reference internal" href="../api-kivy.input.motionevent.html#kivy.input.motionevent.MotionEvent" title="kivy.input.motionevent.MotionEvent"><tt class="xref py py-class docutils literal"><span class="pre">MotionEvent</span></tt></a> object with updated
+attributes. This is something we found incredibly handy and you will
+shortly see why.</li>
+<li>Line 16: Remember: This is the same touch object that we got in
+<tt class="docutils literal"><span class="pre">on_touch_down</span></tt>, so we can simply access the data we stored away
+in the <tt class="docutils literal"><span class="pre">touch.ud</span></tt> dictionary!
+To the line we set up for this touch earlier, we now add the current
+position of the touch as a new point. We know that we need to extend
+the line because this happens in <tt class="docutils literal"><span class="pre">on_touch_move</span></tt>, which is only
+called when the touch has moved, which is exactly why we want to
+update the line.
+Storing the line in the <tt class="docutils literal"><span class="pre">touch.ud</span></tt> makes it a whole lot
+easier for us as we don&#8217;t have to maintain our own touch-to-line
+bookkeeping.</li>
+</ul>
+</dd>
+</dl>
+<p>So far so good. This isn&#8217;t exactly beautiful yet, though. It looks a bit
+like spaghetti bolognese. How about giving each touch its own color?
+Great, let&#8217;s do it:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.widget</span> <span class="kn">import</span> <span class="n">Widget</span>
+<span class="kn">from</span> <span class="nn">kivy.graphics</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Ellipse</span><span class="p">,</span> <span class="n">Line</span>
+
+
+<span class="k">class</span> <span class="nc">MyPaintWidget</span><span class="p">(</span><span class="n">Widget</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">on_touch_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="p">())</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">:</span>
+            <span class="n">Color</span><span class="p">(</span><span class="o">*</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="mf">30.</span>
+            <span class="n">Ellipse</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="n">touch</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">d</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">d</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+            <span class="n">touch</span><span class="o">.</span><span class="n">ud</span><span class="p">[</span><span class="s">&#39;line&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="p">(</span><span class="n">touch</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_touch_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+        <span class="n">touch</span><span class="o">.</span><span class="n">ud</span><span class="p">[</span><span class="s">&#39;line&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">points</span> <span class="o">+=</span> <span class="p">[</span><span class="n">touch</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">y</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">MyPaintApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MyPaintWidget</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">MyPaintApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="../_images/guide-5.jpg" class="align-center" src="../_images/guide-5.jpg" />
+<p>Here are the changes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Line 1: We import Python&#8217;s random() function that will give us
+random values in the range of [0., 1.).</li>
+<li>Line 10: In this case we simply create a new tuple of 3 random
+float values that will represent a random RGB color. Since we do
+this in <tt class="docutils literal"><span class="pre">on_touch_down</span></tt>, every new touch will get its own color.
+Don&#8217;t get confused by the use of
+<a class="reference external" href="http://docs.python.org/2/tutorial/datastructures.html#tuples-and-sequences">tuples</a>.
+We&#8217;re just binding the tuple to <tt class="docutils literal"><span class="pre">color</span></tt> for use as a shortcut
+within this method because we&#8217;re lazy.</li>
+<li>Line 12: As before, we set the color for the canvas. Only this time
+we use the random values we generated and feed them to the color
+class using Python&#8217;s tuple unpacking syntax (since the Color class
+expects three individual color components instead of just 1. If we
+were to pass the tuple directly, that would be just 1 value being
+passed, regardless of the fact that the tuple itself contains 3
+values).</li>
+</ul>
+</div></blockquote>
+<p>This looks a lot nicer already! With a lot of skill and patience, you
+might even be able to create a nice little drawing!</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since by default the <a class="reference internal" href="../api-kivy.graphics.context_instructions.html#kivy.graphics.context_instructions.Color" title="kivy.graphics.context_instructions.Color"><tt class="xref py py-class docutils literal"><span class="pre">Color</span></tt></a>
+instructions assume RGB mode and we&#8217;re feeding a tuple with three
+random float values to it, it might very well happen that we end up
+with a lot of dark or even black colors if we are unlucky. That would
+be bad because by default the background color is dark as well, so you
+wouldn&#8217;t be able to (easily) see the lines you draw.
+There is a nice trick to prevent this: Instead of creating a tuple with
+three random values, create a tuple like this: <tt class="docutils literal"><span class="pre">(random(),</span> <span class="pre">1.,</span> <span class="pre">1.)</span></tt>.
+Then, when passing it to the color instruction, set the mode to HSV
+color space: <tt class="docutils literal"><span class="pre">Color(*color,</span> <span class="pre">mode='hsv')</span></tt>. This way you will have a
+smaller number of possible colors, but the colors that you get will
+always be equally bright: only the hue changes.</p>
+</div>
+</div>
+<div class="section" id="bonus-points">
+<h3>Bonus Points<a class="headerlink" href="#bonus-points" title="Permalink to this headline">¶</a></h3>
+<p>At this point, we could say we are done. The widget does what it&#8217;s
+supposed to do: it traces the touches and draws lines. It even draws
+circles at the positions where a line begins.</p>
+<p>But what if the user wants to start a new drawing? With the current code,
+the only way to clear the window would be to restart the entire application.
+Luckily, we can do better. Let us add a <em>Clear</em> button that erases all the
+lines and circles that have been drawn so far.
+There are two options now:</p>
+<blockquote>
+<div><ul class="simple">
+<li>We could either create the button as a child of our widget. That would
+imply that if you create more than one widget, every widget gets its own
+button. If you&#8217;re not careful, this will also allow users to draw on top
+of the button, which might not be what you want.</li>
+<li>Or we set up the button only once, initially, in our app class and
+when it&#8217;s pressed we clear the widget.</li>
+</ul>
+</div></blockquote>
+<p>For our simple example, it doesn&#8217;t really matter that much. For larger
+applications you should give some thought to who does what in your app.
+We&#8217;ll go with the second option here so that you see how you can build up
+your application&#8217;s widget tree in your app class&#8217;s <a class="reference internal" href="../api-kivy.app.html#kivy.app.App.build" title="kivy.app.App.build"><tt class="xref py py-meth docutils literal"><span class="pre">build()</span></tt></a>
+method. We&#8217;ll also change to the HSV color space (see preceding note):</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.widget</span> <span class="kn">import</span> <span class="n">Widget</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.button</span> <span class="kn">import</span> <span class="n">Button</span>
+<span class="kn">from</span> <span class="nn">kivy.graphics</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Ellipse</span><span class="p">,</span> <span class="n">Line</span>
+
+
+<span class="k">class</span> <span class="nc">MyPaintWidget</span><span class="p">(</span><span class="n">Widget</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">on_touch_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="n">random</span><span class="p">(),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">:</span>
+            <span class="n">Color</span><span class="p">(</span><span class="o">*</span><span class="n">color</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;hsv&#39;</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="mf">30.</span>
+            <span class="n">Ellipse</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="n">touch</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">d</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">d</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+            <span class="n">touch</span><span class="o">.</span><span class="n">ud</span><span class="p">[</span><span class="s">&#39;line&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Line</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="p">(</span><span class="n">touch</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_touch_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">touch</span><span class="p">):</span>
+        <span class="n">touch</span><span class="o">.</span><span class="n">ud</span><span class="p">[</span><span class="s">&#39;line&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">points</span> <span class="o">+=</span> <span class="p">[</span><span class="n">touch</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">touch</span><span class="o">.</span><span class="n">y</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">MyPaintApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">()</span>
+        <span class="n">painter</span> <span class="o">=</span> <span class="n">MyPaintWidget</span><span class="p">()</span>
+        <span class="n">clearbtn</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&#39;Clear&#39;</span><span class="p">)</span>
+        <span class="n">parent</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="n">painter</span><span class="p">)</span>
+        <span class="n">parent</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="n">clearbtn</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">clear_canvas</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="n">clearbtn</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">on_release</span><span class="o">=</span><span class="n">clear_canvas</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">parent</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">MyPaintApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<img alt="../_images/guide-6.jpg" class="align-center" src="../_images/guide-6.jpg" />
+<p>Here&#8217;s what happens:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Line 4: We added an import statement to be able to use the
+<a class="reference internal" href="../api-kivy.uix.button.html#kivy.uix.button.Button" title="kivy.uix.button.Button"><tt class="xref py py-class docutils literal"><span class="pre">Button</span></tt></a> class.</li>
+<li>Line 25: We create a dummy <tt class="docutils literal"><span class="pre">Widget()</span></tt> object as a parent for both
+our painting widget and the button we&#8217;re about to add. This is just
+a poor-man&#8217;s approach to setting up a widget tree hierarchy. We
+could just as well use a layout or do some other fancy stuff.
+Again: this widget does absolutely nothing except holding the two
+widgets we will now add to it as children.</li>
+<li>Line 26: We create our <tt class="docutils literal"><span class="pre">MyPaintWidget()</span></tt> as usual, only this time
+we don&#8217;t return it directly but bind it to a variable name.</li>
+<li>Line 27: We create a button widget. It will have a label on it that
+displays the text &#8216;Clear&#8217;.</li>
+<li>Line 28 &amp; 29: We set up the widget hierarchy by making both the
+painter and the clearbtn children of the dummy parent widget.
+That means <cite>painter</cite> and <cite>clearbtn</cite> are now siblings in the usual computer
+science tree terminology.</li>
+<li>Lines 31 &amp; 32: Up to now, the button did nothing. It was there,
+visible, and you could press it, but nothing would happen.
+We change that here: we create a small, throw-away function that is
+going to be our
+<a class="reference external" href="http://en.wikipedia.org/wiki/Callback_function#Python">callback function</a>
+when the button is pressed. The function just clears the painter&#8217;s
+canvas&#8217; contents, making it black again.</li>
+<li>Line 33: We bind the button&#8217;s on_release event (which is fired when
+the button is pressed and then released) to the callback we just
+defined.</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Kivy Widget class, by design, is kept simple. There are no general
+properties such as background color and border color. Instead, the examples
+and documentation illustrate how to easily handle such simple things
+yourself, as we have done here, setting the color for the canvas, and
+drawing the shape. From a simple start, you can move to more elaborate
+customization. Higher-level built-in widgets, deriving from Widget, such
+as Button, do have convenience properties such as background_color, but
+these vary by widget. Use the API docs to see what is offered by a widget,
+and subclass if you need to add more functionality.</p>
+</div>
+<p>Congratulations! You&#8217;ve written your first Kivy widget. Obviously this was
+just a quick introduction. There is much more to discover. We suggest
+taking a short break to let what you just learned sink in. Maybe draw some
+nice pictures to relax? If you feel like you&#8217;ve understood everything and
+are ready for more, we encourage you to read on.</p>
+</div>
+</div>
+</div>
+
+
+            <div class="footerlinks">
+            <table>
+                <tr>
+                    <td class="leftlink">
+                  <a href="pong.html" title="previous chapter">&laquo; Pong Game Tutorial</a></li>
+                  </td>
+                  <td class="rightlink">
+                  <a href="../api-index.html" title="next chapter">API Reference &raquo;</a>
+                      </td>
+                  </tr>
+              </table>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    </div>
+<!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://txzone.net/piwik/" : "http://txzone.net/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 8);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://txzone.net/piwik/piwik.php?idsite=8" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+    <!--
+    <div class="footer">
+      &copy; Copyright 2010, The Kivy Authors.
+      Last updated on Dec 11, 2014.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2b1.
+</div>
+-->
+  </body>
+
+<!-- Mirrored from kivy.org/docs/tutorials/firstwidget.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:14 GMT -->
+</html>

@@ -1,0 +1,2296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from kivy.org/docs/api-kivy.graphics.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:23 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="twitter:site" content="@kivyframework">
+    
+    <title>Graphics &mdash; Kivy 1.9.0-dev documentation</title>
+    <link href='../../fonts.googleapis.com/css8da2.css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="_static/fresh.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.9.0-dev',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="../../cdn.mathjax.org/mathjax/latest/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/jquery-effects-core-and-slide.js"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/kivy.js"></script>
+    <link rel="top" title="Kivy 1.9.0-dev documentation" href="index-2.html" />
+    <link rel="up" title="API Reference" href="api-index.html" />
+    <link rel="next" title="Canvas" href="api-kivy.graphics.instructions.html" />
+    <link rel="prev" title="Gesture recognition" href="api-kivy.gesture.html" /> 
+  </head>
+  <body>
+
+    <div id="topbar">
+        <div id="topwrapper">
+        <div id="toplogo">
+            <a href="http://kivy.org/">
+                <img src="_static/logo-kivy.png" alt="Kivy" height="50"/>
+            </a>
+        </div>
+        <div id="topmenu">
+            <ul class="navigation">
+                <li><a class="nav-guides" href="gettingstarted/intro.html">Guides</a></li>
+                <li><a class="nav-garden" href="http://kivy-garden.github.io/">Garden</a></li>
+                <li><a class="nav-api" href="api-kivy.html">API Reference</a></li>
+                <li><a class="nav-pdf" href="pdf/Kivy-latest.pdf">PDF</a></li>
+                <li><a class="nav-wiki" href="http://wiki.kivy.org/">Wiki</a></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+<div id="contentall">
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>Quick search</h3>
+            <form class="search" action="http://kivy.org/docs/search.html" method="get">
+                &nbsp;
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+                <input type="text" class="text" name="q" />
+            </form>
+          <!--
+          <h3><a href="index.html">Graphics</a></h3>
+          <ul>
+<li><a class="reference internal" href="#">Graphics</a><ul>
+<li><a class="reference internal" href="#the-basics">The basics</a></li>
+<li><a class="reference internal" href="#gl-reloading-mechanism">GL Reloading mechanism</a></li>
+</ul>
+</li>
+</ul>
+
+          <h3><a href="index.html">Table Of Contents</a></h3>
+          -->
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/first_app.html">A first App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/rules.html">Kv Design Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/events.html">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/framework.html">Non-widget stuff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/layouts.html">Layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/diving.html">Diving in</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User&#8217;s Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="philosophy.html">Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contact.html">Contact Us</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guide-index.html">Programming Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide/basic.html">Kivy Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/environment.html">Controlling the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/config.html">Configure Kivy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/architecture.html">Architectural Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/events.html">Events and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/inputs.html">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/lang.html">Kv language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/other-frameworks.html">Integrating with other Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/bestpractices.html">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/advancedgraphics.html">Advanced Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/packaging.html">Packaging your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials-index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/pong.html">Pong Game Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/firstwidget.html">A Simple Paint App</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="api-index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.html">Kivy framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.html">Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.adapter.html">Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.args_converters.html">List Item View Argument Converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.dictadapter.html">DictAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.listadapter.html">ListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.models.html">SelectableDataItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.simplelistadapter.html">SimpleListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.animation.html">Animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.app.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.atlas.html">Atlas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.base.html">Kivy Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.cache.html">Cache manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.clock.html">Clock object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.compat.html">Compatibility module for Python 2.7 and &gt; 3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.config.html">Configuration object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.context.html">Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.html">Core Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.clipboard.html">Clipboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.gl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.spelling.html">Spelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.text.html">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.text.markup.html">Text Markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.text.text_layout.html">Text layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.html">Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.dampedscroll.html">Damped scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.kinetic.html">Kinetic effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.opacityscroll.html">Opacity scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.scroll.html">Scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.event.html">Event dispatcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.ext.html">Extension Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.factory.html">Factory object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.garden.html">Garden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.geometry.html">Geometry utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.gesture.html">Gesture recognition</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.compiler.html">Graphics compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.context.html">Context management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.context_instructions.html">Context instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.fbo.html">Framebuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.gl_instructions.html">GL instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.instructions.html">Canvas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.opengl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.opengl_utils.html">OpenGL utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.shader.html">Shader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.stencil_instructions.html">Stencil instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.svg.html">SVG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.tesselator.html">Tesselator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.texture.html">Texture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.transformation.html">Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.html">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.factory.html">Motion Event Factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.motionevent.html">Motion Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.html">Input Postprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.dejitter.html">Dejitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.doubletap.html">Double Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.ignorelist.html">Ignore list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.retaintouch.html">Retain Touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.tripletap.html">Triple Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.provider.html">Motion Event Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.html">Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.androidjoystick.html">Android Joystick Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.hidinput.html">Native support for HID input from the linux kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.leapfinger.html">Leap Motion - finger only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.linuxwacom.html">Native support of Wacom tablet from linuxwacom driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.mactouch.html">Native support of MultitouchSupport framework for MacBook (MaxOSX platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.mouse.html">Mouse provider implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.mtdev.html">Native support for Multitouch devices on Linux, using libmtdev.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.probesysfs.html">Auto Create Input Provider Config Entry for Available MT Hardware (linux only).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.tuio.html">TUIO Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.wm_common.html">Common definitions for a Windows provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.wm_pen.html">Support for WM_PEN messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.wm_touch.html">Support for WM_TOUCH messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.recorder.html">Input recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.shape.html">Motion Event Shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.interactive.html">Interactive launcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.lang.html">Kivy Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.lib.html">External libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.lib.gstplayer.html">GstPlayer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.loader.html">Asynchronous data loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.logger.html">Logger object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.metrics.html">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.html">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.inspector.html">Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.keybinding.html">Keybinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.monitor.html">Monitor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.recorder.html">Recorder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.screen.html">Screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.touchring.html">Touchring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.webdebugger.html">Web Debugger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.multistroke.html">Multistroke gesture recognizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.network.html">Network support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.network.urlrequest.html">Url Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.parser.html">Parser utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.resources.html">Resources management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.storage.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.storage.dictstore.html">Dictionary store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.storage.jsonstore.html">JSON store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.storage.redisstore.html">Redis Store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.support.html">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.abstractview.html">Abstract View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.accordion.html">Accordion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.actionbar.html">Action Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.anchorlayout.html">Anchor Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.boxlayout.html">Box Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.bubble.html">Bubble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.button.html">Button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.carousel.html">Carousel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.checkbox.html">CheckBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.codeinput.html">Code Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.colorpicker.html">Color Picker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.dropdown.html">Drop-Down List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.effectwidget.html">EffectWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.filechooser.html">FileChooser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.floatlayout.html">Float Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.gesturesurface.html">Gesture Surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.gridlayout.html">Grid Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.label.html">Label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.layout.html">Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.listview.html">List View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.modalview.html">ModalView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.pagelayout.html">PageLayout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.popup.html">Popup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.progressbar.html">Progress Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.relativelayout.html">Relative Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.rst.html">reStructuredText renderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.sandbox.html">Sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.scatter.html">Scatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.scatterlayout.html">Scatter Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.screenmanager.html">Screen Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.scrollview.html">Scroll View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.slider.html">Slider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.spinner.html">Spinner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.splitter.html">Splitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.stacklayout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.stencilview.html">Stencil View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.switch.html">Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.tabbedpanel.html">TabbedPanel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.textinput.html">Text Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.togglebutton.html">Toggle button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.treeview.html">Tree View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.videoplayer.html">Video player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.vkeyboard.html">VKeyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.widget.html">Widget class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.vector.html">Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.weakmethod.html">Weak Method</a></li>
+</ul>
+</li>
+</ul>
+
+          <!--
+          <h3>Related Topics</h3>
+          <ul>
+              <li>Previous: <a href="api-kivy.gesture.html" title="previous chapter">Gesture recognition</a></li>
+              <li>Next: <a href="api-kivy.graphics.instructions.html" title="next chapter">Canvas</a></li>
+          </ul>
+          -->
+        </div>
+      </div>
+    <div id="content">
+    <div class="wrapper">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div class="toc"><h2>Table Of Contents</h2><ul>
+<li><a class="reference internal" href="#">Graphics</a><ul>
+<li><a class="reference internal" href="#the-basics">The basics</a></li>
+<li><a class="reference internal" href="#gl-reloading-mechanism">GL Reloading mechanism</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+  <div class="section" id="module-kivy.graphics">
+<span id="graphics"></span><h1>Graphics<a class="headerlink" href="#module-kivy.graphics" title="Permalink to this headline">¶</a></h1>
+<p>This package assembles many low level functions used for drawing. The whole
+graphics package is compatible with OpenGL ES 2.0 and has many rendering
+optimizations.</p>
+<div class="section" id="the-basics">
+<h2>The basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">¶</a></h2>
+<p>For drawing on a screen, you will need :</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>a <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Canvas" title="kivy.graphics.instructions.Canvas"><tt class="xref py py-class docutils literal"><span class="pre">Canvas</span></tt></a> object.</li>
+<li><a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Instruction" title="kivy.graphics.instructions.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">Instruction</span></tt></a> objects.</li>
+</ol>
+</div></blockquote>
+<p>Each <a class="reference internal" href="api-kivy.uix.widget.html#kivy.uix.widget.Widget" title="kivy.uix.widget.Widget"><tt class="xref py py-class docutils literal"><span class="pre">Widget</span></tt></a>
+in Kivy already has a <a class="reference internal" href="#kivy.graphics.Canvas" title="kivy.graphics.Canvas"><tt class="xref py py-class docutils literal"><span class="pre">Canvas</span></tt></a> by default. When you create
+a widget, you can create all the instructions needed for drawing. If
+<cite>self</cite> is your current widget, you can do:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.graphics</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">:</span>
+    <span class="c"># Add a red color</span>
+    <span class="n">Color</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c"># Add a rectangle</span>
+    <span class="n">Rectangle</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The instructions <a class="reference internal" href="#kivy.graphics.Color" title="kivy.graphics.Color"><tt class="xref py py-class docutils literal"><span class="pre">Color</span></tt></a> and <a class="reference internal" href="#kivy.graphics.Rectangle" title="kivy.graphics.Rectangle"><tt class="xref py py-class docutils literal"><span class="pre">Rectangle</span></tt></a> are automaticly added to
+the canvas object and will be used when the window is drawn.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Kivy drawing instructions are not automatically relative to the widgets
+position or size. You therefore you need to consider these factors when
+drawing. In order to make your drawing instructions relative to the widget,
+the instructions need either to be
+declared in the <a class="reference internal" href="api-kivy.lang.html#module-kivy.lang" title="kivy.lang"><tt class="xref py py-mod docutils literal"><span class="pre">KvLang</span></tt></a> or bound to pos and size changes.
+Please see <a class="reference internal" href="guide/widgets.html#adding-widget-background"><em>Adding a Background to a Layout</em></a> for more detail.</p>
+</div>
+</div>
+<div class="section" id="gl-reloading-mechanism">
+<h2>GL Reloading mechanism<a class="headerlink" href="#gl-reloading-mechanism" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span>New in version 1.2.0.</span></p>
+</div>
+<p>During the lifetime of the application, the OpenGL context might be lost. This
+happens:</p>
+<ul class="simple">
+<li>when the window is resized on MacOSX or the Windows platform and you&#8217;re
+using pygame as a window provider. This is due to SDL 1.2. In the SDL 1.2
+design, it needs to recreate a GL context everytime the window is
+resized. This was fixed in SDL 1.3 but pygame is not yet available on it
+by default.</li>
+<li>when Android releases the app resources: when your application goes to the
+background, Android might reclaim your opengl context to give the
+resource to another app. When the user switches back to your application, a
+newly created gl context is given to your app.</li>
+</ul>
+<p>Starting from 1.2.0, we have introduced a mechanism for reloading all the
+graphics resources using the GPU: Canvas, FBO, Shader, Texture, VBO,
+and VertexBatch:</p>
+<ul class="simple">
+<li>VBO and VertexBatch are constructed by our graphics instructions. We have all
+the data needed to reconstruct when reloading.</li>
+<li>Shader: same as VBO, we store the source and values used in the
+shader so we are able to recreate the vertex/fragment/program.</li>
+<li>Texture: if the texture has a source (an image file or atlas), the image
+is reloaded from the source and reuploaded to the GPU.</li>
+</ul>
+<p>You should cover theses cases yourself:</p>
+<ul class="simple">
+<li>Textures without a source: if you manually created a texture and manually
+blit data / a buffer to it, you must handle the reloading yourself. Check the
+<a class="reference internal" href="api-kivy.graphics.texture.html"><em>Texture</em></a> to learn how to manage that case. (The text
+rendering already generates the texture and handles the reloading. You
+don&#8217;t need to reload text yourself.)</li>
+<li>FBO: if you added / removed / drew things multiple times on the FBO, we
+can&#8217;t reload it. We don&#8217;t keep a history of the instructions put on it.
+As for textures without a source, check the <a class="reference internal" href="api-kivy.graphics.fbo.html"><em>Framebuffer</em></a> to
+learn how to manage that case.</li>
+</ul>
+<dl class="class">
+<dt id="kivy.graphics.Bezier">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Bezier</tt><a class="headerlink" href="#kivy.graphics.Bezier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.VertexInstruction" title="kivy.graphics.instructions.VertexInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.VertexInstruction</span></tt></a></p>
+<p>A 2d Bezier curve.</p>
+<div class="versionadded">
+<p><span>New in version 1.0.8.</span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>points</cite>: list</dt>
+<dd><p class="first last">List of points in the format (x1, y1, x2, y2...)</p>
+</dd>
+<dt><cite>segments</cite>: int, defaults to 180</dt>
+<dd><p class="first last">Define how many segments are needed for drawing the curve.
+The drawing will be smoother if you have many segments.</p>
+</dd>
+<dt><cite>loop</cite>: bool, defaults to False</dt>
+<dd><p class="first last">Set the bezier curve to join the last point to the first.</p>
+</dd>
+<dt><cite>dash_length</cite>: int</dt>
+<dd><p class="first last">Length of a segment (if dashed), defaults to 1.</p>
+</dd>
+<dt><cite>dash_offset</cite>: int</dt>
+<dd><p class="first last">Distance between the end of a segment and the start of the
+next one, defaults to 0. Changing this makes it dashed.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="kivy.graphics.Bezier.dash_length">
+<tt class="descname">dash_length</tt><a class="headerlink" href="#kivy.graphics.Bezier.dash_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the length of the dashes in the curve.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Bezier.dash_offset">
+<tt class="descname">dash_offset</tt><a class="headerlink" href="#kivy.graphics.Bezier.dash_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the offset between the dashes in the
+curve.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Bezier.points">
+<tt class="descname">points</tt><a class="headerlink" href="#kivy.graphics.Bezier.points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/settings the points of the triangle.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This will always reconstruct the whole graphic from the new points
+list. It can be very CPU intensive.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Bezier.segments">
+<tt class="descname">segments</tt><a class="headerlink" href="#kivy.graphics.Bezier.segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the number of segments of the curve.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.BindTexture">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">BindTexture</tt><a class="headerlink" href="#kivy.graphics.BindTexture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.ContextInstruction" title="kivy.graphics.instructions.ContextInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.ContextInstruction</span></tt></a></p>
+<p>BindTexture Graphic instruction.
+The BindTexture Instruction will bind a texture and enable
+GL_TEXTURE_2D for subsequent drawing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>texture</cite>: Texture</dt>
+<dd><p class="first last">Specifies the texture to bind to the given index.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="kivy.graphics.BindTexture.source">
+<tt class="descname">source</tt><a class="headerlink" href="#kivy.graphics.BindTexture.source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set/get the source (filename) to load for the texture.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.BorderImage">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">BorderImage</tt><a class="headerlink" href="#kivy.graphics.BorderImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.vertex_instructions.html#kivy.graphics.vertex_instructions.Rectangle" title="kivy.graphics.vertex_instructions.Rectangle"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.vertex_instructions.Rectangle</span></tt></a></p>
+<p>A 2d border image. The behavior of the border image is similar to the
+concept of a CSS3 border-image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>border</cite>: list</dt>
+<dd><p class="first last">Border information in the format (top, right, bottom, left).
+Each value is in pixels.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="kivy.graphics.BorderImage.border">
+<tt class="descname">border</tt><a class="headerlink" href="#kivy.graphics.BorderImage.border" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the border of the class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Callback">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Callback</tt><a class="headerlink" href="#kivy.graphics.Callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Instruction" title="kivy.graphics.instructions.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.Instruction</span></tt></a></p>
+<div class="versionadded">
+<p><span>New in version 1.0.4.</span></p>
+</div>
+<p>A Callback is an instruction that will be called when the drawing
+operation is performed. When adding instructions to a canvas, you can do
+this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">:</span>
+    <span class="n">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">Rectangle</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">Callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">my_callback</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The definition of the callback must be:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">my_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instr</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;I have been called!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Note that if you perform many and/or costly calls to callbacks, you
+might potentially slow down the rendering performance significantly.</p>
+</div>
+<p>The updating of your canvas does not occur until something new happens.
+From your callback, you can ask for an update:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cb</span> <span class="o">=</span> <span class="n">Callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">my_callback</span><span class="p">)</span>
+<span class="c"># then later in the code</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">cb</span><span class="o">.</span><span class="n">ask_update</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If you use the Callback class to call rendering methods of another
+toolkit, you will have issues with the OpenGL context. The OpenGL state may
+have been manipulated by the other toolkit, and as soon as program flow
+returns to Kivy, it will just break. You can have glitches, crashes, black
+holes might occur, etc.
+To avoid that, you can activate the <a class="reference internal" href="#kivy.graphics.Callback.reset_context" title="kivy.graphics.Callback.reset_context"><tt class="xref py py-attr docutils literal"><span class="pre">reset_context</span></tt></a> option. It will
+reset the OpenGL context state to make Kivy&#8217;s rendering correct after the
+call to your callback.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The <a class="reference internal" href="#kivy.graphics.Callback.reset_context" title="kivy.graphics.Callback.reset_context"><tt class="xref py py-attr docutils literal"><span class="pre">reset_context</span></tt></a> is not a full OpenGL reset. If you have issues
+regarding that, please contact us.</p>
+</div>
+<dl class="method">
+<dt id="kivy.graphics.Callback.ask_update">
+<tt class="descname">ask_update</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.Callback.ask_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inform the parent canvas that we&#8217;d like it to update on the next
+frame. This is useful when you need to trigger a redraw due to some
+value having changed for example.</p>
+<div class="versionadded">
+<p><span>New in version 1.0.4.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Callback.reset_context">
+<tt class="descname">reset_context</tt><a class="headerlink" href="#kivy.graphics.Callback.reset_context" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set this to True if you want to reset the OpenGL context for Kivy
+after the callback has been called.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Canvas">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Canvas</tt><a class="headerlink" href="#kivy.graphics.Canvas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.CanvasBase" title="kivy.graphics.instructions.CanvasBase"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.CanvasBase</span></tt></a></p>
+<p>The important Canvas class. Use this class to add graphics or context
+instructions that you want to be used for drawing.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Canvas supports Python&#8217;s <tt class="docutils literal"><span class="pre">with</span></tt> statement and its enter &amp; exit
+semantics.</p>
+</div>
+<p>Usage of a canvas without the <tt class="docutils literal"><span class="pre">with</span></tt> statement:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Color</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>Usage of a canvas with Python&#8217;s <tt class="docutils literal"><span class="pre">with</span></tt> statement:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">:</span>
+    <span class="n">Color</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">Rectangle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="kivy.graphics.Canvas.after">
+<tt class="descname">after</tt><a class="headerlink" href="#kivy.graphics.Canvas.after" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting the &#8216;after&#8217; group.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.Canvas.ask_update">
+<tt class="descname">ask_update</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.Canvas.ask_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inform the canvas that we&#8217;d like it to update on the next frame.
+This is useful when you need to trigger a redraw due to some value
+having changed for example.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Canvas.before">
+<tt class="descname">before</tt><a class="headerlink" href="#kivy.graphics.Canvas.before" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting the &#8216;before&#8217; group.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.Canvas.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.Canvas.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears every <a class="reference internal" href="#kivy.graphics.Instruction" title="kivy.graphics.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">Instruction</span></tt></a> in the canvas, leaving it clean.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.Canvas.draw">
+<tt class="descname">draw</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.Canvas.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply the instruction to our window.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Canvas.has_after">
+<tt class="descname">has_after</tt><a class="headerlink" href="#kivy.graphics.Canvas.has_after" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to see if the <a class="reference internal" href="#kivy.graphics.Canvas.after" title="kivy.graphics.Canvas.after"><tt class="xref py py-attr docutils literal"><span class="pre">after</span></tt></a> group has already been created.</p>
+<div class="versionadded">
+<p><span>New in version 1.7.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Canvas.has_before">
+<tt class="descname">has_before</tt><a class="headerlink" href="#kivy.graphics.Canvas.has_before" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to see if the <a class="reference internal" href="#kivy.graphics.Canvas.before" title="kivy.graphics.Canvas.before"><tt class="xref py py-attr docutils literal"><span class="pre">before</span></tt></a> group has already been created.</p>
+<div class="versionadded">
+<p><span>New in version 1.7.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Canvas.opacity">
+<tt class="descname">opacity</tt><a class="headerlink" href="#kivy.graphics.Canvas.opacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property to get/set the opacity value of the canvas.</p>
+<div class="versionadded">
+<p><span>New in version 1.4.1.</span></p>
+</div>
+<p>The opacity attribute controls the opacity of the canvas and its
+children.  Be careful, it&#8217;s a cumulative attribute: the value is
+multiplied to the current global opacity and the result is applied to
+the current context color.</p>
+<p>For example: if your parent has an opacity of 0.5 and a child has an
+opacity of 0.2, the real opacity of the child will be 0.5 * 0.2 = 0.1.</p>
+<p>Then, the opacity is applied on the shader as:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">frag_color</span> <span class="o">=</span> <span class="n">color</span> <span class="o">*</span> <span class="n">vec4</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">opacity</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.CanvasBase">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">CanvasBase</tt><a class="headerlink" href="#kivy.graphics.CanvasBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.InstructionGroup" title="kivy.graphics.instructions.InstructionGroup"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.InstructionGroup</span></tt></a></p>
+<p>CanvasBase provides the context manager methods for the
+<a class="reference internal" href="#kivy.graphics.Canvas" title="kivy.graphics.Canvas"><tt class="xref py py-class docutils literal"><span class="pre">Canvas</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Color">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Color</tt><a class="headerlink" href="#kivy.graphics.Color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.ContextInstruction" title="kivy.graphics.instructions.ContextInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.ContextInstruction</span></tt></a></p>
+<p>Instruction to set the color state for any vertices being drawn after it.
+All the values passed are between 0 and 1, not 0 and 255.</p>
+<p>In Python, you can do:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.graphics</span> <span class="kn">import</span> <span class="n">Color</span>
+
+<span class="c"># create red v</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c"># create blue color</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c"># create blue color with 50% alpha</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c"># using hsv mode</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;hsv&#39;</span><span class="p">)</span>
+<span class="c"># using hsv mode + alpha</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;hsv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In kv lang:</p>
+<div class="highlight-python"><pre>&lt;Rule&gt;:
+    canvas:
+        # red color
+        Color:
+            rgb: 1, 0, 0
+        # blue color
+        Color:
+            rgb: 0, 1, 0
+        # blue color with 50% alpha
+        Color:
+            rgba: 0, 1, 0, .5
+
+        # using hsv mode
+        Color:
+            hsv: 0, 1, 1
+        # using hsv mode + alpha
+        Color:
+            hsv: 0, 1, 1
+            a: .5</pre>
+</div>
+<dl class="attribute">
+<dt id="kivy.graphics.Color.a">
+<tt class="descname">a</tt><a class="headerlink" href="#kivy.graphics.Color.a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alpha component, between 0 and 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Color.b">
+<tt class="descname">b</tt><a class="headerlink" href="#kivy.graphics.Color.b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blue component, between 0 and 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Color.g">
+<tt class="descname">g</tt><a class="headerlink" href="#kivy.graphics.Color.g" title="Permalink to this definition">¶</a></dt>
+<dd><p>Green component, between 0 and 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Color.h">
+<tt class="descname">h</tt><a class="headerlink" href="#kivy.graphics.Color.h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hue component, between 0 and 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Color.hsv">
+<tt class="descname">hsv</tt><a class="headerlink" href="#kivy.graphics.Color.hsv" title="Permalink to this definition">¶</a></dt>
+<dd><p>HSV color, list of 3 values in 0-1 range, alpha will be 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Color.r">
+<tt class="descname">r</tt><a class="headerlink" href="#kivy.graphics.Color.r" title="Permalink to this definition">¶</a></dt>
+<dd><p>Red component, between 0 and 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Color.rgb">
+<tt class="descname">rgb</tt><a class="headerlink" href="#kivy.graphics.Color.rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>RGB color, list of 3 values in 0-1 range. The alpha will be 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Color.rgba">
+<tt class="descname">rgba</tt><a class="headerlink" href="#kivy.graphics.Color.rgba" title="Permalink to this definition">¶</a></dt>
+<dd><p>RGBA color, list of 4 values in 0-1 range.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Color.s">
+<tt class="descname">s</tt><a class="headerlink" href="#kivy.graphics.Color.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saturation component, between 0 and 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Color.v">
+<tt class="descname">v</tt><a class="headerlink" href="#kivy.graphics.Color.v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Value component, between 0 and 1.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.ContextInstruction">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">ContextInstruction</tt><a class="headerlink" href="#kivy.graphics.ContextInstruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Instruction" title="kivy.graphics.instructions.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.Instruction</span></tt></a></p>
+<p>The ContextInstruction class is the base for the creation of instructions
+that don&#8217;t have a direct visual representation, but instead modify the
+current Canvas&#8217; state, e.g. texture binding, setting color parameters,
+matrix manipulation and so on.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Ellipse">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Ellipse</tt><a class="headerlink" href="#kivy.graphics.Ellipse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.vertex_instructions.html#kivy.graphics.vertex_instructions.Rectangle" title="kivy.graphics.vertex_instructions.Rectangle"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.vertex_instructions.Rectangle</span></tt></a></p>
+<p>A 2D ellipse.</p>
+<div class="versionchanged">
+<p><span>Changed in version 1.0.7: </span>Added angle_start and angle_end.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>segments</cite>: int, defaults to 180</dt>
+<dd><p class="first last">Define how many segments are needed for drawing the ellipse.
+The drawing will be smoother if you have many segments.</p>
+</dd>
+<dt><cite>angle_start</cite>: int, defaults to 0</dt>
+<dd><p class="first last">Specifies the starting angle, in degrees, of the disk portion.</p>
+</dd>
+<dt><cite>angle_end</cite>: int, defaults to 360</dt>
+<dd><p class="first last">Specifies the ending angle, in degrees, of the disk portion.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="kivy.graphics.Ellipse.angle_end">
+<tt class="descname">angle_end</tt><a class="headerlink" href="#kivy.graphics.Ellipse.angle_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>End angle of the ellipse in degrees, defaults to 360.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Ellipse.angle_start">
+<tt class="descname">angle_start</tt><a class="headerlink" href="#kivy.graphics.Ellipse.angle_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start angle of the ellipse in degrees, defaults to 0.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Ellipse.segments">
+<tt class="descname">segments</tt><a class="headerlink" href="#kivy.graphics.Ellipse.segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the number of segments of the ellipse.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Fbo">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Fbo</tt><a class="headerlink" href="#kivy.graphics.Fbo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.RenderContext" title="kivy.graphics.instructions.RenderContext"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.RenderContext</span></tt></a></p>
+<p>Fbo class for wrapping the OpenGL Framebuffer extension. The Fbo support
+&#8220;with&#8221; statement.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>clear_color</cite>: tuple, defaults to (0, 0, 0, 0)</dt>
+<dd><p class="first last">Define the default color for clearing the framebuffer</p>
+</dd>
+<dt><cite>size</cite>: tuple, defaults to (1024, 1024)</dt>
+<dd><p class="first last">Default size of the framebuffer</p>
+</dd>
+<dt><cite>push_viewport</cite>: bool, defaults to True</dt>
+<dd><p class="first last">If True, the OpenGL viewport will be set to the framebuffer size,
+and will be automatically restored when the framebuffer released.</p>
+</dd>
+<dt><cite>with_depthbuffer</cite>: bool, defaults to False</dt>
+<dd><p class="first last">If True, the framebuffer will be allocated with a Z buffer.</p>
+</dd>
+<dt><cite>with_stencilbuffer</cite>: bool, defaults to False</dt>
+<dd><div class="first versionadded">
+<p><span>New in version 1.9.0.</span></p>
+</div>
+<p class="last">If True, the framebuffer will be allocated with a stencil buffer.</p>
+</dd>
+<dt><cite>texture</cite>: <a class="reference internal" href="api-kivy.graphics.texture.html#kivy.graphics.texture.Texture" title="kivy.graphics.texture.Texture"><tt class="xref py py-class docutils literal"><span class="pre">Texture</span></tt></a>, defaults to None</dt>
+<dd><p class="first last">If None, a default texture will be created.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Using both of <tt class="docutils literal"><span class="pre">with_stencilbuffer</span></tt> and <tt class="docutils literal"><span class="pre">with_depthbuffer</span></tt> is not
+supported in kivy 1.9.0</p>
+</div>
+<dl class="method">
+<dt id="kivy.graphics.Fbo.add_reload_observer">
+<tt class="descname">add_reload_observer</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.Fbo.add_reload_observer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a callback to be called after the whole graphics context has
+been reloaded. This is where you can reupload your custom data in GPU.</p>
+<div class="versionadded">
+<p><span>New in version 1.2.0.</span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>callback</cite>: func(context) -&gt; return None</dt>
+<dd><p class="first last">The first parameter will be the context itself</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.Fbo.bind">
+<tt class="descname">bind</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.Fbo.bind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bind the FBO to the current opengl context.
+<cite>Bind</cite> mean that you enable the Framebuffer, and all the drawing
+operations will act inside the Framebuffer, until <a class="reference internal" href="#kivy.graphics.Fbo.release" title="kivy.graphics.Fbo.release"><tt class="xref py py-meth docutils literal"><span class="pre">release()</span></tt></a> is
+called.</p>
+<p>The bind/release operations are automatically called when you add
+graphics objects into it. If you want to manipulate a Framebuffer
+yourself, you can use it like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">fbo</span> <span class="o">=</span> <span class="n">FBO</span><span class="p">()</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">fbo</span><span class="o">.</span><span class="n">bind</span><span class="p">()</span>
+<span class="c"># do any drawing command</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">fbo</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+<span class="c"># then, your fbo texture is available at</span>
+<span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fbo</span><span class="o">.</span><span class="n">texture</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.Fbo.clear_buffer">
+<tt class="descname">clear_buffer</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.Fbo.clear_buffer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear the framebuffer with the <a class="reference internal" href="#kivy.graphics.Fbo.clear_color" title="kivy.graphics.Fbo.clear_color"><tt class="xref py py-attr docutils literal"><span class="pre">clear_color</span></tt></a>.</p>
+<p>You need to bind the framebuffer yourself before calling this
+method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">fbo</span><span class="o">.</span><span class="n">bind</span><span class="p">()</span>
+<span class="n">fbo</span><span class="o">.</span><span class="n">clear_buffer</span><span class="p">()</span>
+<span class="n">fbo</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Fbo.clear_color">
+<tt class="descname">clear_color</tt><a class="headerlink" href="#kivy.graphics.Fbo.clear_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear color in (red, green, blue, alpha) format.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.Fbo.get_pixel_color">
+<tt class="descname">get_pixel_color</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.Fbo.get_pixel_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the color of the pixel with specified window
+coordinates wx, wy. It returns result in RGBA format.</p>
+<div class="versionadded">
+<p><span>New in version 1.8.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Fbo.pixels">
+<tt class="descname">pixels</tt><a class="headerlink" href="#kivy.graphics.Fbo.pixels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the pixels texture, in RGBA format only, unsigned byte. The
+origin of the image is at bottom left.</p>
+<div class="versionadded">
+<p><span>New in version 1.7.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.Fbo.release">
+<tt class="descname">release</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.Fbo.release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Release the Framebuffer (unbind).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.Fbo.remove_reload_observer">
+<tt class="descname">remove_reload_observer</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.Fbo.remove_reload_observer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a callback from the observer list, previously added by
+<a class="reference internal" href="#kivy.graphics.Fbo.add_reload_observer" title="kivy.graphics.Fbo.add_reload_observer"><tt class="xref py py-meth docutils literal"><span class="pre">add_reload_observer()</span></tt></a>.</p>
+<div class="versionadded">
+<p><span>New in version 1.2.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Fbo.size">
+<tt class="descname">size</tt><a class="headerlink" href="#kivy.graphics.Fbo.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Size of the framebuffer, in (width, height) format.</p>
+<p>If you change the size, the framebuffer content will be lost.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Fbo.texture">
+<tt class="descname">texture</tt><a class="headerlink" href="#kivy.graphics.Fbo.texture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the framebuffer texture</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.GraphicException">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">GraphicException</tt><a class="headerlink" href="#kivy.graphics.GraphicException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Exception raised when a graphics error is fired.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Instruction">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Instruction</tt><a class="headerlink" href="#kivy.graphics.Instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.event.html#kivy.event.ObjectWithUid" title="kivy.event.ObjectWithUid"><tt class="xref py py-class docutils literal"><span class="pre">kivy.event.ObjectWithUid</span></tt></a></p>
+<p>Represents the smallest instruction available. This class is for internal
+usage only, don&#8217;t use it directly.</p>
+<dl class="attribute">
+<dt id="kivy.graphics.Instruction.proxy_ref">
+<tt class="descname">proxy_ref</tt><a class="headerlink" href="#kivy.graphics.Instruction.proxy_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a proxy reference to the Instruction i.e. without creating a
+reference of the widget. See <a class="reference external" href="http://docs.python.org/2/library/weakref.html?highlight=proxy#weakref.proxy">weakref.proxy</a>
+for more information.</p>
+<div class="versionadded">
+<p><span>New in version 1.7.2.</span></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.InstructionGroup">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">InstructionGroup</tt><a class="headerlink" href="#kivy.graphics.InstructionGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Instruction" title="kivy.graphics.instructions.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.Instruction</span></tt></a></p>
+<p>Group of <a class="reference internal" href="#kivy.graphics.Instruction" title="kivy.graphics.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">Instructions</span></tt></a>. Allows for the adding and
+removing of graphics instructions. It can be used directly as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">blue</span> <span class="o">=</span> <span class="n">InstructionGroup</span><span class="p">()</span>
+<span class="n">blue</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">))</span>
+<span class="n">blue</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)))</span>
+
+<span class="n">green</span> <span class="o">=</span> <span class="n">InstructionGroup</span><span class="p">()</span>
+<span class="n">green</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">))</span>
+<span class="n">green</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)))</span>
+
+<span class="c"># Here, self should be a Widget or subclass</span>
+<span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="p">[</span><span class="n">blue</span><span class="p">,</span> <span class="n">green</span><span class="p">]]</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="kivy.graphics.InstructionGroup.add">
+<tt class="descname">add</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.InstructionGroup.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new <a class="reference internal" href="#kivy.graphics.Instruction" title="kivy.graphics.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">Instruction</span></tt></a> to our list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.InstructionGroup.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.InstructionGroup.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all the <a class="reference internal" href="#kivy.graphics.Instruction" title="kivy.graphics.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">Instructions</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.InstructionGroup.get_group">
+<tt class="descname">get_group</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.InstructionGroup.get_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an iterable for all the <a class="reference internal" href="#kivy.graphics.Instruction" title="kivy.graphics.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">Instructions</span></tt></a>
+with a specific group name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.InstructionGroup.insert">
+<tt class="descname">insert</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.InstructionGroup.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert a new <a class="reference internal" href="#kivy.graphics.Instruction" title="kivy.graphics.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">Instruction</span></tt></a> into our list at index.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.InstructionGroup.remove">
+<tt class="descname">remove</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.InstructionGroup.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove an existing <a class="reference internal" href="#kivy.graphics.Instruction" title="kivy.graphics.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">Instruction</span></tt></a> from our list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.InstructionGroup.remove_group">
+<tt class="descname">remove_group</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.InstructionGroup.remove_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all <a class="reference internal" href="#kivy.graphics.Instruction" title="kivy.graphics.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">Instructions</span></tt></a> with a specific group
+name.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Line">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Line</tt><a class="headerlink" href="#kivy.graphics.Line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.VertexInstruction" title="kivy.graphics.instructions.VertexInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.VertexInstruction</span></tt></a></p>
+<p>A 2d line.</p>
+<p>Drawing a line can be done easily:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">:</span>
+    <span class="n">Line</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The line has 3 internal drawing modes that you should be aware of
+for optimal results:</p>
+<ol class="arabic simple">
+<li>If the <a class="reference internal" href="#kivy.graphics.Line.width" title="kivy.graphics.Line.width"><tt class="xref py py-attr docutils literal"><span class="pre">width</span></tt></a> is 1.0, then the standard GL_LINE drawing from
+OpenGL will be used. <a class="reference internal" href="#kivy.graphics.Line.dash_length" title="kivy.graphics.Line.dash_length"><tt class="xref py py-attr docutils literal"><span class="pre">dash_length</span></tt></a> and <a class="reference internal" href="#kivy.graphics.Line.dash_offset" title="kivy.graphics.Line.dash_offset"><tt class="xref py py-attr docutils literal"><span class="pre">dash_offset</span></tt></a> will
+work, while properties for cap and joint have no meaning here.</li>
+<li>If the <a class="reference internal" href="#kivy.graphics.Line.width" title="kivy.graphics.Line.width"><tt class="xref py py-attr docutils literal"><span class="pre">width</span></tt></a> is &gt; 1.0, then a custom drawing method will be used,
+based on triangles. <a class="reference internal" href="#kivy.graphics.Line.dash_length" title="kivy.graphics.Line.dash_length"><tt class="xref py py-attr docutils literal"><span class="pre">dash_length</span></tt></a> and <a class="reference internal" href="#kivy.graphics.Line.dash_offset" title="kivy.graphics.Line.dash_offset"><tt class="xref py py-attr docutils literal"><span class="pre">dash_offset</span></tt></a> do not
+work in this mode.
+Additionally, if the current color has an alpha &lt; 1.0, a stencil will be
+used internally to draw the line.</li>
+</ol>
+<img alt="_images/line-instruction.png" class="align-center" src="_images/line-instruction.png" />
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>points</cite>: list</dt>
+<dd><p class="first last">List of points in the format (x1, y1, x2, y2...)</p>
+</dd>
+<dt><cite>dash_length</cite>: int</dt>
+<dd><p class="first last">Length of a segment (if dashed), defaults to 1.</p>
+</dd>
+<dt><cite>dash_offset</cite>: int</dt>
+<dd><p class="first last">Offset between the end of a segments and the begining of the
+next one, defaults to 0. Changing this makes it dashed.</p>
+</dd>
+<dt><cite>width</cite>: float</dt>
+<dd><p class="first last">Width of the line, defaults to 1.0.</p>
+</dd>
+<dt><cite>cap</cite>: str, defaults to &#8216;round&#8217;</dt>
+<dd><p class="first last">See <a class="reference internal" href="#kivy.graphics.Line.cap" title="kivy.graphics.Line.cap"><tt class="xref py py-attr docutils literal"><span class="pre">cap</span></tt></a> for more information.</p>
+</dd>
+<dt><cite>joint</cite>: str, defaults to &#8216;round&#8217;</dt>
+<dd><p class="first last">See <a class="reference internal" href="#kivy.graphics.Line.joint" title="kivy.graphics.Line.joint"><tt class="xref py py-attr docutils literal"><span class="pre">joint</span></tt></a> for more information.</p>
+</dd>
+<dt><cite>cap_precision</cite>: int, defaults to 10</dt>
+<dd><p class="first last">See <a class="reference internal" href="#kivy.graphics.Line.cap_precision" title="kivy.graphics.Line.cap_precision"><tt class="xref py py-attr docutils literal"><span class="pre">cap_precision</span></tt></a> for more information</p>
+</dd>
+<dt><cite>joint_precision</cite>: int, defaults to 10</dt>
+<dd><p class="first last">See <a class="reference internal" href="#kivy.graphics.Line.joint_precision" title="kivy.graphics.Line.joint_precision"><tt class="xref py py-attr docutils literal"><span class="pre">joint_precision</span></tt></a> for more information
+See <a class="reference internal" href="#kivy.graphics.Line.cap_precision" title="kivy.graphics.Line.cap_precision"><tt class="xref py py-attr docutils literal"><span class="pre">cap_precision</span></tt></a> for more information.</p>
+</dd>
+<dt><cite>joint_precision</cite>: int, defaults to 10</dt>
+<dd><p class="first last">See <a class="reference internal" href="#kivy.graphics.Line.joint_precision" title="kivy.graphics.Line.joint_precision"><tt class="xref py py-attr docutils literal"><span class="pre">joint_precision</span></tt></a> for more information.</p>
+</dd>
+<dt><cite>close</cite>: bool, defaults to False</dt>
+<dd><p class="first last">If True, the line will be closed.</p>
+</dd>
+<dt><cite>circle</cite>: list</dt>
+<dd><p class="first last">If set, the <a class="reference internal" href="#kivy.graphics.Line.points" title="kivy.graphics.Line.points"><tt class="xref py py-attr docutils literal"><span class="pre">points</span></tt></a> will be set to build a circle. Check
+<a class="reference internal" href="#kivy.graphics.Line.circle" title="kivy.graphics.Line.circle"><tt class="xref py py-attr docutils literal"><span class="pre">circle</span></tt></a> for more information.</p>
+</dd>
+<dt><cite>ellipse</cite>: list</dt>
+<dd><p class="first last">If set, the <a class="reference internal" href="#kivy.graphics.Line.points" title="kivy.graphics.Line.points"><tt class="xref py py-attr docutils literal"><span class="pre">points</span></tt></a> will be set to build an ellipse. Check
+<a class="reference internal" href="#kivy.graphics.Line.ellipse" title="kivy.graphics.Line.ellipse"><tt class="xref py py-attr docutils literal"><span class="pre">ellipse</span></tt></a> for more information.</p>
+</dd>
+<dt><cite>rectangle</cite>: list</dt>
+<dd><p class="first last">If set, the <a class="reference internal" href="#kivy.graphics.Line.points" title="kivy.graphics.Line.points"><tt class="xref py py-attr docutils literal"><span class="pre">points</span></tt></a> will be set to build a rectangle. Check
+<a class="reference internal" href="#kivy.graphics.Line.rectangle" title="kivy.graphics.Line.rectangle"><tt class="xref py py-attr docutils literal"><span class="pre">rectangle</span></tt></a> for more information.</p>
+</dd>
+<dt><cite>bezier</cite>: list</dt>
+<dd><p class="first last">If set, the <a class="reference internal" href="#kivy.graphics.Line.points" title="kivy.graphics.Line.points"><tt class="xref py py-attr docutils literal"><span class="pre">points</span></tt></a> will be set to build a bezier line. Check
+<a class="reference internal" href="#kivy.graphics.Line.bezier" title="kivy.graphics.Line.bezier"><tt class="xref py py-attr docutils literal"><span class="pre">bezier</span></tt></a> for more information.</p>
+</dd>
+<dt><cite>bezier_precision</cite>: int, defaults to 180</dt>
+<dd><p class="first last">Precision of the Bezier drawing.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span>Changed in version 1.0.8: </span><cite>dash_offset</cite> and <cite>dash_length</cite> have been added</p>
+</div>
+<div class="versionchanged">
+<p><span>Changed in version 1.4.1: </span><cite>width</cite>, <cite>cap</cite>, <cite>joint</cite>, <cite>cap_precision</cite>, <cite>joint_precision</cite>, <cite>close</cite>,
+<cite>ellipse</cite>, <cite>rectangle</cite> have been added.</p>
+</div>
+<div class="versionchanged">
+<p><span>Changed in version 1.4.1: </span><cite>bezier</cite>, <cite>bezier_precision</cite> have been added.</p>
+</div>
+<dl class="attribute">
+<dt id="kivy.graphics.Line.bezier">
+<tt class="descname">bezier</tt><a class="headerlink" href="#kivy.graphics.Line.bezier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this property to build a bezier line, without calculating the
+<a class="reference internal" href="#kivy.graphics.Line.points" title="kivy.graphics.Line.points"><tt class="xref py py-attr docutils literal"><span class="pre">points</span></tt></a>. You can only set this property, not get it.</p>
+<p>The argument must be a tuple of 2n elements, n being the number of points.</p>
+<p>Usage:</p>
+<div class="highlight-python"><pre>Line(bezier=(x1, y1, x2, y2, x3, y3)</pre>
+</div>
+<div class="versionadded">
+<p><span>New in version 1.4.2.</span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Bezier lines calculations are inexpensive for a low number of
+points, but complexity is quadratic, so lines with a lot of points
+can be very expensive to build, use with care!</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.bezier_precision">
+<tt class="descname">bezier_precision</tt><a class="headerlink" href="#kivy.graphics.Line.bezier_precision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of iteration for drawing the bezier between 2 segments,
+defaults to 180. The bezier_precision must be at least 1.</p>
+<div class="versionadded">
+<p><span>New in version 1.4.2.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.cap">
+<tt class="descname">cap</tt><a class="headerlink" href="#kivy.graphics.Line.cap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the cap of the line, defaults to &#8216;round&#8217;. Can be one of
+&#8216;none&#8217;, &#8216;square&#8217; or &#8216;round&#8217;</p>
+<div class="versionadded">
+<p><span>New in version 1.4.1.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.cap_precision">
+<tt class="descname">cap_precision</tt><a class="headerlink" href="#kivy.graphics.Line.cap_precision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of iteration for drawing the &#8220;round&#8221; cap, defaults to 10.
+The cap_precision must be at least 1.</p>
+<div class="versionadded">
+<p><span>New in version 1.4.1.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.circle">
+<tt class="descname">circle</tt><a class="headerlink" href="#kivy.graphics.Line.circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this property to build a circle, without calculate the
+<a class="reference internal" href="#kivy.graphics.Line.points" title="kivy.graphics.Line.points"><tt class="xref py py-attr docutils literal"><span class="pre">points</span></tt></a>. You can only set this property, not get it.</p>
+<p>The argument must be a tuple of (center_x, center_y, radius, angle_start,
+angle_end, segments):</p>
+<ul>
+<li><p class="first">center_x and center_y represent the center of the circle</p>
+</li>
+<li><p class="first">radius represent the radius of the circle</p>
+</li>
+<li><dl class="first docutils">
+<dt>(optional) angle_start and angle_end are in degree. The default</dt>
+<dd><p class="first last">value is 0 and 360.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>(optional) segments is the precision of the ellipse. The default</dt>
+<dd><p class="first last">value is calculated from the range between angle.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Note that it&#8217;s up to you to <a class="reference internal" href="#kivy.graphics.Line.close" title="kivy.graphics.Line.close"><tt class="xref py py-attr docutils literal"><span class="pre">close</span></tt></a> the circle or not.</p>
+<p>For example, for building a simple ellipse, in python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># simple circle</span>
+<span class="n">Line</span><span class="p">(</span><span class="n">circle</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+
+<span class="c"># only from 90 to 180 degrees</span>
+<span class="n">Line</span><span class="p">(</span><span class="n">circle</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">))</span>
+
+<span class="c"># only from 90 to 180 degrees, with few segments</span>
+<span class="n">Line</span><span class="p">(</span><span class="n">circle</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span>New in version 1.4.1.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.close">
+<tt class="descname">close</tt><a class="headerlink" href="#kivy.graphics.Line.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, the line will be closed.</p>
+<div class="versionadded">
+<p><span>New in version 1.4.1.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.dash_length">
+<tt class="descname">dash_length</tt><a class="headerlink" href="#kivy.graphics.Line.dash_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the length of the dashes in the curve</p>
+<div class="versionadded">
+<p><span>New in version 1.0.8.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.dash_offset">
+<tt class="descname">dash_offset</tt><a class="headerlink" href="#kivy.graphics.Line.dash_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the offset between the dashes in the curve</p>
+<div class="versionadded">
+<p><span>New in version 1.0.8.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.ellipse">
+<tt class="descname">ellipse</tt><a class="headerlink" href="#kivy.graphics.Line.ellipse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this property to build an ellipse, without calculate the
+<a class="reference internal" href="#kivy.graphics.Line.points" title="kivy.graphics.Line.points"><tt class="xref py py-attr docutils literal"><span class="pre">points</span></tt></a>. You can only set this property, not get it.</p>
+<p>The argument must be a tuple of (x, y, width, height, angle_start,
+angle_end, segments):</p>
+<ul>
+<li><p class="first">x and y represent the bottom left of the ellipse</p>
+</li>
+<li><p class="first">width and height represent the size of the ellipse</p>
+</li>
+<li><dl class="first docutils">
+<dt>(optional) angle_start and angle_end are in degree. The default</dt>
+<dd><p class="first last">value is 0 and 360.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>(optional) segments is the precision of the ellipse. The default</dt>
+<dd><p class="first last">value is calculated from the range between angle.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Note that it&#8217;s up to you to <a class="reference internal" href="#kivy.graphics.Line.close" title="kivy.graphics.Line.close"><tt class="xref py py-attr docutils literal"><span class="pre">close</span></tt></a> the ellipse or not.</p>
+<p>For example, for building a simple ellipse, in python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># simple ellipse</span>
+<span class="n">Line</span><span class="p">(</span><span class="n">ellipse</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">))</span>
+
+<span class="c"># only from 90 to 180 degrees</span>
+<span class="n">Line</span><span class="p">(</span><span class="n">ellipse</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">))</span>
+
+<span class="c"># only from 90 to 180 degrees, with few segments</span>
+<span class="n">Line</span><span class="p">(</span><span class="n">ellipse</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span>New in version 1.4.1.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.joint">
+<tt class="descname">joint</tt><a class="headerlink" href="#kivy.graphics.Line.joint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the join of the line, defaults to &#8216;round&#8217;. Can be one of
+&#8216;none&#8217;, &#8216;round&#8217;, &#8216;bevel&#8217;, &#8216;miter&#8217;.</p>
+<div class="versionadded">
+<p><span>New in version 1.4.1.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.joint_precision">
+<tt class="descname">joint_precision</tt><a class="headerlink" href="#kivy.graphics.Line.joint_precision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of iteration for drawing the &#8220;round&#8221; joint, defaults to 10.
+The joint_precision must be at least 1.</p>
+<div class="versionadded">
+<p><span>New in version 1.4.1.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.points">
+<tt class="descname">points</tt><a class="headerlink" href="#kivy.graphics.Line.points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/settings points of the line</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This will always reconstruct the whole graphics from the new points
+list. It can be very CPU expensive.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.rectangle">
+<tt class="descname">rectangle</tt><a class="headerlink" href="#kivy.graphics.Line.rectangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this property to build a rectangle, without calculating the
+<a class="reference internal" href="#kivy.graphics.Line.points" title="kivy.graphics.Line.points"><tt class="xref py py-attr docutils literal"><span class="pre">points</span></tt></a>. You can only set this property, not get it.</p>
+<p>The argument must be a tuple of (x, y, width, height)
+angle_end, segments):</p>
+<ul class="simple">
+<li>x and y represent the bottom-left position of the rectangle</li>
+<li>width and height represent the size</li>
+</ul>
+<p>The line is automatically closed.</p>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Line</span><span class="p">(</span><span class="n">rectangle</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span>New in version 1.4.1.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.rounded_rectangle">
+<tt class="descname">rounded_rectangle</tt><a class="headerlink" href="#kivy.graphics.Line.rounded_rectangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this property to build a rectangle, without calculating the
+<a class="reference internal" href="#kivy.graphics.Line.points" title="kivy.graphics.Line.points"><tt class="xref py py-attr docutils literal"><span class="pre">points</span></tt></a>. You can only set this property, not get it.</p>
+<p>The argument must be a tuple of one of the following forms:</p>
+<ul class="simple">
+<li>(x, y, width, height, corner_radius)</li>
+<li>(x, y, width, height, corner_radius, resolution)</li>
+<li>(x, y, width, height, corner_radius1, corner_radius2, corner_radius3, corner_radius4)</li>
+<li>(x, y, width, height, corner_radius1, corner_radius2, corner_radius3, corner_radius4, resolution)</li>
+<li>x and y represent the bottom-left position of the rectangle</li>
+<li>width and height represent the size</li>
+<li>corner_radius is the number of pixels between two borders and the center of the circle arc joining them</li>
+<li>resolution is the numper of line segment that will be used to draw the circle arc at each corner (default to 30)</li>
+</ul>
+<p>The line is automatically closed.</p>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Line</span><span class="p">(</span><span class="n">rounded_rectangle</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span>New in version 1.9.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Line.width">
+<tt class="descname">width</tt><a class="headerlink" href="#kivy.graphics.Line.width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the width of the line, defaults to 1.0.</p>
+<div class="versionadded">
+<p><span>New in version 1.4.1.</span></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.MatrixInstruction">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">MatrixInstruction</tt><a class="headerlink" href="#kivy.graphics.MatrixInstruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.ContextInstruction" title="kivy.graphics.instructions.ContextInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.ContextInstruction</span></tt></a></p>
+<p>Base class for Matrix Instruction on the canvas.</p>
+<dl class="attribute">
+<dt id="kivy.graphics.MatrixInstruction.matrix">
+<tt class="descname">matrix</tt><a class="headerlink" href="#kivy.graphics.MatrixInstruction.matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matrix property. Matrix from the transformation module.
+Setting the matrix using this property when a change is made
+is important because it will notify the context about the update.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.MatrixInstruction.stack">
+<tt class="descname">stack</tt><a class="headerlink" href="#kivy.graphics.MatrixInstruction.stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the matrix stack to use. Can be &#8216;modelview_mat&#8217; or
+&#8216;projection_mat&#8217;.</p>
+<div class="versionadded">
+<p><span>New in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Mesh">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Mesh</tt><a class="headerlink" href="#kivy.graphics.Mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.VertexInstruction" title="kivy.graphics.instructions.VertexInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.VertexInstruction</span></tt></a></p>
+<p>A 2d mesh.</p>
+<p>The format for vertices is currently fixed but this might change in a future
+release. Right now, each vertex is described with 2D coordinates (x, y) and
+a 2D texture coordinate (u, v).</p>
+<p>In OpenGL ES 2.0 and in our graphics implementation, you cannot have more
+than 65535 indices.</p>
+<p>A list of vertices is described as:</p>
+<div class="highlight-python"><pre>vertices = [x1, y1, u1, v1, x2, y2, u2, v2, ...]
+            |            |  |            |
+            +---- i1 ----+  +---- i2 ----+</pre>
+</div>
+<p>If you want to draw a triangle, add 3 vertices. You can then make an
+indices list as follows:</p>
+<blockquote>
+<div>indices = [0, 1, 2]</div></blockquote>
+<div class="versionadded">
+<p><span>New in version 1.1.0.</span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>vertices</cite>: list</dt>
+<dd><p class="first last">List of vertices in the format (x1, y1, u1, v1, x2, y2, u2, v2...).</p>
+</dd>
+<dt><cite>indices</cite>: list</dt>
+<dd><p class="first last">List of indices in the format (i1, i2, i3...).</p>
+</dd>
+<dt><cite>mode</cite>: str</dt>
+<dd><p class="first last">Mode of the vbo. Check <a class="reference internal" href="#kivy.graphics.Mesh.mode" title="kivy.graphics.Mesh.mode"><tt class="xref py py-attr docutils literal"><span class="pre">mode</span></tt></a> for more information. Defaults to
+&#8216;points&#8217;.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="kivy.graphics.Mesh.indices">
+<tt class="descname">indices</tt><a class="headerlink" href="#kivy.graphics.Mesh.indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vertex indices used to specify the order when drawing the
+mesh.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Mesh.mode">
+<tt class="descname">mode</tt><a class="headerlink" href="#kivy.graphics.Mesh.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>VBO Mode used for drawing vertices/indices. Can be one of &#8216;points&#8217;,
+&#8216;line_strip&#8217;, &#8216;line_loop&#8217;, &#8216;lines&#8217;, &#8216;triangles&#8217;, &#8216;triangle_strip&#8217; or
+&#8216;triangle_fan&#8217;.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Mesh.vertices">
+<tt class="descname">vertices</tt><a class="headerlink" href="#kivy.graphics.Mesh.vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of x, y, u, v coordinates used to construct the Mesh. Right now,
+the Mesh instruction doesn&#8217;t allow you to change the format of the
+vertices, which means it&#8217;s only x, y + one texture coordinate.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Point">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Point</tt><a class="headerlink" href="#kivy.graphics.Point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.VertexInstruction" title="kivy.graphics.instructions.VertexInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.VertexInstruction</span></tt></a></p>
+<p>A 2d line.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>points</cite>: list</dt>
+<dd><p class="first last">List of points in the format (x1, y1, x2, y2...).</p>
+</dd>
+<dt><cite>pointsize</cite>: float, defaults to 1.</dt>
+<dd><p class="first last">Size of the point (1. means the real size will be 2).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Starting from version 1.0.7, vertex instruction have a limit of 65535
+vertices (indices of vertex to be accurate).
+2 entries in the list (x, y) will be converted to 4 vertices. So the
+limit inside Point() class is 2^15-2.</p>
+</div>
+<dl class="method">
+<dt id="kivy.graphics.Point.add_point">
+<tt class="descname">add_point</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.Point.add_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a point to the current <a class="reference internal" href="#kivy.graphics.Point.points" title="kivy.graphics.Point.points"><tt class="xref py py-attr docutils literal"><span class="pre">points</span></tt></a> list.</p>
+<p>If you intend to add multiple points, prefer to use this method instead
+of reassigning a new <a class="reference internal" href="#kivy.graphics.Point.points" title="kivy.graphics.Point.points"><tt class="xref py py-attr docutils literal"><span class="pre">points</span></tt></a> list. Assigning a new <a class="reference internal" href="#kivy.graphics.Point.points" title="kivy.graphics.Point.points"><tt class="xref py py-attr docutils literal"><span class="pre">points</span></tt></a>
+list will recalculate and reupload the whole buffer into the GPU.
+If you use add_point, it will only upload the changes.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Point.points">
+<tt class="descname">points</tt><a class="headerlink" href="#kivy.graphics.Point.points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/settings points of the triangle.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Point.pointsize">
+<tt class="descname">pointsize</tt><a class="headerlink" href="#kivy.graphics.Point.pointsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting point size.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.PopMatrix">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">PopMatrix</tt><a class="headerlink" href="#kivy.graphics.PopMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.ContextInstruction" title="kivy.graphics.instructions.ContextInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.ContextInstruction</span></tt></a></p>
+<p>Pop the matrix from the context&#8217;s matrix stack onto the model view.</p>
+<dl class="attribute">
+<dt id="kivy.graphics.PopMatrix.stack">
+<tt class="descname">stack</tt><a class="headerlink" href="#kivy.graphics.PopMatrix.stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the matrix stack to use. Can be &#8216;modelview_mat&#8217; or
+&#8216;projection_mat&#8217;.</p>
+<div class="versionadded">
+<p><span>New in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.PushMatrix">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">PushMatrix</tt><a class="headerlink" href="#kivy.graphics.PushMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.ContextInstruction" title="kivy.graphics.instructions.ContextInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.ContextInstruction</span></tt></a></p>
+<p>Push the matrix onto the context&#8217;s matrix stack.</p>
+<dl class="attribute">
+<dt id="kivy.graphics.PushMatrix.stack">
+<tt class="descname">stack</tt><a class="headerlink" href="#kivy.graphics.PushMatrix.stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the matrix stack to use. Can be &#8216;modelview_mat&#8217; or
+&#8216;projection_mat&#8217;.</p>
+<div class="versionadded">
+<p><span>New in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Quad">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Quad</tt><a class="headerlink" href="#kivy.graphics.Quad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.VertexInstruction" title="kivy.graphics.instructions.VertexInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.VertexInstruction</span></tt></a></p>
+<p>A 2d quad.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>points</cite>: list</dt>
+<dd><p class="first last">List of point in the format (x1, y1, x2, y2, x3, y3, x4, y4).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="kivy.graphics.Quad.points">
+<tt class="descname">points</tt><a class="headerlink" href="#kivy.graphics.Quad.points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/settings points of the quad.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Rectangle">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Rectangle</tt><a class="headerlink" href="#kivy.graphics.Rectangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.VertexInstruction" title="kivy.graphics.instructions.VertexInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.VertexInstruction</span></tt></a></p>
+<p>A 2d rectangle.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>pos</cite>: list</dt>
+<dd><p class="first last">Position of the rectangle, in the format (x, y).</p>
+</dd>
+<dt><cite>size</cite>: list</dt>
+<dd><p class="first last">Size of the rectangle, in the format (width, height).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="kivy.graphics.Rectangle.pos">
+<tt class="descname">pos</tt><a class="headerlink" href="#kivy.graphics.Rectangle.pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/settings the position of the rectangle.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Rectangle.size">
+<tt class="descname">size</tt><a class="headerlink" href="#kivy.graphics.Rectangle.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/settings the size of the rectangle.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.RenderContext">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">RenderContext</tt><a class="headerlink" href="#kivy.graphics.RenderContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Canvas" title="kivy.graphics.instructions.Canvas"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.Canvas</span></tt></a></p>
+<p>The render context stores all the necessary information for drawing, i.e.:</p>
+<ul class="simple">
+<li>The vertex shader</li>
+<li>The fragment shader</li>
+<li>The default texture</li>
+<li>The state stack (color, texture, matrix...)</li>
+</ul>
+<dl class="attribute">
+<dt id="kivy.graphics.RenderContext.shader">
+<tt class="descname">shader</tt><a class="headerlink" href="#kivy.graphics.RenderContext.shader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the shader attached to the render context.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.RenderContext.use_parent_modelview">
+<tt class="descname">use_parent_modelview</tt><a class="headerlink" href="#kivy.graphics.RenderContext.use_parent_modelview" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, the parent modelview matrix will be used.</p>
+<div class="versionadded">
+<p><span>New in version 1.7.0.</span></p>
+</div>
+<p>Before:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rc</span><span class="p">[</span><span class="s">&#39;modelview_mat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">render_context</span><span class="p">[</span><span class="s">&#39;modelview_mat&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rc</span> <span class="o">=</span> <span class="n">RenderContext</span><span class="p">(</span><span class="n">use_parent_modelview</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.RenderContext.use_parent_projection">
+<tt class="descname">use_parent_projection</tt><a class="headerlink" href="#kivy.graphics.RenderContext.use_parent_projection" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, the parent projection matrix will be used.</p>
+<div class="versionadded">
+<p><span>New in version 1.7.0.</span></p>
+</div>
+<p>Before:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rc</span><span class="p">[</span><span class="s">&#39;projection_mat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">render_context</span><span class="p">[</span><span class="s">&#39;projection_mat&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rc</span> <span class="o">=</span> <span class="n">RenderContext</span><span class="p">(</span><span class="n">use_parent_projection</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Rotate">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Rotate</tt><a class="headerlink" href="#kivy.graphics.Rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.context_instructions.Transform</span></tt></p>
+<p>Rotate the coordinate space by applying a rotation transformation
+on the modelview matrix. You can set the properties of the instructions
+afterwards with e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rot</span><span class="o">.</span><span class="n">angle</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">rot</span><span class="o">.</span><span class="n">axis</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="kivy.graphics.Rotate.angle">
+<tt class="descname">angle</tt><a class="headerlink" href="#kivy.graphics.Rotate.angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the angle of the rotation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Rotate.axis">
+<tt class="descname">axis</tt><a class="headerlink" href="#kivy.graphics.Rotate.axis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the axis of the rotation.</p>
+<p>The format of the axis is (x, y, z).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Rotate.origin">
+<tt class="descname">origin</tt><a class="headerlink" href="#kivy.graphics.Rotate.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Origin of the rotation.</p>
+<div class="versionadded">
+<p><span>New in version 1.7.0.</span></p>
+</div>
+<p>The format of the origin can be either (x, y) or (x, y, z).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.graphics.Rotate.set">
+<tt class="descname">set</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.graphics.Rotate.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the angle and axis of rotation.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">rotationobject</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="deprecated">
+<p><span>Deprecated since version 1.7.0: </span>The set() method doesn&#8217;t use the new <a class="reference internal" href="#kivy.graphics.Rotate.origin" title="kivy.graphics.Rotate.origin"><tt class="xref py py-attr docutils literal"><span class="pre">origin</span></tt></a> property.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Scale">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Scale</tt><a class="headerlink" href="#kivy.graphics.Scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.context_instructions.Transform</span></tt></p>
+<p>Instruction to create a non uniform scale transformation.</p>
+<p>Create using one or three arguments:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Scale</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>         <span class="c"># scale all three axes the same</span>
+<span class="n">Scale</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>   <span class="c"># scale the axes independently</span>
+</pre></div>
+</div>
+<div class="deprecated">
+<p><span>Deprecated since version 1.6.0: </span>Deprecated single scale property in favor of x, y, z, xyz axis
+independant scaled factors.</p>
+</div>
+<dl class="attribute">
+<dt id="kivy.graphics.Scale.scale">
+<tt class="descname">scale</tt><a class="headerlink" href="#kivy.graphics.Scale.scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the scale.</p>
+<div class="deprecated">
+<p><span>Deprecated since version 1.6.0: </span>Deprecated in favor of per axis scale properties x,y,z, xyz, etc.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Scale.x">
+<tt class="descname">x</tt><a class="headerlink" href="#kivy.graphics.Scale.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the scale on the X axis.</p>
+<div class="versionchanged">
+<p><span>Changed in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Scale.xyz">
+<tt class="descname">xyz</tt><a class="headerlink" href="#kivy.graphics.Scale.xyz" title="Permalink to this definition">¶</a></dt>
+<dd><p>3 tuple scale vector in 3D in x, y, and z axis.</p>
+<div class="versionchanged">
+<p><span>Changed in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Scale.y">
+<tt class="descname">y</tt><a class="headerlink" href="#kivy.graphics.Scale.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the scale on the Y axis.</p>
+<div class="versionchanged">
+<p><span>Changed in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Scale.z">
+<tt class="descname">z</tt><a class="headerlink" href="#kivy.graphics.Scale.z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the scale on Z axis.</p>
+<div class="versionchanged">
+<p><span>Changed in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.StencilPop">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">StencilPop</tt><a class="headerlink" href="#kivy.graphics.StencilPop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Instruction" title="kivy.graphics.instructions.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.Instruction</span></tt></a></p>
+<p>Pop the stencil stack. See the module documentation for more information.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.StencilPush">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">StencilPush</tt><a class="headerlink" href="#kivy.graphics.StencilPush" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Instruction" title="kivy.graphics.instructions.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.Instruction</span></tt></a></p>
+<p>Push the stencil stack. See the module documentation for more
+information.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.StencilUse">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">StencilUse</tt><a class="headerlink" href="#kivy.graphics.StencilUse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Instruction" title="kivy.graphics.instructions.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.Instruction</span></tt></a></p>
+<p>Use current stencil buffer as a mask. Check the module documentation for
+more information.</p>
+<dl class="attribute">
+<dt id="kivy.graphics.StencilUse.func_op">
+<tt class="descname">func_op</tt><a class="headerlink" href="#kivy.graphics.StencilUse.func_op" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the stencil operation to use for glStencilFunc(). Can be
+one of &#8216;never&#8217;, &#8216;less&#8217;, &#8216;equal&#8217;, &#8216;lequal&#8217;, &#8216;greater&#8217;, &#8216;notequal&#8217;,
+&#8216;gequal&#8217; or &#8216;always&#8217;.</p>
+<p>By default, the operator is set to &#8216;equal&#8217;.</p>
+<div class="versionadded">
+<p><span>New in version 1.5.0.</span></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.StencilUnUse">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">StencilUnUse</tt><a class="headerlink" href="#kivy.graphics.StencilUnUse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Instruction" title="kivy.graphics.instructions.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.Instruction</span></tt></a></p>
+<p>Use current stencil buffer to unset the mask.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Translate">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Translate</tt><a class="headerlink" href="#kivy.graphics.Translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.context_instructions.Transform</span></tt></p>
+<p>Instruction to create a translation of the model view coordinate space.</p>
+<p>Construct by either:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Translate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>         <span class="c"># translate in just the two axes</span>
+<span class="n">Translate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>      <span class="c"># translate in all three axes</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="kivy.graphics.Translate.x">
+<tt class="descname">x</tt><a class="headerlink" href="#kivy.graphics.Translate.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the translation on the X axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Translate.xy">
+<tt class="descname">xy</tt><a class="headerlink" href="#kivy.graphics.Translate.xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>2 tuple with translation vector in 2D for x and y axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Translate.xyz">
+<tt class="descname">xyz</tt><a class="headerlink" href="#kivy.graphics.Translate.xyz" title="Permalink to this definition">¶</a></dt>
+<dd><p>3 tuple translation vector in 3D in x, y, and z axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Translate.y">
+<tt class="descname">y</tt><a class="headerlink" href="#kivy.graphics.Translate.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the translation on the Y axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.Translate.z">
+<tt class="descname">z</tt><a class="headerlink" href="#kivy.graphics.Translate.z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/setting the translation on the Z axis.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.Triangle">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">Triangle</tt><a class="headerlink" href="#kivy.graphics.Triangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.VertexInstruction" title="kivy.graphics.instructions.VertexInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.VertexInstruction</span></tt></a></p>
+<p>A 2d triangle.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>points</cite>: list</dt>
+<dd><p class="first last">List of points in the format (x1, y1, x2, y2, x3, y3).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="kivy.graphics.Triangle.points">
+<tt class="descname">points</tt><a class="headerlink" href="#kivy.graphics.Triangle.points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for getting/settings points of the triangle.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.VertexInstruction">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">VertexInstruction</tt><a class="headerlink" href="#kivy.graphics.VertexInstruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Instruction" title="kivy.graphics.instructions.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.Instruction</span></tt></a></p>
+<p>The VertexInstruction class is the base for all graphics instructions
+that have a direct visual representation on the canvas, such as Rectangles,
+Triangles, Lines, Ellipse and so on.</p>
+<dl class="attribute">
+<dt id="kivy.graphics.VertexInstruction.source">
+<tt class="descname">source</tt><a class="headerlink" href="#kivy.graphics.VertexInstruction.source" title="Permalink to this definition">¶</a></dt>
+<dd><p>This property represents the filename to load the texture from.
+If you want to use an image as source, do it like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">:</span>
+    <span class="n">Rectangle</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s">&#39;mylogo.png&#39;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here&#8217;s the equivalent in Kivy language:</p>
+<div class="highlight-python"><pre>&lt;MyWidget&gt;:
+    canvas:
+        Rectangle:
+            source: 'mylogo.png'
+            pos: self.pos
+            size: self.size</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The filename will be searched for using the
+<a class="reference internal" href="api-kivy.resources.html#kivy.resources.resource_find" title="kivy.resources.resource_find"><tt class="xref py py-func docutils literal"><span class="pre">kivy.resources.resource_find()</span></tt></a> function.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.VertexInstruction.tex_coords">
+<tt class="descname">tex_coords</tt><a class="headerlink" href="#kivy.graphics.VertexInstruction.tex_coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>This property represents the texture coordinates used for drawing the
+vertex instruction. The value must be a list of 8 values.</p>
+<p>A texture coordinate has a position (u, v), and a size (w, h). The size
+can be negative, and would represent the &#8216;flipped&#8217; texture. By default,
+the tex_coords are:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>You can pass your own texture coordinates if you want to achieve fancy
+effects.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The default values just mentioned can be negative. Depending
+on the image and label providers, the coordinates are flipped
+vertically because of the order in which the image is internally
+stored. Instead of flipping the image data, we are just flipping
+the texture coordinates to be faster.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.VertexInstruction.texture">
+<tt class="descname">texture</tt><a class="headerlink" href="#kivy.graphics.VertexInstruction.texture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property that represents the texture used for drawing this
+Instruction. You can set a new texture like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.core.image</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">texture</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="s">&#39;logo.png&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">texture</span>
+<span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">:</span>
+    <span class="n">Rectangle</span><span class="p">(</span><span class="n">texture</span><span class="o">=</span><span class="n">texture</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Usually, you will use the <a class="reference internal" href="#kivy.graphics.VertexInstruction.source" title="kivy.graphics.VertexInstruction.source"><tt class="xref py py-attr docutils literal"><span class="pre">source</span></tt></a> attribute instead of the
+texture.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.ClearColor">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">ClearColor</tt><a class="headerlink" href="#kivy.graphics.ClearColor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Instruction" title="kivy.graphics.instructions.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.Instruction</span></tt></a></p>
+<p>ClearColor Graphics Instruction.</p>
+<div class="versionadded">
+<p><span>New in version 1.3.0.</span></p>
+</div>
+<p>Sets the clear color used to clear buffers with the glClear function or
+<a class="reference internal" href="#kivy.graphics.ClearBuffers" title="kivy.graphics.ClearBuffers"><tt class="xref py py-class docutils literal"><span class="pre">ClearBuffers</span></tt></a> graphics instructions.</p>
+<dl class="attribute">
+<dt id="kivy.graphics.ClearColor.a">
+<tt class="descname">a</tt><a class="headerlink" href="#kivy.graphics.ClearColor.a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alpha component, between 0 and 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.ClearColor.b">
+<tt class="descname">b</tt><a class="headerlink" href="#kivy.graphics.ClearColor.b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blue component, between 0 and 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.ClearColor.g">
+<tt class="descname">g</tt><a class="headerlink" href="#kivy.graphics.ClearColor.g" title="Permalink to this definition">¶</a></dt>
+<dd><p>Green component, between 0 and 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.ClearColor.r">
+<tt class="descname">r</tt><a class="headerlink" href="#kivy.graphics.ClearColor.r" title="Permalink to this definition">¶</a></dt>
+<dd><p>Red component, between 0 and 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.ClearColor.rgb">
+<tt class="descname">rgb</tt><a class="headerlink" href="#kivy.graphics.ClearColor.rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>RGB color, a list of 3 values in 0-1 range where alpha will be 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.ClearColor.rgba">
+<tt class="descname">rgba</tt><a class="headerlink" href="#kivy.graphics.ClearColor.rgba" title="Permalink to this definition">¶</a></dt>
+<dd><p>RGBA color used for the clear color, a list of 4 values in the 0-1
+range.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.ClearBuffers">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">ClearBuffers</tt><a class="headerlink" href="#kivy.graphics.ClearBuffers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.Instruction" title="kivy.graphics.instructions.Instruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.Instruction</span></tt></a></p>
+<p>Clearbuffer Graphics Instruction.</p>
+<div class="versionadded">
+<p><span>New in version 1.3.0.</span></p>
+</div>
+<p>Clear the buffers specified by the instructions buffer mask property.
+By default, only the coloc buffer is cleared.</p>
+<dl class="attribute">
+<dt id="kivy.graphics.ClearBuffers.clear_color">
+<tt class="descname">clear_color</tt><a class="headerlink" href="#kivy.graphics.ClearBuffers.clear_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, the color buffer will be cleared.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.ClearBuffers.clear_depth">
+<tt class="descname">clear_depth</tt><a class="headerlink" href="#kivy.graphics.ClearBuffers.clear_depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, the depth buffer will be cleared.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.ClearBuffers.clear_stencil">
+<tt class="descname">clear_stencil</tt><a class="headerlink" href="#kivy.graphics.ClearBuffers.clear_stencil" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, the stencil buffer will be cleared.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.PushState">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">PushState</tt><a class="headerlink" href="#kivy.graphics.PushState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.ContextInstruction" title="kivy.graphics.instructions.ContextInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.ContextInstruction</span></tt></a></p>
+<p>Instruction that pushes arbitrary states/uniforms onto the context
+state stack.</p>
+<div class="versionadded">
+<p><span>New in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.ChangeState">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">ChangeState</tt><a class="headerlink" href="#kivy.graphics.ChangeState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.ContextInstruction" title="kivy.graphics.instructions.ContextInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.ContextInstruction</span></tt></a></p>
+<p>Instruction that changes the values of arbitrary states/uniforms on the
+current render context.</p>
+<div class="versionadded">
+<p><span>New in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.PopState">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">PopState</tt><a class="headerlink" href="#kivy.graphics.PopState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.ContextInstruction" title="kivy.graphics.instructions.ContextInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.ContextInstruction</span></tt></a></p>
+<p>Instruction that pops arbitrary states/uniforms off the context
+state stack.</p>
+<div class="versionadded">
+<p><span>New in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.ApplyContextMatrix">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">ApplyContextMatrix</tt><a class="headerlink" href="#kivy.graphics.ApplyContextMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.ContextInstruction" title="kivy.graphics.instructions.ContextInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.ContextInstruction</span></tt></a></p>
+<p>Pre-multiply the matrix at the top of the stack specified by
+<cite>target_stack</cite> by the matrix at the top of the &#8216;source_stack&#8217;</p>
+<div class="versionadded">
+<p><span>New in version 1.6.0.</span></p>
+</div>
+<dl class="attribute">
+<dt id="kivy.graphics.ApplyContextMatrix.source_stack">
+<tt class="descname">source_stack</tt><a class="headerlink" href="#kivy.graphics.ApplyContextMatrix.source_stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the matrix stack to use as a source.
+Can be &#8216;modelview_mat&#8217; or &#8216;projection_mat&#8217;.</p>
+<div class="versionadded">
+<p><span>New in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.graphics.ApplyContextMatrix.target_stack">
+<tt class="descname">target_stack</tt><a class="headerlink" href="#kivy.graphics.ApplyContextMatrix.target_stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the matrix stack to use as a target.
+Can be &#8216;modelview_mat&#8217; or &#8216;projection_mat&#8217;.</p>
+<div class="versionadded">
+<p><span>New in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.UpdateNormalMatrix">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">UpdateNormalMatrix</tt><a class="headerlink" href="#kivy.graphics.UpdateNormalMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.ContextInstruction" title="kivy.graphics.instructions.ContextInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.ContextInstruction</span></tt></a></p>
+<p>Update the normal matrix &#8216;normal_mat&#8217; based on the current
+modelview matrix. This will compute &#8216;normal_mat&#8217; uniform as:
+<cite>inverse( transpose( mat3(mvm) ) )</cite></p>
+<div class="versionadded">
+<p><span>New in version 1.6.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.graphics.LoadIdentity">
+<em class="property">class </em><tt class="descclassname">kivy.graphics.</tt><tt class="descname">LoadIdentity</tt><a class="headerlink" href="#kivy.graphics.LoadIdentity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api-kivy.graphics.instructions.html#kivy.graphics.instructions.ContextInstruction" title="kivy.graphics.instructions.ContextInstruction"><tt class="xref py py-class docutils literal"><span class="pre">kivy.graphics.instructions.ContextInstruction</span></tt></a></p>
+<p>Load the identity Matrix into the matrix stack specified by
+the instructions stack property (default=&#8217;modelview_mat&#8217;)</p>
+<div class="versionadded">
+<p><span>New in version 1.6.0.</span></p>
+</div>
+<dl class="attribute">
+<dt id="kivy.graphics.LoadIdentity.stack">
+<tt class="descname">stack</tt><a class="headerlink" href="#kivy.graphics.LoadIdentity.stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the matrix stack to use. Can be &#8216;modelview_mat&#8217; or
+&#8216;projection_mat&#8217;.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.instructions.html">Canvas</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.context_instructions.html">Context instructions</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.context.html">Context management</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.fbo.html">Framebuffer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.fbo.html#reloading-the-fbo-content">Reloading the FBO content</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.gl_instructions.html">GL instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.gl_instructions.html#clearing-an-fbo">Clearing an FBO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.compiler.html">Graphics compiler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.compiler.html#reducing-the-context-instructions">Reducing the context instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.opengl.html">OpenGL</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.opengl_utils.html">OpenGL utilities</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.svg.html">SVG</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.shader.html">Shader</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.shader.html#header-inclusion">Header inclusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.shader.html#single-file-glsl-shader-programs">Single file glsl shader programs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.stencil_instructions.html">Stencil instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.stencil_instructions.html#limitations">Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.stencil_instructions.html#example-of-stencil-usage">Example of stencil usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.tesselator.html">Tesselator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.tesselator.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.texture.html">Texture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.texture.html#blitting-custom-data">Blitting custom data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.texture.html#bgr-bgra-support">BGR/BGRA support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.texture.html#npot-texture">NPOT texture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.texture.html#texture-atlas">Texture atlas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.texture.html#mipmapping">Mipmapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.texture.html#reloading-the-texture">Reloading the Texture</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.transformation.html">Transformation</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api-kivy.graphics.vertex_instructions.html">Vertex Instructions</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+            <div class="footerlinks">
+            <table>
+                <tr>
+                    <td class="leftlink">
+                  <a href="api-kivy.gesture.html" title="previous chapter">&laquo; Gesture recognition</a></li>
+                  </td>
+                  <td class="rightlink">
+                  <a href="api-kivy.graphics.instructions.html" title="next chapter">Canvas &raquo;</a>
+                      </td>
+                  </tr>
+              </table>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    </div>
+<!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://txzone.net/piwik/" : "http://txzone.net/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 8);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://txzone.net/piwik/piwik.php?idsite=8" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+    <!--
+    <div class="footer">
+      &copy; Copyright 2010, The Kivy Authors.
+      Last updated on Dec 11, 2014.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2b1.
+</div>
+-->
+  </body>
+
+<!-- Mirrored from kivy.org/docs/api-kivy.graphics.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:23 GMT -->
+</html>

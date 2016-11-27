@@ -1,0 +1,861 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<!-- Mirrored from kivy.org/docs/api-kivy.event.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:23 GMT -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="twitter:site" content="@kivyframework">
+    
+    <title>Event dispatcher &mdash; Kivy 1.9.0-dev documentation</title>
+    <link href='../../fonts.googleapis.com/css8da2.css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="_static/fresh.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.9.0-dev',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="../../cdn.mathjax.org/mathjax/latest/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/jquery-effects-core-and-slide.js"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/kivy.js"></script>
+    <link rel="top" title="Kivy 1.9.0-dev documentation" href="index-2.html" />
+    <link rel="up" title="API Reference" href="api-index.html" />
+    <link rel="next" title="Extension Support" href="api-kivy.ext.html" />
+    <link rel="prev" title="Scroll effect" href="api-kivy.effects.scroll.html" /> 
+  </head>
+  <body>
+
+    <div id="topbar">
+        <div id="topwrapper">
+        <div id="toplogo">
+            <a href="http://kivy.org/">
+                <img src="_static/logo-kivy.png" alt="Kivy" height="50"/>
+            </a>
+        </div>
+        <div id="topmenu">
+            <ul class="navigation">
+                <li><a class="nav-guides" href="gettingstarted/intro.html">Guides</a></li>
+                <li><a class="nav-garden" href="http://kivy-garden.github.io/">Garden</a></li>
+                <li><a class="nav-api" href="api-kivy.html">API Reference</a></li>
+                <li><a class="nav-pdf" href="pdf/Kivy-latest.pdf">PDF</a></li>
+                <li><a class="nav-wiki" href="http://wiki.kivy.org/">Wiki</a></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+<div id="contentall">
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3>Quick search</h3>
+            <form class="search" action="http://kivy.org/docs/search.html" method="get">
+                &nbsp;
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+                <input type="text" class="text" name="q" />
+            </form>
+          <!--
+          <h3><a href="index.html">Event dispatcher</a></h3>
+          <ul>
+<li><a class="reference internal" href="#">Event dispatcher</a><ul>
+</ul>
+</li>
+</ul>
+
+          <h3><a href="index.html">Table Of Contents</a></h3>
+          -->
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted/index.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/first_app.html">A first App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/rules.html">Kv Design Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/events.html">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/framework.html">Non-widget stuff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/layouts.html">Layouts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/drawing.html">Drawing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted/diving.html">Diving in</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current current">
+<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User&#8217;s Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="philosophy.html">Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribute.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contact.html">Contact Us</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guide-index.html">Programming Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide/basic.html">Kivy Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/environment.html">Controlling the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/config.html">Configure Kivy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/architecture.html">Architectural Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/events.html">Events and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/inputs.html">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/lang.html">Kv language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/other-frameworks.html">Integrating with other Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/bestpractices.html">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/advancedgraphics.html">Advanced Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide/packaging.html">Packaging your application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials-index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/pong.html">Pong Game Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/firstwidget.html">A Simple Paint App</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current current"><a class="reference internal" href="api-index.html">API Reference</a><ul class="current current">
+<li class="toctree-l2 current"><a class="reference internal" href="api-kivy.html">Kivy framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.html">Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.adapter.html">Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.args_converters.html">List Item View Argument Converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.dictadapter.html">DictAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.listadapter.html">ListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.models.html">SelectableDataItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.adapters.simplelistadapter.html">SimpleListAdapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.animation.html">Animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.app.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.atlas.html">Atlas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.base.html">Kivy Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.cache.html">Cache manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.clock.html">Clock object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.compat.html">Compatibility module for Python 2.7 and &gt; 3.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.config.html">Configuration object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.context.html">Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.html">Core Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.clipboard.html">Clipboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.gl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.spelling.html">Spelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.text.html">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.text.markup.html">Text Markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.text.text_layout.html">Text layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.core.window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.html">Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.dampedscroll.html">Damped scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.kinetic.html">Kinetic effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.opacityscroll.html">Opacity scroll effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.effects.scroll.html">Scroll effect</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Event dispatcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.ext.html">Extension Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.factory.html">Factory object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.garden.html">Garden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.geometry.html">Geometry utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.gesture.html">Gesture recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.html">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.compiler.html">Graphics compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.context.html">Context management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.context_instructions.html">Context instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.fbo.html">Framebuffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.gl_instructions.html">GL instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.instructions.html">Canvas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.opengl.html">OpenGL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.opengl_utils.html">OpenGL utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.shader.html">Shader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.stencil_instructions.html">Stencil instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.svg.html">SVG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.tesselator.html">Tesselator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.texture.html">Texture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.graphics.transformation.html">Transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.html">Input management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.factory.html">Motion Event Factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.motionevent.html">Motion Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.html">Input Postprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.calibration.html">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.dejitter.html">Dejitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.doubletap.html">Double Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.ignorelist.html">Ignore list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.retaintouch.html">Retain Touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.postproc.tripletap.html">Triple Tap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.provider.html">Motion Event Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.html">Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.androidjoystick.html">Android Joystick Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.hidinput.html">Native support for HID input from the linux kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.leapfinger.html">Leap Motion - finger only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.linuxwacom.html">Native support of Wacom tablet from linuxwacom driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.mactouch.html">Native support of MultitouchSupport framework for MacBook (MaxOSX platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.mouse.html">Mouse provider implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.mtdev.html">Native support for Multitouch devices on Linux, using libmtdev.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.probesysfs.html">Auto Create Input Provider Config Entry for Available MT Hardware (linux only).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.tuio.html">TUIO Input Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.wm_common.html">Common definitions for a Windows provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.wm_pen.html">Support for WM_PEN messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.providers.wm_touch.html">Support for WM_TOUCH messages (Windows platform)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.recorder.html">Input recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.input.shape.html">Motion Event Shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.interactive.html">Interactive launcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.lang.html">Kivy Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.lib.html">External libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.lib.gstplayer.html">GstPlayer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.loader.html">Asynchronous data loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.logger.html">Logger object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.metrics.html">Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.html">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.inspector.html">Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.keybinding.html">Keybinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.monitor.html">Monitor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.recorder.html">Recorder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.screen.html">Screen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.touchring.html">Touchring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.modules.webdebugger.html">Web Debugger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.multistroke.html">Multistroke gesture recognizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.network.html">Network support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.network.urlrequest.html">Url Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.parser.html">Parser utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.resources.html">Resources management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.storage.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.storage.dictstore.html">Dictionary store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.storage.jsonstore.html">JSON store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.storage.redisstore.html">Redis Store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.support.html">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.abstractview.html">Abstract View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.accordion.html">Accordion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.actionbar.html">Action Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.anchorlayout.html">Anchor Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.boxlayout.html">Box Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.bubble.html">Bubble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.button.html">Button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.camera.html">Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.carousel.html">Carousel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.checkbox.html">CheckBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.codeinput.html">Code Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.colorpicker.html">Color Picker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.dropdown.html">Drop-Down List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.effectwidget.html">EffectWidget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.filechooser.html">FileChooser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.floatlayout.html">Float Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.gesturesurface.html">Gesture Surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.gridlayout.html">Grid Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.label.html">Label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.layout.html">Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.listview.html">List View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.modalview.html">ModalView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.pagelayout.html">PageLayout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.popup.html">Popup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.progressbar.html">Progress Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.relativelayout.html">Relative Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.rst.html">reStructuredText renderer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.sandbox.html">Sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.scatter.html">Scatter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.scatterlayout.html">Scatter Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.screenmanager.html">Screen Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.scrollview.html">Scroll View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.slider.html">Slider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.spinner.html">Spinner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.splitter.html">Splitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.stacklayout.html">Stack Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.stencilview.html">Stencil View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.switch.html">Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.tabbedpanel.html">TabbedPanel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.textinput.html">Text Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.togglebutton.html">Toggle button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.treeview.html">Tree View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.videoplayer.html">Video player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.vkeyboard.html">VKeyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.uix.widget.html">Widget class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.vector.html">Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-kivy.weakmethod.html">Weak Method</a></li>
+</ul>
+</li>
+</ul>
+
+          <!--
+          <h3>Related Topics</h3>
+          <ul>
+              <li>Previous: <a href="api-kivy.effects.scroll.html" title="previous chapter">Scroll effect</a></li>
+              <li>Next: <a href="api-kivy.ext.html" title="next chapter">Extension Support</a></li>
+          </ul>
+          -->
+        </div>
+      </div>
+    <div id="content">
+    <div class="wrapper">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div class="toc"><h2>Table Of Contents</h2><ul>
+<li><a class="reference internal" href="#">Event dispatcher</a><ul>
+</ul>
+</li>
+</ul>
+</div>
+            
+  <div class="section" id="module-kivy.event">
+<span id="event-dispatcher"></span><h1>Event dispatcher<a class="headerlink" href="#module-kivy.event" title="Permalink to this headline">¶</a></h1>
+<p>All objects that produce events in Kivy implement the <a class="reference internal" href="#kivy.event.EventDispatcher" title="kivy.event.EventDispatcher"><tt class="xref py py-class docutils literal"><span class="pre">EventDispatcher</span></tt></a>
+which provides a consistent interface for registering and manipulating event
+handlers.</p>
+<div class="versionchanged">
+<p><span>Changed in version 1.0.9: </span>Property discovery and methods have been moved from the
+<a class="reference internal" href="api-kivy.uix.widget.html#kivy.uix.widget.Widget" title="kivy.uix.widget.Widget"><tt class="xref py py-class docutils literal"><span class="pre">Widget</span></tt></a> to the <a class="reference internal" href="#kivy.event.EventDispatcher" title="kivy.event.EventDispatcher"><tt class="xref py py-class docutils literal"><span class="pre">EventDispatcher</span></tt></a>.</p>
+</div>
+<dl class="class">
+<dt id="kivy.event.EventDispatcher">
+<em class="property">class </em><tt class="descclassname">kivy.event.</tt><tt class="descname">EventDispatcher</tt><a class="headerlink" href="#kivy.event.EventDispatcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kivy.event.ObjectWithUid" title="kivy.event.ObjectWithUid"><tt class="xref py py-class docutils literal"><span class="pre">kivy.event.ObjectWithUid</span></tt></a></p>
+<p>Generic event dispatcher interface.</p>
+<p>See the module docstring for usage.</p>
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.bind">
+<tt class="descname">bind</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.bind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bind an event type or a property to a callback.</p>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># With properties</span>
+<span class="k">def</span> <span class="nf">my_x_callback</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;on object&#39;</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="s">&#39;x changed to&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">my_width_callback</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;on object&#39;</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="s">&#39;width changed to&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">my_x_callback</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">my_width_callback</span><span class="p">)</span>
+
+<span class="c"># With event</span>
+<span class="k">def</span> <span class="nf">my_press_callback</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;event on object&#39;</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">my_press_callback</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In general, property callbacks are called with 2 arguments (the
+object and the property&#8217;s new value) and event callbacks with
+one argument (the object). The example above illustrates this.</p>
+<p>The following example demonstrates various ways of using the bind
+function in a complete application:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">kivy.uix.boxlayout</span> <span class="kn">import</span> <span class="n">BoxLayout</span>
+<span class="kn">from</span> <span class="nn">kivy.app</span> <span class="kn">import</span> <span class="n">App</span>
+<span class="kn">from</span> <span class="nn">kivy.uix.button</span> <span class="kn">import</span> <span class="n">Button</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+
+<span class="k">class</span> <span class="nc">DemoBox</span><span class="p">(</span><span class="n">BoxLayout</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class demonstrates various techniques that can be used for binding to</span>
+<span class="sd">    events. Although parts could me made more optimal, advanced Python concepts</span>
+<span class="sd">    are avoided for the sake of readability and clarity.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DemoBox</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="s">&quot;vertical&quot;</span>
+
+        <span class="c"># We start with binding to a normal event. The only argument</span>
+        <span class="c"># passed to the callback is the object which we have bound to.</span>
+        <span class="n">btn</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Normal binding to event&quot;</span><span class="p">)</span>
+        <span class="n">btn</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_event</span><span class="p">)</span>
+
+        <span class="c"># Next, we bind to a standard property change event. This typically</span>
+        <span class="c"># passes 2 arguments: the object and the value</span>
+        <span class="n">btn2</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Normal binding to a property change&quot;</span><span class="p">)</span>
+        <span class="n">btn2</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_property</span><span class="p">)</span>
+
+        <span class="c"># Here we use anonymous functions (a.k.a lambdas) to perform binding.</span>
+        <span class="c"># Their advantage is that you can avoid declaring new functions i.e.</span>
+        <span class="c"># they offer a concise way to &quot;redirect&quot; callbacks.</span>
+        <span class="n">btn3</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Using anonymous functions.&quot;</span><span class="p">)</span>
+        <span class="n">btn3</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_event</span><span class="p">(</span><span class="bp">None</span><span class="p">))</span>
+
+        <span class="c"># You can also declare a function that accepts a variable number of</span>
+        <span class="c"># positional and keyword arguments and use introspection to determine</span>
+        <span class="c"># what is being passed in. This is very handy for debugging as well</span>
+        <span class="c"># as function re-use. Here, we use standard event binding to a function</span>
+        <span class="c"># that accepts optional positional and keyword arguments.</span>
+        <span class="n">btn4</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Use a flexible function&quot;</span><span class="p">)</span>
+        <span class="n">btn4</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_anything</span><span class="p">)</span>
+
+        <span class="c"># Lastly, we show how to use partial functions. They are sometimes</span>
+        <span class="c"># difficult to grasp, but provide a very flexible and powerful way to</span>
+        <span class="c"># reuse functions.</span>
+        <span class="n">btn5</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Using partial functions. For hardcores.&quot;</span><span class="p">)</span>
+        <span class="n">btn5</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_anything</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">,</span> <span class="s">&quot;2&quot;</span><span class="p">,</span> <span class="n">monthy</span><span class="o">=</span><span class="s">&quot;python&quot;</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">but</span> <span class="ow">in</span> <span class="p">[</span><span class="n">btn</span><span class="p">,</span> <span class="n">btn2</span><span class="p">,</span> <span class="n">btn3</span><span class="p">,</span> <span class="n">btn4</span><span class="p">,</span> <span class="n">btn5</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="n">but</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Typical event from&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Typical property change from&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="s">&quot;to&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_anything</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;The flexible function has *args of&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="p">),</span>
+            <span class="s">&quot;and **kwargs of&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">DemoApp</span><span class="p">(</span><span class="n">App</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">DemoBox</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">DemoApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>When binding a function to an event, a
+<a class="reference internal" href="api-kivy.weakmethod.html#kivy.weakmethod.WeakMethod" title="kivy.weakmethod.WeakMethod"><tt class="xref py py-class docutils literal"><span class="pre">kivy.weakmethod.WeakMethod</span></tt></a> of the callback is saved, and
+when dispatching the callback is removed if the callback reference
+becomes invalid. For properties, the actual callback is saved.</p>
+<p>Another difference between binding to an event vs a property; when
+binding to a property, if this callback has already been bound to this
+property, it won&#8217;t be added again. For events, we don&#8217;t do this check.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.create_property">
+<tt class="descname">create_property</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.create_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new property at runtime.</p>
+<div class="versionadded">
+<p><span>New in version 1.0.9.</span></p>
+</div>
+<div class="versionchanged">
+<p><span>Changed in version 1.8.0: </span><cite>value</cite> parameter added, can be used to set the default value of the
+property. Also, the type of the value is used to specialize the
+created property.</p>
+</div>
+<div class="versionchanged">
+<p><span>Changed in version 1.9.0: </span>In the past, if <cite>value</cite> was of type <cite>bool</cite>, a <cite>NumericProperty</cite>
+would be created, now a <cite>BooleanProperty</cite> is created.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function is designed for the Kivy language, don&#8217;t use it in
+your code. You should declare the property in your class instead of
+using this method.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>name</cite>: string</dt>
+<dd><p class="first last">Name of the property</p>
+</dd>
+<dt><cite>value</cite>: object, optional</dt>
+<dd><p class="first last">Default value of the property. Type is also used for creating
+more appropriate property types. Defaults to None.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mywidget</span> <span class="o">=</span> <span class="n">Widget</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mywidget</span><span class="o">.</span><span class="n">create_property</span><span class="p">(</span><span class="s">&#39;custom&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mywidget</span><span class="o">.</span><span class="n">custom</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">mywidget</span><span class="o">.</span><span class="n">custom</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.dispatch">
+<tt class="descname">dispatch</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch an event across all the handlers added in bind/fast_bind().
+As soon as a handler returns True, the dispatching stops.</p>
+<p>The function collects all the positional and keyword arguments and
+passes them on to the handlers.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The handlers are called in reverse order than they were registered
+with <a class="reference internal" href="#kivy.event.EventDispatcher.bind" title="kivy.event.EventDispatcher.bind"><tt class="xref py py-meth docutils literal"><span class="pre">bind()</span></tt></a>.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>event_type</cite>: basestring</dt>
+<dd><p class="first last">the event name to dispatch.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span>Changed in version 1.9.0: </span>Keyword arguments collection and forwarding was added. Before, only
+positional arguments would be collected and forwarded.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.events">
+<tt class="descname">events</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all the events in the class. Can be used for introspection.</p>
+<div class="versionadded">
+<p><span>New in version 1.8.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.fast_bind">
+<tt class="descname">fast_bind</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.fast_bind" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method for faster binding. This method is somewhat different than
+<a class="reference internal" href="#kivy.event.EventDispatcher.bind" title="kivy.event.EventDispatcher.bind"><tt class="xref py py-meth docutils literal"><span class="pre">bind()</span></tt></a> and is meant for more advanced users and internal usage.
+It can be used as long as the following points are heeded.</p>
+<ul class="simple">
+<li>As opposed to <a class="reference internal" href="#kivy.event.EventDispatcher.bind" title="kivy.event.EventDispatcher.bind"><tt class="xref py py-meth docutils literal"><span class="pre">bind()</span></tt></a>, it does not check that this function and
+largs/kwargs has not been bound before to this name. So binding
+the same callback multiple times will just keep adding it.</li>
+<li>Although <a class="reference internal" href="#kivy.event.EventDispatcher.bind" title="kivy.event.EventDispatcher.bind"><tt class="xref py py-meth docutils literal"><span class="pre">bind()</span></tt></a> creates a <tt class="xref py py-class docutils literal"><span class="pre">WeakMethod</span></tt> when
+binding to an event, this method stores the callback directly.</li>
+<li>This method returns True if <cite>name</cite> was found and bound, and
+<cite>False</cite>, otherwise. It does not raise an exception, like <a class="reference internal" href="#kivy.event.EventDispatcher.bind" title="kivy.event.EventDispatcher.bind"><tt class="xref py py-meth docutils literal"><span class="pre">bind()</span></tt></a>,
+would if the property <cite>name</cite> is not found.</li>
+</ul>
+<p>When binding a callback with largs and/or kwargs, <a class="reference internal" href="#kivy.event.EventDispatcher.fast_unbind" title="kivy.event.EventDispatcher.fast_unbind"><tt class="xref py py-meth docutils literal"><span class="pre">fast_unbind()</span></tt></a>
+must be used for unbinding. If no largs and kwargs are provided,
+<a class="reference internal" href="#kivy.event.EventDispatcher.unbind" title="kivy.event.EventDispatcher.unbind"><tt class="xref py py-meth docutils literal"><span class="pre">unbind()</span></tt></a> may be used as well.</p>
+<p>This method passes on any caught positional and/or keyword arguments to
+the callback, removing the need to call partial. When calling the
+callback the expended largs are passed on followed by instance/value
+(just instance for kwargs) followed by expended kwargs.</p>
+<p>Following is an example of usage similar to the example in
+<a class="reference internal" href="#kivy.event.EventDispatcher.bind" title="kivy.event.EventDispatcher.bind"><tt class="xref py py-meth docutils literal"><span class="pre">bind()</span></tt></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">DemoBox</span><span class="p">(</span><span class="n">BoxLayout</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DemoBox</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="s">&quot;vertical&quot;</span>
+
+        <span class="n">btn</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Normal binding to event&quot;</span><span class="p">)</span>
+        <span class="n">btn</span><span class="o">.</span><span class="n">fast_bind</span><span class="p">(</span><span class="s">&#39;on_press&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_event</span><span class="p">)</span>
+
+        <span class="n">btn2</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Normal binding to a property change&quot;</span><span class="p">)</span>
+        <span class="n">btn2</span><span class="o">.</span><span class="n">fast_bind</span><span class="p">(</span><span class="s">&#39;state&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_property</span><span class="p">)</span>
+
+        <span class="n">btn3</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;A: Using function with args.&quot;</span><span class="p">)</span>
+        <span class="n">btn3</span><span class="o">.</span><span class="n">fast_bind</span><span class="p">(</span><span class="s">&#39;on_press&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_event_with_args</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="p">,</span>
+                       <span class="n">tree</span><span class="o">=</span><span class="s">&#39;birch&#39;</span><span class="p">,</span> <span class="n">food</span><span class="o">=</span><span class="s">&#39;apple&#39;</span><span class="p">)</span>
+
+        <span class="n">btn4</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Unbind A.&quot;</span><span class="p">)</span>
+        <span class="n">btn4</span><span class="o">.</span><span class="n">fast_bind</span><span class="p">(</span><span class="s">&#39;on_press&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unbind_a</span><span class="p">,</span> <span class="n">btn3</span><span class="p">)</span>
+
+        <span class="n">btn5</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Use a flexible function&quot;</span><span class="p">)</span>
+        <span class="n">btn5</span><span class="o">.</span><span class="n">fast_bind</span><span class="p">(</span><span class="s">&#39;on_press&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_anything</span><span class="p">)</span>
+
+        <span class="n">btn6</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;B: Using flexible functions with args. For hardcores.&quot;</span><span class="p">)</span>
+        <span class="n">btn6</span><span class="o">.</span><span class="n">fast_bind</span><span class="p">(</span><span class="s">&#39;on_press&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_anything</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">,</span> <span class="s">&quot;2&quot;</span><span class="p">,</span> <span class="n">monthy</span><span class="o">=</span><span class="s">&quot;python&quot;</span><span class="p">)</span>
+
+        <span class="n">btn7</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s">&quot;Force dispatch B with different params&quot;</span><span class="p">)</span>
+        <span class="n">btn7</span><span class="o">.</span><span class="n">fast_bind</span><span class="p">(</span><span class="s">&#39;on_press&#39;</span><span class="p">,</span> <span class="n">btn6</span><span class="o">.</span><span class="n">dispatch</span><span class="p">,</span> <span class="s">&#39;on_press&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">monthy</span><span class="o">=</span><span class="s">&quot;other python&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">but</span> <span class="ow">in</span> <span class="p">[</span><span class="n">btn</span><span class="p">,</span> <span class="n">btn2</span><span class="p">,</span> <span class="n">btn3</span><span class="p">,</span> <span class="n">btn4</span><span class="p">,</span> <span class="n">btn5</span><span class="p">,</span> <span class="n">btn6</span><span class="p">,</span> <span class="n">btn7</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="n">but</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Typical event from&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_event_with_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">side</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">food</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Event with args&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">side</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">food</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Typical property change from&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="s">&quot;to&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_anything</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;The flexible function has *args of&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="p">),</span>
+            <span class="s">&quot;and **kwargs of&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">unbind_a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">btn</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">btn</span><span class="o">.</span><span class="n">fast_unbind</span><span class="p">(</span><span class="s">&#39;on_press&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_event_with_args</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="p">,</span>
+                        <span class="n">tree</span><span class="o">=</span><span class="s">&#39;birch&#39;</span><span class="p">,</span> <span class="n">food</span><span class="o">=</span><span class="s">&#39;apple&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since the kv lang uses this method to bind, one has to implement
+this method, instead of <a class="reference internal" href="#kivy.event.EventDispatcher.bind" title="kivy.event.EventDispatcher.bind"><tt class="xref py py-meth docutils literal"><span class="pre">bind()</span></tt></a> when creating a non
+<a class="reference internal" href="#kivy.event.EventDispatcher" title="kivy.event.EventDispatcher"><tt class="xref py py-class docutils literal"><span class="pre">EventDispatcher</span></tt></a> based class used with the kv lang. See
+<a class="reference internal" href="#kivy.event.Observable" title="kivy.event.Observable"><tt class="xref py py-class docutils literal"><span class="pre">Observable</span></tt></a> for an example.</p>
+</div>
+<div class="versionadded">
+<p><span>New in version 1.9.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.fast_unbind">
+<tt class="descname">fast_unbind</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.fast_unbind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Similar to <a class="reference internal" href="#kivy.event.EventDispatcher.fast_bind" title="kivy.event.EventDispatcher.fast_bind"><tt class="xref py py-meth docutils literal"><span class="pre">fast_bind()</span></tt></a>.</p>
+<p>When unbinding from a property <a class="reference internal" href="#kivy.event.EventDispatcher.unbind" title="kivy.event.EventDispatcher.unbind"><tt class="xref py py-meth docutils literal"><span class="pre">unbind()</span></tt></a> will unbind
+all callbacks that match the callback, while this method will only
+unbind the first (as it is assumed that the combination of func and
+largs/kwargs are uniquely bound).</p>
+<p>To unbind, the same positional and keyword arguments passed to
+<a class="reference internal" href="#kivy.event.EventDispatcher.fast_bind" title="kivy.event.EventDispatcher.fast_bind"><tt class="xref py py-meth docutils literal"><span class="pre">fast_bind()</span></tt></a> must be passed on to fast_unbind.</p>
+<div class="versionadded">
+<p><span>New in version 1.9.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.get_property_observers">
+<tt class="descname">get_property_observers</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.get_property_observers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of methods that are bound to the property/event
+passed as the <em>name</em> argument:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">widget_instance</span><span class="o">.</span><span class="n">get_property_observers</span><span class="p">(</span><span class="s">&#39;on_release&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span>New in version 1.8.0.</span></p>
+</div>
+<div class="versionchanged">
+<p><span>Changed in version 1.9.0: </span>To keep compatibility, callbacks bound with <a class="reference internal" href="#kivy.event.EventDispatcher.fast_bind" title="kivy.event.EventDispatcher.fast_bind"><tt class="xref py py-meth docutils literal"><span class="pre">fast_bind()</span></tt></a> will
+also only return the callback function and not their provided args.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.getter">
+<tt class="descname">getter</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.getter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the getter of a property.</p>
+<div class="versionadded">
+<p><span>New in version 1.0.9.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.is_event_type">
+<tt class="descname">is_event_type</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.is_event_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if the event_type is already registered.</p>
+<div class="versionadded">
+<p><span>New in version 1.0.4.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.properties">
+<tt class="descname">properties</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all the properties in the class in a dictionary of
+key/property class. Can be used for introspection.</p>
+<div class="versionadded">
+<p><span>New in version 1.0.9.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.property">
+<tt class="descname">property</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a property instance from the property name. If quiet is True,
+None is returned instead of raising an exception when <cite>name</cite> is not a
+property. Defaults to <cite>False</cite>.</p>
+<div class="versionadded">
+<p><span>New in version 1.0.9.</span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A <a class="reference internal" href="api-kivy.properties.html#kivy.properties.Property" title="kivy.properties.Property"><tt class="xref py py-class docutils literal"><span class="pre">Property</span></tt></a> derived instance
+corresponding to the name.</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span>Changed in version 1.9.0: </span>quiet was added.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="kivy.event.EventDispatcher.proxy_ref">
+<tt class="descname">proxy_ref</tt><a class="headerlink" href="#kivy.event.EventDispatcher.proxy_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default implementation of proxy_ref, returns self.
+..versionadded:: 1.9.0</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.register_event_type">
+<tt class="descname">register_event_type</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.register_event_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register an event type with the dispatcher.</p>
+<p>Registering event types allows the dispatcher to validate event handler
+names as they are attached and to search attached objects for suitable
+handlers. Each event type declaration must:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>start with the prefix <cite>on_</cite>.</li>
+<li>have a default handler in the class.</li>
+</ol>
+</div></blockquote>
+<p>Example of creating a custom event:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyWidget</span><span class="p">(</span><span class="n">Widget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_event_type</span><span class="p">(</span><span class="s">&#39;on_swipe&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_swipe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">on_swipe_callback</span><span class="p">(</span><span class="o">*</span><span class="n">largs</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;my swipe is called&#39;</span><span class="p">,</span> <span class="n">largs</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">MyWidget</span><span class="p">()</span>
+<span class="n">w</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="s">&#39;on_swipe&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.setter">
+<tt class="descname">setter</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.setter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the setter of a property. Use: instance.setter(&#8216;name&#8217;).
+The setter is a convenient callback function useful if you want
+to directly bind one property to another.
+It returns a partial function that will accept
+(obj, value) args and results in the property &#8216;name&#8217; of instance
+being set to value.</p>
+<div class="versionadded">
+<p><span>New in version 1.0.9.</span></p>
+</div>
+<p>For example, to bind number2 to number1 in python you would do:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ExampleWidget</span><span class="p">(</span><span class="n">Widget</span><span class="p">):</span>
+    <span class="n">number1</span> <span class="o">=</span> <span class="n">NumericProperty</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">number2</span> <span class="o">=</span> <span class="n">NumericProperty</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ExampleWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">number1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">setter</span><span class="p">(</span><span class="s">&#39;number2&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This is equivalent to kv binding:</p>
+<div class="highlight-python"><pre>&lt;ExampleWidget&gt;:
+    number2: self.number1</pre>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.unbind">
+<tt class="descname">unbind</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.unbind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unbind properties from callback functions with similar usage as
+<a class="reference internal" href="#kivy.event.EventDispatcher.bind" title="kivy.event.EventDispatcher.bind"><tt class="xref py py-meth docutils literal"><span class="pre">bind()</span></tt></a>.</p>
+<p>One difference between unbinding from
+an event vs. property, is that when unbinding from an event, we
+stop after the first callback match. For properties, we remove all
+matching callbacks.</p>
+<p>Note, a callback bound with <a class="reference internal" href="#kivy.event.EventDispatcher.fast_bind" title="kivy.event.EventDispatcher.fast_bind"><tt class="xref py py-meth docutils literal"><span class="pre">fast_bind()</span></tt></a> without any largs or
+kwargs is equivalent to one bound with <a class="reference internal" href="#kivy.event.EventDispatcher.bind" title="kivy.event.EventDispatcher.bind"><tt class="xref py py-meth docutils literal"><span class="pre">bind()</span></tt></a> so either
+<a class="reference internal" href="#kivy.event.EventDispatcher.unbind" title="kivy.event.EventDispatcher.unbind"><tt class="xref py py-meth docutils literal"><span class="pre">unbind()</span></tt></a> or <a class="reference internal" href="#kivy.event.EventDispatcher.fast_unbind" title="kivy.event.EventDispatcher.fast_unbind"><tt class="xref py py-meth docutils literal"><span class="pre">fast_unbind()</span></tt></a> will unbind it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.EventDispatcher.unregister_event_types">
+<tt class="descname">unregister_event_types</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.EventDispatcher.unregister_event_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unregister an event type in the dispatcher.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.event.ObjectWithUid">
+<em class="property">class </em><tt class="descclassname">kivy.event.</tt><tt class="descname">ObjectWithUid</tt><a class="headerlink" href="#kivy.event.ObjectWithUid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>(internal) This class assists in providing unique identifiers for class
+instances. It it not intended for direct usage.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="kivy.event.Observable">
+<em class="property">class </em><tt class="descclassname">kivy.event.</tt><tt class="descname">Observable</tt><a class="headerlink" href="#kivy.event.Observable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kivy.event.ObjectWithUid" title="kivy.event.ObjectWithUid"><tt class="xref py py-class docutils literal"><span class="pre">kivy.event.ObjectWithUid</span></tt></a></p>
+<p><a class="reference internal" href="#kivy.event.Observable" title="kivy.event.Observable"><tt class="xref py py-class docutils literal"><span class="pre">Observable</span></tt></a> is a stub class defining the methods required
+for binding. <a class="reference internal" href="#kivy.event.EventDispatcher" title="kivy.event.EventDispatcher"><tt class="xref py py-class docutils literal"><span class="pre">EventDispatcher</span></tt></a> is (the) one example of a class that
+implements the binding interface. See <a class="reference internal" href="#kivy.event.EventDispatcher" title="kivy.event.EventDispatcher"><tt class="xref py py-class docutils literal"><span class="pre">EventDispatcher</span></tt></a> for details.</p>
+<div class="versionadded">
+<p><span>New in version 1.9.0.</span></p>
+</div>
+<dl class="method">
+<dt id="kivy.event.Observable.fast_bind">
+<tt class="descname">fast_bind</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.Observable.fast_bind" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="#kivy.event.EventDispatcher.fast_bind" title="kivy.event.EventDispatcher.fast_bind"><tt class="xref py py-meth docutils literal"><span class="pre">EventDispatcher.fast_bind()</span></tt></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To keep backward compatibility with derived classes which may have
+inherited from <a class="reference internal" href="#kivy.event.Observable" title="kivy.event.Observable"><tt class="xref py py-class docutils literal"><span class="pre">Observable</span></tt></a> before, the
+<a class="reference internal" href="#kivy.event.Observable.fast_bind" title="kivy.event.Observable.fast_bind"><tt class="xref py py-meth docutils literal"><span class="pre">fast_bind()</span></tt></a> method was added. The default implementation
+of <a class="reference internal" href="#kivy.event.Observable.fast_bind" title="kivy.event.Observable.fast_bind"><tt class="xref py py-meth docutils literal"><span class="pre">fast_bind()</span></tt></a> and <a class="reference internal" href="#kivy.event.Observable.fast_unbind" title="kivy.event.Observable.fast_unbind"><tt class="xref py py-meth docutils literal"><span class="pre">fast_unbind()</span></tt></a> is to create a partial
+function that it passes to bind. However, <a class="reference internal" href="#kivy.event.Observable.fast_unbind" title="kivy.event.Observable.fast_unbind"><tt class="xref py py-meth docutils literal"><span class="pre">fast_unbind()</span></tt></a>
+is fairly inefficient since we have to lookup this partial function
+before we can call <tt class="xref py py-meth docutils literal"><span class="pre">unbind()</span></tt>. It is recommended to overwrite
+these methods in derived classes to bind directly for
+better performance.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="kivy.event.Observable.fast_unbind">
+<tt class="descname">fast_unbind</tt><big>(</big><big>)</big><a class="headerlink" href="#kivy.event.Observable.fast_unbind" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="#kivy.event.Observable.fast_bind" title="kivy.event.Observable.fast_bind"><tt class="xref py py-meth docutils literal"><span class="pre">fast_bind()</span></tt></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+</div>
+
+
+            <div class="footerlinks">
+            <table>
+                <tr>
+                    <td class="leftlink">
+                  <a href="api-kivy.effects.scroll.html" title="previous chapter">&laquo; Scroll effect</a></li>
+                  </td>
+                  <td class="rightlink">
+                  <a href="api-kivy.ext.html" title="next chapter">Extension Support &raquo;</a>
+                      </td>
+                  </tr>
+              </table>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    </div>
+<!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://txzone.net/piwik/" : "http://txzone.net/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 8);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://txzone.net/piwik/piwik.php?idsite=8" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+    <!--
+    <div class="footer">
+      &copy; Copyright 2010, The Kivy Authors.
+      Last updated on Dec 11, 2014.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2b1.
+</div>
+-->
+  </body>
+
+<!-- Mirrored from kivy.org/docs/api-kivy.event.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Jan 2015 07:56:23 GMT -->
+</html>
