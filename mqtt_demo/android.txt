@@ -1,0 +1,3 @@
+author=Nahuel Defosse
+title=MQTT
+orientation=landscape
